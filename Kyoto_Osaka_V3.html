@@ -1,0 +1,3045 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>京都大阪 7天6夜 行動版旅遊全攻略</title>
+    <style>
+        :root {
+            --primary: #D35400; /* 秋季楓葉橘 */
+            --secondary: #E67E22;
+            --accent: #F39C12;
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text-main: #2C3E50;
+            --text-muted: #7F8C8D;
+            --border-color: #E0E0E0;
+            --safe-area-bottom: env(safe-area-inset-bottom);
+        }
+        
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            padding-bottom: calc(70px + var(--safe-area-bottom)); 
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80') center/cover;
+            color: white;
+            padding: 50px 20px 30px;
+            text-align: center;
+        }
+        header h1 { font-size: 1.8rem; margin: 0 0 15px 0; line-height: 1.3; }
+        
+        .info-pill {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 12px 15px;
+            border-radius: 12px;
+            margin: 0 auto;
+            max-width: 400px;
+            font-size: 0.9rem;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .info-pill p { margin: 5px 0; display: flex; align-items: flex-start; gap: 8px; }
+        .info-pill span { flex-shrink: 0; }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0 calc(10px + var(--safe-area-bottom));
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+        .bottom-nav a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+        }
+        .bottom-nav a.active, .bottom-nav a:active { color: var(--primary); }
+        .nav-icon { font-size: 1.4rem; }
+
+        .container { padding: 20px 15px; max-width: 600px; margin: 0 auto; }
+        section { padding-top: 20px; margin-bottom: 30px; }
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 15px;
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+        }
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+        
+        .spot-card {
+            flex: 0 0 240px;
+            scroll-snap-align: start;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-color);
+        }
+        .spot-card h4 { margin: 0 0 8px 0; color: var(--text-main); font-size: 1.1rem; }
+        .spot-card p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+
+        .day-accordion {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+        .day-header {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .day-header span { font-size: 0.9rem; font-weight: normal; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 12px;}
+        
+        .timeline { padding: 15px; }
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 23px; 
+            top: 25px;
+            bottom: -20px;
+            width: 2px;
+            background: var(--border-color);
+        }
+        .timeline-item:last-child::before { display: none; }
+
+        .time-box {
+            flex: 0 0 50px;
+            text-align: right;
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            padding-top: 3px;
+        }
+        .content-box {
+            flex: 1;
+            background: #F9FBFC;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .content-box h5 { margin: 0 0 5px 0; font-size: 1rem; color: var(--text-main); }
+        .content-box p { margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+        .tag {
+            display: inline-block;
+            background: #E8F8F5;
+            color: #16A085;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .area-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            -ms-overflow-style: none; scrollbar-width: none;
+        }
+        .area-tabs::-webkit-scrollbar { display: none; }
+        
+        .area-tab {
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .area-tab.active { background: var(--primary); color: white; }
+
+        .food-list { display: flex; flex-direction: column; gap: 12px; }
+        .food-item {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .food-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .food-name { font-size: 1.05rem; font-weight: bold; color: var(--text-main); margin: 0; display: flex; align-items: center; gap: 5px;}
+        .food-type { font-size: 0.75rem; background: #FEF9E7; color: #D4AC0D; padding: 2px 6px; border-radius: 4px; border: 1px solid #F9E79F;}
+        .food-desc { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+        
+        .food-scores {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            background: #F9FBFC;
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+        .score-box { display: flex; align-items: center; gap: 4px; font-weight: 600; }
+        .tabelog-score { color: #E67E22; }
+        .gmap-score { color: #4285F4; }
+        
+        .food-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; border-top: 1px dashed var(--border-color); padding-top: 10px;}
+        .food-price { color: #27AE60; font-weight: bold; font-size: 0.9rem; }
+        
+        .map-btn {
+            background: #4285F4;
+            color: #FFF;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(66, 133, 244, 0.3);
+        }
+        
+        .guide-card {
+            background: #FFF3E0;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent);
+        }
+        .mall-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .mall-card h4 { margin: 0 0 5px 0; color: var(--primary); display: flex; justify-content: space-between;}
+        .mall-loc { font-size: 0.75rem; color: white; background: #34495E; padding: 2px 6px; border-radius: 4px;}
+        .mall-card p { margin: 5px 0; font-size: 0.85rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🍁 京都大阪 7天6夜<br>行動版旅遊指南</h1>
+        <div class="info-pill">
+            <p><span>📅</span> 09/28(一) – 10/04(日)</p>
+            <p><span>✈️</span> 國泰 (TPE ⇄ KIX)</p>
+            <p><span>🏨</span> Day 1-3 京都四條 / Day 4-6 大阪難波</p>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- Top 10 -->
+        <section id="top10">
+            <div class="section-title">🏆 關西必訪 Top 10</div>
+            <div class="horizontal-scroll">
+                <div class="spot-card"><h4>1. 清水寺</h4><p>世界遺產，懸空舞台與周邊老街絕佳。</p></div>
+                <div class="spot-card"><h4>2. 伏見稻荷大社</h4><p>震撼千本鳥居，拍照與祈福聖地。</p></div>
+                <div class="spot-card"><h4>3. 嵐山竹林</h4><p>翠綠竹林小徑，漫步其中極具詩意。</p></div>
+                <div class="spot-card"><h4>4. 金閣寺</h4><p>金碧輝煌舍利殿，京都代表性絕景。</p></div>
+                <div class="spot-card"><h4>5. 大阪海遊館</h4><p>世界最大級別水族館，觀賞鯨鯊。</p></div>
+                <div class="spot-card"><h4>6. 錦市場</h4><p>京都的廚房，在地小吃與醃漬物。</p></div>
+                <div class="spot-card"><h4>7. 大阪城</h4><p>大阪歷史地標，登高俯瞰市區。</p></div>
+                <div class="spot-card"><h4>8. 道頓堀</h4><p>美食商圈，固力果跑跑人必拍。</p></div>
+                <div class="spot-card"><h4>9. 梅田藍天大廈</h4><p>空中庭園展望台，360度百萬夜景。</p></div>
+                <div class="spot-card"><h4>10. 難波八阪神社</h4><p>巨大獅子頭神殿，吸走厄運帶來好運。</p></div>
+            </div>
+        </section>
+
+        <!-- 行程規劃 -->
+        <section id="itinerary">
+            <div class="section-title">🗓️ 每日行程與交通</div>
+            
+            <div class="day-accordion">
+                <div class="day-header">Day 1：抵達與初探京都 <span>9/28 (一)</span></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time-box">15:00</div><div class="content-box"><h5>抵達關西機場</h5><p>入境、領行李、兌換票券</p></div></div>
+                    <div class="timeline-item"><div class="time-box">16:30</div><div class="content-box"><h5>前往京都</h5><p>搭乘 JR Haruka 特急 (約80分)</p><span class="tag">JR</span></div></div>
+                    <div class="timeline-item"><div class="time-box">18:00</div><div class="content-box"><h5>四條站飯店入住</h5><p>轉乘地鐵烏丸線至四條站</p><span class="tag">地鐵</span></div></div>
+                    <div class="timeline-item"><div class="time-box">18:30</div><div class="content-box"><h5>京都車站晚餐</h5><p>車站周邊享用美食</p></div></div>
+                </div>
+            </div>
+
+            <!-- ... 其他行程同前 ... -->
+            <div class="day-accordion">
+                <div class="day-header">Day 2：嵐山與金閣寺 <span>9/29 (二)</span></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time-box">09:00</div><div class="content-box"><h5>嵐山竹林小徑</h5><p>四條搭地鐵轉東西線至太秦天神川，轉嵐電至嵐山</p><span class="tag">地鐵+嵐電</span></div></div>
+                    <div class="timeline-item"><div class="time-box">10:30</div><div class="content-box"><h5>天龍寺</h5><p>世界遺產巡禮</p><span class="tag">步行 5分</span></div></div>
+                    <div class="timeline-item"><div class="time-box">12:00</div><div class="content-box"><h5>嵐山大街 / 渡月橋</h5><p>享用午餐與漫步</p></div></div>
+                    <div class="timeline-item"><div class="time-box">14:30</div><div class="content-box"><h5>金閣寺</h5><p>嵐電轉北野白梅町，轉市營公車204/205</p><span class="tag">嵐電+公車</span></div></div>
+                    <div class="timeline-item"><div class="time-box">17:00</div><div class="content-box"><h5>返回四條烏丸</h5><p>搭乘公車12號直達</p></div></div>
+                </div>
+            </div>
+            
+            <div class="day-accordion">
+                <div class="day-header">Day 3：伏見稻荷與清水寺 <span>9/30 (三)</span></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time-box">08:30</div><div class="content-box"><h5>伏見稻荷大社</h5><p>四條搭地鐵至京都站轉JR奈良線</p><span class="tag">地鐵+JR</span></div></div>
+                    <div class="timeline-item"><div class="time-box">11:00</div><div class="content-box"><h5>清水五條</h5><p>京阪電車至清水五條，步行上山</p><span class="tag">京阪電車</span></div></div>
+                    <div class="timeline-item"><div class="time-box">12:00</div><div class="content-box"><h5>清水坂 / 清水寺</h5><p>午餐與參拜</p></div></div>
+                    <div class="timeline-item"><div class="time-box">14:30</div><div class="content-box"><h5>二年坂、三年坂</h5><p>沿著老街一路逛下山</p><span class="tag">步行</span></div></div>
+                    <div class="timeline-item"><div class="time-box">16:30</div><div class="content-box"><h5>祇園、河原町</h5><p>商圈逛街與晚餐</p></div></div>
+                </div>
+            </div>
+
+            <div class="day-accordion">
+                <div class="day-header">Day 4：移師大阪道頓堀 <span>10/1 (四)</span></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time-box">10:00</div><div class="content-box"><h5>前往大阪</h5><p>地鐵至京都站轉JR至新大阪，再轉地鐵至難波</p><span class="tag">地鐵+JR (70分)</span></div></div>
+                    <div class="timeline-item"><div class="time-box">11:30</div><div class="content-box"><h5>難波站飯店</h5><p>寄放行李</p></div></div>
+                    <div class="timeline-item"><div class="time-box">13:00</div><div class="content-box"><h5>黑門市場</h5><p>海鮮與在地小吃午餐</p><span class="tag">步行 10分</span></div></div>
+                    <div class="timeline-item"><div class="time-box">15:30</div><div class="content-box"><h5>大阪城天守閣</h5><p>難波搭千日前線轉谷町線至谷町四丁目</p><span class="tag">地鐵</span></div></div>
+                    <div class="timeline-item"><div class="time-box">18:30</div><div class="content-box"><h5>道頓堀、心齋橋</h5><p>晚餐與感受夜生活</p></div></div>
+                </div>
+            </div>
+
+            <div class="day-accordion">
+                <div class="day-header">Day 5：海遊館與梅田 <span>10/2 (五)</span></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time-box">10:00</div><div class="content-box"><h5>大阪海遊館</h5><p>難波搭御堂筋線轉中央線至大阪港</p><span class="tag">地鐵 (30分)</span></div></div>
+                    <div class="timeline-item"><div class="time-box">13:30</div><div class="content-box"><h5>天保山購物中心</h5><p>午餐與休息</p></div></div>
+                    <div class="timeline-item"><div class="time-box">15:30</div><div class="content-box"><h5>梅田逛街</h5><p>中央線轉御堂筋線至梅田 (參考下方指南)</p><span class="tag">地鐵</span></div></div>
+                    <div class="timeline-item"><div class="time-box">18:30</div><div class="content-box"><h5>梅田藍天大廈</h5><p>空中庭園百萬夜景</p><span class="tag">步行 12分</span></div></div>
+                </div>
+            </div>
+
+            <div class="day-accordion">
+                <div class="day-header">Day 6：難波深度探索 <span>10/3 (六)</span></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time-box">10:00</div><div class="content-box"><h5>難波八阪神社</h5><p>巨大獅子頭打卡</p><span class="tag">步行 10分</span></div></div>
+                    <div class="timeline-item"><div class="time-box">11:30</div><div class="content-box"><h5>通天閣、新世界</h5><p>吃串炸與感受下町風情</p><span class="tag">地鐵至動物園前</span></div></div>
+                    <div class="timeline-item"><div class="time-box">15:00</div><div class="content-box"><h5>心齋橋/難波</h5><p>最後採買藥妝與伴手禮</p></div></div>
+                </div>
+            </div>
+            
+            <div class="day-accordion">
+                <div class="day-header">Day 7：滿載而歸 <span>10/4 (日)</span></div>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="time-box">上午</div><div class="content-box"><h5>悠閒早餐</h5><p>飯店退房</p></div></div>
+                    <div class="timeline-item"><div class="time-box">-4h</div><div class="content-box"><h5>前往關西機場</h5><p>南海難波站搭乘特急 Rapi:t 直達</p><span class="tag">南海電鐵 (40分)</span></div></div>
+                    <div class="timeline-item"><div class="time-box">-3h</div><div class="content-box"><h5>機場報到</h5><p>國泰航空托運與免稅店採買</p></div></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Tabelog 150 美食 (已加入 Google 評分) -->
+        <section id="food">
+            <div class="section-title">🍽️ 嚴選百大美食 (￥5000內)</div>
+            
+            <div class="area-tabs">
+<a href="#" class="area-tab active" onclick="showArea('area-0', this); return false;">京都車站</a>
+<a href="#" class="area-tab " onclick="showArea('area-1', this); return false;">京都河原町</a>
+<a href="#" class="area-tab " onclick="showArea('area-2', this); return false;">大阪難波</a>
+<a href="#" class="area-tab " onclick="showArea('area-3', this); return false;">心齋橋</a>
+<a href="#" class="area-tab " onclick="showArea('area-4', this); return false;">梅田</a>
+
+            </div>
+<div id="area-0" class="food-list" style="display: flex;">
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">1. 本家 第一旭 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">京都車站旁老字號醬油拉麵，經常大排長龍。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (1,503則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E6%9C%AC%E5%AE%B6%20%E7%AC%AC%E4%B8%80%E6%97%AD" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">2. 新福菜館 本店 <span class="food-type">拉麵/炒飯</span></h4>
+                    </div>
+                    <p class="food-desc">以黑色湯頭拉麵與黑色炒飯聞名的名店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.59</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (4,154則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E6%96%B0%E7%A6%8F%E8%8F%9C%E9%A4%A8%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">3. 名代豬排 Katsukura <span class="food-type">炸豬排</span></h4>
+                    </div>
+                    <p class="food-desc">The Cube 11樓，超人氣低溫熟成炸豬排。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.7</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (622則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E5%90%8D%E4%BB%A3%E8%B1%AC%E6%8E%92%20Katsukura" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">4. 東洋亭 (Porta店) <span class="food-type">洋食</span></h4>
+                    </div>
+                    <p class="food-desc">百年洋食館，招牌百年布丁與漢堡排。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.54</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (608則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E6%9D%B1%E6%B4%8B%E4%BA%AD%20%28Porta%E5%BA%97%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">5. 中村藤吉 (京都駅店) <span class="food-type">甜點/抹茶</span></h4>
+                    </div>
+                    <p class="food-desc">宇治抹茶名店，必吃生茶果凍。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.7</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (2,339則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E4%B8%AD%E6%9D%91%E8%97%A4%E5%90%89%20%28%E4%BA%AC%E9%83%BD%E9%A7%85%E5%BA%97%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">6. 伊藤久右衛門 <span class="food-type">甜點/抹茶</span></h4>
+                    </div>
+                    <p class="food-desc">京都車站前的抹茶聖代極受歡迎。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.71</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (1,153則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E4%BC%8A%E8%97%A4%E4%B9%85%E5%8F%B3%E8%A1%9B%E9%96%80" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">7. 壽司之武藏 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">八條口超高人氣平價迴轉壽司。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.75</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,381則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E5%A3%BD%E5%8F%B8%E4%B9%8B%E6%AD%A6%E8%97%8F" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">8. 京の焼肉処 弘 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">京都塔旁，高CP值和牛燒肉連鎖。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.84</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (2,056則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E4%BA%AC%E3%81%AE%E7%84%BC%E8%82%89%E5%87%A6%20%E5%BC%98" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">9. 拉麵小路 - 坂內食堂 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">車站10樓拉麵小路內的喜多方拉麵名店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.54</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (3,805則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E6%8B%89%E9%BA%B5%E5%B0%8F%E8%B7%AF%20-%20%E5%9D%82%E5%85%A7%E9%A3%9F%E5%A0%82" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">10. 吟釀拉麵 久保田 <span class="food-type">沾麵</span></h4>
+                    </div>
+                    <p class="food-desc">車站步行10分，超濃郁味噌沾麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.52</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (4,485則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E5%90%9F%E9%87%80%E6%8B%89%E9%BA%B5%20%E4%B9%85%E4%BF%9D%E7%94%B0" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">11. 敘敘苑 京都伊勢丹店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">位於伊勢丹的高級和牛燒肉，景觀絕佳。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.82</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (3,897則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E6%95%98%E6%95%98%E8%8B%91%20%E4%BA%AC%E9%83%BD%E4%BC%8A%E5%8B%A2%E4%B8%B9%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">12. 串八 京都駅前店 <span class="food-type">串燒/居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">在地人超愛的平價炭火串燒與炸串。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.72</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (3,385則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E4%B8%B2%E5%85%AB%20%E4%BA%AC%E9%83%BD%E9%A7%85%E5%89%8D%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">13. 和幸 京都伊勢丹店 <span class="food-type">炸豬排</span></h4>
+                    </div>
+                    <p class="food-desc">經典日式連鎖豬排，白飯高麗菜吃到飽。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.53</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (826則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E5%92%8C%E5%B9%B8%20%E4%BA%AC%E9%83%BD%E4%BC%8A%E5%8B%A2%E4%B8%B9%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">14. 貝だし麺 きた田 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">早晨就營業的清爽蛤蜊高湯拉麵名店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (2,357則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E8%B2%9D%E3%81%A0%E3%81%97%E9%BA%BA%20%E3%81%8D%E3%81%9F%E7%94%B0" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">15. 辻利 京都塔店 <span class="food-type">抹茶甜點</span></h4>
+                    </div>
+                    <p class="food-desc">京都代表性抹茶品牌，冰淇淋必吃。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (1,955則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E8%BE%BB%E5%88%A9%20%E4%BA%AC%E9%83%BD%E5%A1%94%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">16. 壽司三味 京都站前店 <span class="food-type">壽司</span></h4>
+                    </div>
+                    <p class="food-desc">平價美味，24小時營業的知名壽司。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.58</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (3,299則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E5%A3%BD%E5%8F%B8%E4%B8%89%E5%91%B3%20%E4%BA%AC%E9%83%BD%E7%AB%99%E5%89%8D%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">17. やよい軒 京都駅八条口店 <span class="food-type">定食</span></h4>
+                    </div>
+                    <p class="food-desc">高CP值日式定食，白飯無限續加。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,687則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E3%82%84%E3%82%88%E3%81%84%E8%BB%92%20%E4%BA%AC%E9%83%BD%E9%A7%85%E5%85%AB%E6%9D%A1%E5%8F%A3%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">18. 鳥貴族 京都塔店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">全品項均一價的超高人氣烤肉串連鎖。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.76</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (1,605則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E9%B3%A5%E8%B2%B4%E6%97%8F%20%E4%BA%AC%E9%83%BD%E5%A1%94%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">19. 551 HORAI 蓬萊 京都伊勢丹店 <span class="food-type">中華小吃</span></h4>
+                    </div>
+                    <p class="food-desc">關西必吃的超人氣現做豬肉包子。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.85</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,828則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20551%20HORAI%20%E8%93%AC%E8%90%8A%20%E4%BA%AC%E9%83%BD%E4%BC%8A%E5%8B%A2%E4%B8%B9%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">20. 丸亀製麵 京都CUBE店 <span class="food-type">烏龍麵</span></h4>
+                    </div>
+                    <p class="food-desc">Q彈手打讚岐烏龍麵，現炸天婦羅。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (631則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E4%B8%B8%E4%BA%80%E8%A3%BD%E9%BA%B5%20%E4%BA%AC%E9%83%BDCUBE%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">21. 世界の山ちゃん 京都駅前店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">來自名古屋的夢幻胡椒炸雞翅。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.78</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,364則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E4%B8%96%E7%95%8C%E3%81%AE%E5%B1%B1%E3%81%A1%E3%82%83%E3%82%93%20%E4%BA%AC%E9%83%BD%E9%A7%85%E5%89%8D%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">22. 星巴克 京都Porta店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">位於地下街，適合逛街中途休憩。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.82</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (1,788則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E6%98%9F%E5%B7%B4%E5%85%8B%20%E4%BA%AC%E9%83%BDPorta%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">23. 志津屋 SIZUYA 京都駅店 <span class="food-type">麵包</span></h4>
+                    </div>
+                    <p class="food-desc">京都老字號麵包店，炸牛排三明治必吃。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.58</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (4,245則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E5%BF%97%E6%B4%A5%E5%B1%8B%20SIZUYA%20%E4%BA%AC%E9%83%BD%E9%A7%85%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">24. 麥當勞 京都站八條口店 <span class="food-type">速食</span></h4>
+                    </div>
+                    <p class="food-desc">快速方便的早餐與消夜好去處。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,510則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E9%BA%A5%E7%95%B6%E5%8B%9E%20%E4%BA%AC%E9%83%BD%E7%AB%99%E5%85%AB%E6%A2%9D%E5%8F%A3%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">25. 餃子的王將 京都站前店 <span class="food-type">中華料理</span></h4>
+                    </div>
+                    <p class="food-desc">發跡於京都的超人氣平價中華料理。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.76</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (2,894則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E9%A4%83%E5%AD%90%E7%9A%84%E7%8E%8B%E5%B0%87%20%E4%BA%AC%E9%83%BD%E7%AB%99%E5%89%8D%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">26. ラーメン橫綱 京都五條店 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">京都人從小吃到大的豚骨醬油拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (1,398則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E6%A9%AB%E7%B6%B1%20%E4%BA%AC%E9%83%BD%E4%BA%94%E6%A2%9D%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">27. CoCo壹番屋 京都站烏丸口店 <span class="food-type">咖哩</span></h4>
+                    </div>
+                    <p class="food-desc">可客製化辣度與配料的濃郁日式咖哩。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.85</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (872則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20CoCo%E5%A3%B9%E7%95%AA%E5%B1%8B%20%E4%BA%AC%E9%83%BD%E7%AB%99%E7%83%8F%E4%B8%B8%E5%8F%A3%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">28. 吉野家 京都站八条口店 <span class="food-type">牛丼</span></h4>
+                    </div>
+                    <p class="food-desc">24小時營業，快速美味的平價牛丼。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.77</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (1,155則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E5%90%89%E9%87%8E%E5%AE%B6%20%E4%BA%AC%E9%83%BD%E7%AB%99%E5%85%AB%E6%9D%A1%E5%8F%A3%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">29. モリタ屋 JR京都伊勢丹店 <span class="food-type">壽喜燒</span></h4>
+                    </div>
+                    <p class="food-desc">創立於明治維新時期的頂級和牛壽喜燒。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.78</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,076則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E3%83%A2%E3%83%AA%E3%82%BF%E5%B1%8B%20JR%E4%BA%AC%E9%83%BD%E4%BC%8A%E5%8B%A2%E4%B8%B9%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">30. 杵屋 京都Porta店 <span class="food-type">烏龍麵</span></h4>
+                    </div>
+                    <p class="food-desc">手工現做烏龍麵，湯頭溫潤順口。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.64</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (4,477則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E8%BB%8A%E7%AB%99%20%E6%9D%B5%E5%B1%8B%20%E4%BA%AC%E9%83%BDPorta%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+</div>
+<div id="area-1" class="food-list" style="display: none;">
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">1. MACCHA HOUSE 抹茶館 <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">爆紅的木盒裝宇治抹茶提拉米蘇。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.7</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (969則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20MACCHA%20HOUSE%20%E6%8A%B9%E8%8C%B6%E9%A4%A8" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">2. 豬一 (Inoichi) <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">米其林必比登推薦，清爽系白醬油拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.74</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (3,648則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E8%B1%AC%E4%B8%80%20%28Inoichi%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">3. 佰食屋 <span class="food-type">國產牛排丼</span></h4>
+                    </div>
+                    <p class="food-desc">每日限量100份的超狂牛肉丼飯。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,147則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E4%BD%B0%E9%A3%9F%E5%B1%8B" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">4. Inoda Coffee 本店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">昭和復古風情的京都老字號咖啡館。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.6 (3,620則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20Inoda%20Coffee%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">5. 六曜社 地下店 <span class="food-type">咖啡/甜點</span></h4>
+                    </div>
+                    <p class="food-desc">自家烘焙咖啡與招牌手工甜甜圈。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.57</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (1,722則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E5%85%AD%E6%9B%9C%E7%A4%BE%20%E5%9C%B0%E4%B8%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">6. 名代豆餅 出町ふたば <span class="food-type">和菓子</span></h4>
+                    </div>
+                    <p class="food-desc">(百貨有售) 永遠在排隊的紅豆大福。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (1,126則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E5%90%8D%E4%BB%A3%E8%B1%86%E9%A4%85%20%E5%87%BA%E7%94%BA%E3%81%B5%E3%81%9F%E3%81%B0" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">7. Kawa Cafe <span class="food-type">咖啡/法式</span></h4>
+                    </div>
+                    <p class="food-desc">鴨川納涼床旁，平價浪漫法式早午餐。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.64</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (3,689則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20Kawa%20Cafe" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">8. 麵屋 豬一 離れ <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">豬一的姊妹店，同樣極具水準。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.82</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,501則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E9%BA%B5%E5%B1%8B%20%E8%B1%AC%E4%B8%80%20%E9%9B%A2%E3%82%8C" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">9. 牛カツ 京都勝牛 <span class="food-type">炸牛排</span></h4>
+                    </div>
+                    <p class="food-desc">外酥內嫩，發源於京都的炸牛排。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.52</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (3,906則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E7%89%9B%E3%82%AB%E3%83%84%20%E4%BA%AC%E9%83%BD%E5%8B%9D%E7%89%9B" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">10. 祇園辻利 / 茶寮都路里 <span class="food-type">抹茶甜點</span></h4>
+                    </div>
+                    <p class="food-desc">祇園超人氣抹茶聖代與特濃抹茶冰。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.78</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.8 (4,096則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E7%A5%87%E5%9C%92%E8%BE%BB%E5%88%A9%20/%20%E8%8C%B6%E5%AF%AE%E9%83%BD%E8%B7%AF%E9%87%8C" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">11. 敘敘苑 京都四條河原町店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">四條河原町的高級燒肉代名詞。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.7</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (2,490則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E6%95%98%E6%95%98%E8%8B%91%20%E4%BA%AC%E9%83%BD%E5%9B%9B%E6%A2%9D%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">12. 鳥貴族 四條河原町店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">學生與上班族最愛的平價串燒。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.79</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (1,025則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E9%B3%A5%E8%B2%B4%E6%97%8F%20%E5%9B%9B%E6%A2%9D%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">13. 壽司三味 河原町店 <span class="food-type">壽司</span></h4>
+                    </div>
+                    <p class="food-desc">食材新鮮，師傅現場捏製的美味壽司。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (2,661則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E5%A3%BD%E5%8F%B8%E4%B8%89%E5%91%B3%20%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">14. 燒肉LIKE 京都四條河原町店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">單人也能輕鬆享用的個人燒肉套餐。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.81</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.6 (4,304則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E7%87%92%E8%82%89LIKE%20%E4%BA%AC%E9%83%BD%E5%9B%9B%E6%A2%9D%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">15. 麵匠 一粒萬倍 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">米其林推薦等級的清澈醬油拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.69</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (2,134則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E9%BA%B5%E5%8C%A0%20%E4%B8%80%E7%B2%92%E8%90%AC%E5%80%8D" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">16. Shake Shack 京都四條烏丸店 <span class="food-type">漢堡</span></h4>
+                    </div>
+                    <p class="food-desc">紐約超人氣漢堡，肉排多汁美味。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.85</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (2,619則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20Shake%20Shack%20%E4%BA%AC%E9%83%BD%E5%9B%9B%E6%A2%9D%E7%83%8F%E4%B8%B8%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">17. 藍瓶咖啡 京都六角店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">結合百年自行車店的質感手沖咖啡。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,884則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E8%97%8D%E7%93%B6%E5%92%96%E5%95%A1%20%E4%BA%AC%E9%83%BD%E5%85%AD%E8%A7%92%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">18. 星巴克 京都BAL店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">充滿藝術氣息的高質感星巴克門市。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.52</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,402則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E6%98%9F%E5%B7%B4%E5%85%8B%20%E4%BA%AC%E9%83%BDBAL%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">19. 幸せのパンケーキ 京都店 <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">入口即化的超鬆軟幸福舒芙蕾鬆餅。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.51</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (4,208則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E5%B9%B8%E3%81%9B%E3%81%AE%E3%83%91%E3%83%B3%E3%82%B1%E3%83%BC%E3%82%AD%20%E4%BA%AC%E9%83%BD%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">20. 磯丸水產 河原町店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">24小時營業，桌上炭烤新鮮海產。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.52</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (1,474則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E7%A3%AF%E4%B8%B8%E6%B0%B4%E7%94%A2%20%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">21. 丸亀製麵 河原町三條店 <span class="food-type">烏龍麵</span></h4>
+                    </div>
+                    <p class="food-desc">逛街途中快速解決一餐的最佳選擇。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.6</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,041則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E4%B8%B8%E4%BA%80%E8%A3%BD%E9%BA%B5%20%E6%B2%B3%E5%8E%9F%E7%94%BA%E4%B8%89%E6%A2%9D%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">22. 餃子的王將 四條河原町店 <span class="food-type">中華料理</span></h4>
+                    </div>
+                    <p class="food-desc">在地人下班後喝一杯配煎餃的最愛。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.76</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (1,495則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E9%A4%83%E5%AD%90%E7%9A%84%E7%8E%8B%E5%B0%87%20%E5%9B%9B%E6%A2%9D%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">23. 京都勝牛 河原町店 <span class="food-type">炸牛排</span></h4>
+                    </div>
+                    <p class="food-desc">外酥內嫩的京都名物炸牛排。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.78</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (897則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E4%BA%AC%E9%83%BD%E5%8B%9D%E7%89%9B%20%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">24. HARBS 大丸京都店 <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">必吃層次豐富的水果千層蛋糕。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (2,412則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20HARBS%20%E5%A4%A7%E4%B8%B8%E4%BA%AC%E9%83%BD%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">25. 壽司之武藏 三條本店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">超過40年歷史的京都迴轉壽司名店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (3,146則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E5%A3%BD%E5%8F%B8%E4%B9%8B%E6%AD%A6%E8%97%8F%20%E4%B8%89%E6%A2%9D%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">26. 牛角 京都河原町店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">知名連鎖燒肉，提供吃到飽方案。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.54</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (3,779則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E7%89%9B%E8%A7%92%20%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">27. 一蘭拉麵 京都河原町店 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">台灣人最愛的濃郁天然豚骨拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (2,696則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E4%B8%80%E8%98%AD%E6%8B%89%E9%BA%B5%20%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">28. 燒肉 弘 四條木屋町店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">京都必吃的高CP值和牛燒肉。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (2,394則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E7%87%92%E8%82%89%20%E5%BC%98%20%E5%9B%9B%E6%A2%9D%E6%9C%A8%E5%B1%8B%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">29. First Kitchen 京都大丸前店 <span class="food-type">速食</span></h4>
+                    </div>
+                    <p class="food-desc">日系連鎖速食，漢堡與搖搖薯條必點。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.59</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (4,028則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20First%20Kitchen%20%E4%BA%AC%E9%83%BD%E5%A4%A7%E4%B8%B8%E5%89%8D%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">30. 三嶋亭 本店 <span class="food-type">壽喜燒</span></h4>
+                    </div>
+                    <p class="food-desc">京都百年壽喜燒老店，極致和牛體驗。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.8 (2,714則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E6%B2%B3%E5%8E%9F%E7%94%BA%20%E4%B8%89%E5%B6%8B%E4%BA%AD%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+</div>
+<div id="area-2" class="food-list" style="display: none;">
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">1. 福太郎 本店 <span class="food-type">大阪燒</span></h4>
+                    </div>
+                    <p class="food-desc">難波排隊名店，蔥燒大阪燒極具人氣。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.79</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (3,976則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E7%A6%8F%E5%A4%AA%E9%83%8E%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">2. 自由軒 <span class="food-type">洋食/咖哩</span></h4>
+                    </div>
+                    <p class="food-desc">百年歷史，生雞蛋咖哩飯發祥地。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.59</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (1,375則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E8%87%AA%E7%94%B1%E8%BB%92" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">3. 千日前 やよい <span class="food-type">居酒屋/串炸</span></h4>
+                    </div>
+                    <p class="food-desc">在地人熱愛的隱藏版串炸與關東煮。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (508則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E5%8D%83%E6%97%A5%E5%89%8D%20%E3%82%84%E3%82%88%E3%81%84" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">4. 老爺爺起司蛋糕 (りくろーおじさん) <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">現烤出爐、搖晃的輕乳酪起司蛋糕。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.85</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (3,715則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E8%80%81%E7%88%BA%E7%88%BA%E8%B5%B7%E5%8F%B8%E8%9B%8B%E7%B3%95%20%28%E3%82%8A%E3%81%8F%E3%82%8D%E3%83%BC%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">5. 達摩串炸 (だるま) <span class="food-type">串炸</span></h4>
+                    </div>
+                    <p class="food-desc">大阪串炸代名詞，麵衣薄脆。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (3,492則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E9%81%94%E6%91%A9%E4%B8%B2%E7%82%B8%20%28%E3%81%A0%E3%82%8B%E3%81%BE%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">6. 美津の (Mizuno) <span class="food-type">大阪燒</span></h4>
+                    </div>
+                    <p class="food-desc">米其林指南推薦，山藥燒口感獨特。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.85</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,493則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E7%BE%8E%E6%B4%A5%E3%81%AE%20%28Mizuno%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">7. 天地人 <span class="food-type">炭烤豚丼</span></h4>
+                    </div>
+                    <p class="food-desc">黑門市場附近，炭香濃郁的燒肉丼。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.56</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (739則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E5%A4%A9%E5%9C%B0%E4%BA%BA" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">8. 肉星 (Nikuboshi) <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">高CP值單點燒肉，肉質鮮甜。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.71</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.8 (1,784則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E8%82%89%E6%98%9F%20%28Nikuboshi%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">9. 丸福咖啡店 本店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">濃郁深焙咖啡與復古厚鬆餅。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.53</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (4,265則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E4%B8%B8%E7%A6%8F%E5%92%96%E5%95%A1%E5%BA%97%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">10. 金龍拉麵 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">道頓堀地標，白飯小菜吃到飽。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.8 (2,580則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E9%87%91%E9%BE%8D%E6%8B%89%E9%BA%B5" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">11. 敘敘苑 難波店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">難波商圈的高級和牛燒肉首選。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.54</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (778則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E6%95%98%E6%95%98%E8%8B%91%20%E9%9B%A3%E6%B3%A2%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">12. 鳥貴族 難波道頓堀店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">全品項低價位，大口吃肉喝酒的好去處。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.74</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (4,356則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E9%B3%A5%E8%B2%B4%E6%97%8F%20%E9%9B%A3%E6%B3%A2%E9%81%93%E9%A0%93%E5%A0%80%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">13. 壽司三味 道頓堀店 <span class="food-type">壽司</span></h4>
+                    </div>
+                    <p class="food-desc">道頓堀上的知名連鎖壽司，24小時營業。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.81</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (662則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E5%A3%BD%E5%8F%B8%E4%B8%89%E5%91%B3%20%E9%81%93%E9%A0%93%E5%A0%80%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">14. 燒肉LIKE 難波店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">一個人也能爽吃燒肉的高效餐廳。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.72</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,815則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E7%87%92%E8%82%89LIKE%20%E9%9B%A3%E6%B3%A2%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">15. 蟹道樂 本店 <span class="food-type">海鮮</span></h4>
+                    </div>
+                    <p class="food-desc">道頓堀地標大螃蟹，頂級螃蟹會席料理。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.69</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (3,433則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E8%9F%B9%E9%81%93%E6%A8%82%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">16. 一蘭拉麵 道頓堀店 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">永遠大排長龍的道頓堀人氣拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.62</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (3,251則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E4%B8%80%E8%98%AD%E6%8B%89%E9%BA%B5%20%E9%81%93%E9%A0%93%E5%A0%80%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">17. 千房 道頓堀ビル店 <span class="food-type">大阪燒</span></h4>
+                    </div>
+                    <p class="food-desc">職人現場煎製，口感鬆軟的頂級大阪燒。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (3,579則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E5%8D%83%E6%88%BF%20%E9%81%93%E9%A0%93%E5%A0%80%E3%83%93%E3%83%AB%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">18. 磯丸水產 道頓堀店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">自己動手烤海鮮，氣氛熱鬧無比。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.83</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (2,806則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E7%A3%AF%E4%B8%B8%E6%B0%B4%E7%94%A2%20%E9%81%93%E9%A0%93%E5%A0%80%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">19. 餃子的王將 難波南海通店 <span class="food-type">中華料理</span></h4>
+                    </div>
+                    <p class="food-desc">平價美味，經典日式煎餃與炒飯。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.85</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (2,572則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E9%A4%83%E5%AD%90%E7%9A%84%E7%8E%8B%E5%B0%87%20%E9%9B%A3%E6%B3%A2%E5%8D%97%E6%B5%B7%E9%80%9A%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">20. 551 HORAI 蓬萊 難波中店 <span class="food-type">中華小吃</span></h4>
+                    </div>
+                    <p class="food-desc">排隊買包子，皮Q肉汁多的關西靈魂美食。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.6</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (4,101則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20551%20HORAI%20%E8%93%AC%E8%90%8A%20%E9%9B%A3%E6%B3%A2%E4%B8%AD%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">21. 丸亀製麵 難波店 <span class="food-type">烏龍麵</span></h4>
+                    </div>
+                    <p class="food-desc">千日前商店街內的平價烏龍麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.59</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (3,915則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E4%B8%B8%E4%BA%80%E8%A3%BD%E9%BA%B5%20%E9%9B%A3%E6%B3%A2%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">22. 星巴克 難波南海通店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">鄰近車站，逛街前後的咖啡補給站。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.69</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (3,805則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E6%98%9F%E5%B7%B4%E5%85%8B%20%E9%9B%A3%E6%B3%A2%E5%8D%97%E6%B5%B7%E9%80%9A%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">23. 炸串 橫綱 難波本館 <span class="food-type">串炸</span></h4>
+                    </div>
+                    <p class="food-desc">超顯眼巨型看板，種類豐富的大阪串炸。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.73</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,771則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E7%82%B8%E4%B8%B2%20%E6%A9%AB%E7%B6%B1%20%E9%9B%A3%E6%B3%A2%E6%9C%AC%E9%A4%A8" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">24. 麥當勞 難波戎橋店 <span class="food-type">速食</span></h4>
+                    </div>
+                    <p class="food-desc">就在固力果跑跑人旁邊的便利速食。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.61</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.6 (1,050則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E9%BA%A5%E7%95%B6%E5%8B%9E%20%E9%9B%A3%E6%B3%A2%E6%88%8E%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">25. 吉野家 難波御堂筋店 <span class="food-type">牛丼</span></h4>
+                    </div>
+                    <p class="food-desc">經典牛丼，半夜肚子餓的救星。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.6</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (1,136則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E5%90%89%E9%87%8E%E5%AE%B6%20%E9%9B%A3%E6%B3%A2%E5%BE%A1%E5%A0%82%E7%AD%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">26. 藏壽司 難波御堂筋店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">可以扭蛋的超人氣平價迴轉壽司。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.6</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,904則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E8%97%8F%E5%A3%BD%E5%8F%B8%20%E9%9B%A3%E6%B3%A2%E5%BE%A1%E5%A0%82%E7%AD%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">27. 壽司郎 難波AMZA店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">日本迴轉壽司霸主，期間限定口味必吃。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.58</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (1,528則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E5%A3%BD%E5%8F%B8%E9%83%8E%20%E9%9B%A3%E6%B3%A2AMZA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">28. 燒肉 力丸 難波湊町店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">和牛吃到飽，CP值爆表的人氣燒肉。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.82</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (2,234則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E7%87%92%E8%82%89%20%E5%8A%9B%E4%B8%B8%20%E9%9B%A3%E6%B3%A2%E6%B9%8A%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">29. HARBS 難波PARKS店 <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">難波地區享用超厚實水果千層蛋糕的好地方。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.79</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.8 (3,658則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20HARBS%20%E9%9B%A3%E6%B3%A2PARKS%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">30. 溫野菜 難波店 <span class="food-type">涮涮鍋</span></h4>
+                    </div>
+                    <p class="food-desc">提供優質肉品與豐富蔬菜的吃到飽火鍋。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.55</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (2,309則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%98%AA%E9%9B%A3%E6%B3%A2%20%E6%BA%AB%E9%87%8E%E8%8F%9C%20%E9%9B%A3%E6%B3%A2%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+</div>
+<div id="area-3" class="food-list" style="display: none;">
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">1. 北極星 本店 <span class="food-type">洋食</span></h4>
+                    </div>
+                    <p class="food-desc">日式榻榻米上的百年蛋包飯創始店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.7</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (958則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E5%8C%97%E6%A5%B5%E6%98%9F%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">2. 明治軒 <span class="food-type">洋食</span></h4>
+                    </div>
+                    <p class="food-desc">90年歷史，炸牛排串與蛋包飯特餐。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.54</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (3,918則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E6%98%8E%E6%B2%BB%E8%BB%92" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">3. Luke's Lobster <span class="food-type">小吃</span></h4>
+                    </div>
+                    <p class="food-desc">紐約爆紅龍蝦堡，肉質Q彈鮮甜。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.64</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (1,022則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20Luke%27s%20Lobster" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">4. 宇治香園 <span class="food-type">茶飲/甜點</span></h4>
+                    </div>
+                    <p class="food-desc">老字號茶舖的濃郁抹茶霜淇淋。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.52</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (3,760則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E5%AE%87%E6%B2%BB%E9%A6%99%E5%9C%92" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">5. PABLO <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">心齋橋筋內的半熟起司塔名店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.84</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (1,360則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20PABLO" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">6. Shake Shack <span class="food-type">漢堡</span></h4>
+                    </div>
+                    <p class="food-desc">大丸百貨一樓，美式人氣漢堡。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.74</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (2,793則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20Shake%20Shack" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">7. 拉麵 Zundo-ya (ずんどう屋) <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">超濃郁豚骨拉麵，深夜依然客滿。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.81</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.6 (3,569則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E6%8B%89%E9%BA%B5%20Zundo-ya%20%28%E3%81%9A%E3%82%93%E3%81%A9%E3%81%86%E5%B1%8B%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">8. 燒肉一丁 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">包廂式黑毛和牛燒肉，價格合理。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.56</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (4,498則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E7%87%92%E8%82%89%E4%B8%80%E4%B8%81" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">9. 紅虎餃子房 <span class="food-type">中華料理</span></h4>
+                    </div>
+                    <p class="food-desc">巨無霸鐵鍋棒餃子與黑芝麻擔擔麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.78</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (601則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E7%B4%85%E8%99%8E%E9%A4%83%E5%AD%90%E6%88%BF" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">10. Crepes de Cocorico <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">心齋橋排隊法式可麗餅。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.57</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (2,186則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20Crepes%20de%20Cocorico" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">11. 敘敘苑 心齋橋店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">心齋橋筋附近，適合逛街後享用的頂級燒肉。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.78</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (3,725則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E6%95%98%E6%95%98%E8%8B%91%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">12. 鳥貴族 心齋橋店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">便宜又大碗的超人氣串烤專賣店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.75</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (4,016則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E9%B3%A5%E8%B2%B4%E6%97%8F%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">13. 壽司三味 心齋橋店 <span class="food-type">壽司</span></h4>
+                    </div>
+                    <p class="food-desc">食材新鮮有保證，單點或套餐都滿意。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.67</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (2,385則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E5%A3%BD%E5%8F%B8%E4%B8%89%E5%91%B3%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">14. 燒肉LIKE 心齋橋店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">翻桌率超高的個人專屬燒肉快餐。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.63</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (3,203則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E7%87%92%E8%82%89LIKE%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">15. 蟹道樂 網元本館 <span class="food-type">海鮮</span></h4>
+                    </div>
+                    <p class="food-desc">環境優雅隱密，專賣頂級鮮甜螃蟹料理。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.58</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (784則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E8%9F%B9%E9%81%93%E6%A8%82%20%E7%B6%B2%E5%85%83%E6%9C%AC%E9%A4%A8" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">16. 一蘭拉麵 心齋橋店 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">客製化口味，濃郁好喝的豚骨湯頭。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.84</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (2,586則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E4%B8%80%E8%98%AD%E6%8B%89%E9%BA%B5%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">17. 味乃家 本店 <span class="food-type">大阪燒</span></h4>
+                    </div>
+                    <p class="food-desc">米其林必比登推薦，麵衣鬆軟的高麗菜燒。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.65</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (613則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E5%91%B3%E4%B9%83%E5%AE%B6%20%E6%9C%AC%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">18. 磯丸水產 心齋橋店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">網烤蟹膏味噌必點，海鮮控的天堂。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.55</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (4,442則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E7%A3%AF%E4%B8%B8%E6%B0%B4%E7%94%A2%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">19. 餃子的王將 心齋橋筋店 <span class="food-type">中華料理</span></h4>
+                    </div>
+                    <p class="food-desc">經典外皮酥脆的煎餃，百吃不膩。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.84</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.9 (2,279則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E9%A4%83%E5%AD%90%E7%9A%84%E7%8E%8B%E5%B0%87%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E7%AD%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">20. 551 HORAI 蓬萊 心齋橋大丸店 <span class="food-type">中華小吃</span></h4>
+                    </div>
+                    <p class="food-desc">大丸百貨內，在地人推薦的超強肉包。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.63</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (2,594則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20551%20HORAI%20%E8%93%AC%E8%90%8A%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%A4%A7%E4%B8%B8%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">21. 丸亀製麵 心齋橋店 <span class="food-type">烏龍麵</span></h4>
+                    </div>
+                    <p class="food-desc">自助式點餐，快速又省錢的美食。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.55</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (681則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E4%B8%B8%E4%BA%80%E8%A3%BD%E9%BA%B5%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">22. 星巴克 心齋橋筋店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">心齋橋逛街大道的熱門約會地點。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.75</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (3,803則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E6%98%9F%E5%B7%B4%E5%85%8B%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E7%AD%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">23. 達摩 心齋橋店 <span class="food-type">串炸</span></h4>
+                    </div>
+                    <p class="food-desc">知名連鎖串炸，生高麗菜解膩絕配。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.69</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (786則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E9%81%94%E6%91%A9%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">24. 麥當勞 心齋橋南店 <span class="food-type">速食</span></h4>
+                    </div>
+                    <p class="food-desc">提供期間限定日式口味漢堡的速食店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.83</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (3,217則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E9%BA%A5%E7%95%B6%E5%8B%9E%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%8D%97%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">25. 松屋 心齋橋店 <span class="food-type">牛丼</span></h4>
+                    </div>
+                    <p class="food-desc">點餐機方便快速，定食CP值極高。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (3,231則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E6%9D%BE%E5%B1%8B%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">26. 藏壽司 心齋橋店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">好吃又好玩，極受觀光客歡迎的壽司店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.65</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (2,770則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E8%97%8F%E5%A3%BD%E5%8F%B8%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">27. 壽司郎 心齋橋店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">品項多樣，嚴選鮮魚的高人氣連鎖。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.55</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,052則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E5%A3%BD%E5%8F%B8%E9%83%8E%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">28. 燒肉 力丸 心齋橋店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">提供高階國產牛吃到飽的排隊名店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.74</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (1,732則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E7%87%92%E8%82%89%20%E5%8A%9B%E4%B8%B8%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">29. HARBS 大丸心齋橋店 <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">百貨內悠閒享用超大片新鮮蛋糕。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.65</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (1,360則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20HARBS%20%E5%A4%A7%E4%B8%B8%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">30. 溫野菜 心齋橋店 <span class="food-type">涮涮鍋</span></h4>
+                    </div>
+                    <p class="food-desc">湯頭選擇多，肉品鮮嫩的火鍋吃到飽。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (1,819則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E9%BD%8B%E6%A9%8B%20%E6%BA%AB%E9%87%8E%E8%8F%9C%20%E5%BF%83%E9%BD%8B%E6%A9%8B%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+</div>
+<div id="area-4" class="food-list" style="display: none;">
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">1. きじ (木地) 藍天大廈店 <span class="food-type">大阪燒</span></h4>
+                    </div>
+                    <p class="food-desc">充滿人情味的第一名摩登燒。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.67</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (2,593則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E3%81%8D%E3%81%98%20%28%E6%9C%A8%E5%9C%B0%29%20%E8%97%8D%E5%A4%A9%E5%A4%A7%E5%BB%88%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">2. 人類みな麺類 Premium <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">LUCUA百貨內，關西最強醬油拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.67</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (1,662則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E4%BA%BA%E9%A1%9E%E3%81%BF%E3%81%AA%E9%BA%BA%E9%A1%9E%20Premium" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">3. HARBS <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">必吃超大份量水果千層蛋糕。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.69</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (3,852則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20HARBS" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">4. 敘敘苑 (LUCUA店) <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">午間套餐CP值極高，高樓景觀絕佳。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.83</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (1,420則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E6%95%98%E6%95%98%E8%8B%91%20%28LUCUA%E5%BA%97%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">5. Bâton d'or <span class="food-type">伴手禮</span></h4>
+                    </div>
+                    <p class="food-desc">阪急百貨B1，被譽為Pocky界的LV。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.78</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.8 (1,502則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20B%C3%A2ton%20d%27or" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">6. 篝 (Kagari) <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">來自東京銀座的米其林雞白湯拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.84</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (798則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E7%AF%9D%20%28Kagari%29" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">7. 函太郎 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">Grand Front內，來自北海道的新鮮壽司。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (3,352則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E5%87%BD%E5%A4%AA%E9%83%8E" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">8. Gariguette <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">Grand Front一樓，爆紅法式千層派。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.64</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.0 (3,187則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20Gariguette" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">9. Qu'il fait bon <span class="food-type">甜點</span></h4>
+                    </div>
+                    <p class="food-desc">Grand Front內，頂級新鮮水果派。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.74</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (1,396則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20Qu%27il%20fait%20bon" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">10. Shake Shack 梅田 <span class="food-type">漢堡</span></h4>
+                    </div>
+                    <p class="food-desc">阪神百貨旁，寬敞舒適的美式漢堡。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.57</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (2,783則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20Shake%20Shack%20%E6%A2%85%E7%94%B0" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">11. 鳥貴族 阪急梅田店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">阪急站旁，下班後的微醺烤肉聚點。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.59</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (3,782則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E9%B3%A5%E8%B2%B4%E6%97%8F%20%E9%98%AA%E6%80%A5%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">12. 壽司三味 梅田東通店 <span class="food-type">壽司</span></h4>
+                    </div>
+                    <p class="food-desc">東通商店街內，品質穩定的美味壽司。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.67</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.6 (2,938則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E5%A3%BD%E5%8F%B8%E4%B8%89%E5%91%B3%20%E6%A2%85%E7%94%B0%E6%9D%B1%E9%80%9A%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">13. 燒肉LIKE 梅田店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">快速、美味、平價的無煙燒肉體驗。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.62</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.3 (3,446則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E7%87%92%E8%82%89LIKE%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">14. 一蘭拉麵 梅田店 <span class="food-type">拉麵</span></h4>
+                    </div>
+                    <p class="food-desc">梅田逛街後必吃的暖胃濃郁拉麵。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.81</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (2,744則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E4%B8%80%E8%98%AD%E6%8B%89%E9%BA%B5%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">15. 鶴橋風月 梅田店 <span class="food-type">大阪燒</span></h4>
+                    </div>
+                    <p class="food-desc">經典的大阪燒連鎖店，醬汁濃郁迷人。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (2,444則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E9%B6%B4%E6%A9%8B%E9%A2%A8%E6%9C%88%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">16. 磯丸水產 梅田店 <span class="food-type">居酒屋</span></h4>
+                    </div>
+                    <p class="food-desc">鮮活海產現烤現吃，氣氛極佳。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.66</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (1,635則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E7%A3%AF%E4%B8%B8%E6%B0%B4%E7%94%A2%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">17. 餃子的王將 梅田店 <span class="food-type">中華料理</span></h4>
+                    </div>
+                    <p class="food-desc">份量滿點的煎餃與天津飯套餐。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.77</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (1,479則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E9%A4%83%E5%AD%90%E7%9A%84%E7%8E%8B%E5%B0%87%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">18. 551 HORAI 梅田大丸店 <span class="food-type">中華小吃</span></h4>
+                    </div>
+                    <p class="food-desc">梅田大丸B1的排隊名店，豬肉包必買。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.6</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (1,460則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20551%20HORAI%20%E6%A2%85%E7%94%B0%E5%A4%A7%E4%B8%B8%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">19. 丸亀製麵 梅田店 <span class="food-type">烏龍麵</span></h4>
+                    </div>
+                    <p class="food-desc">平價實惠，彈牙烏龍麵的信賴品牌。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.6</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (830則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E4%B8%B8%E4%BA%80%E8%A3%BD%E9%BA%B5%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">20. 星巴克 梅田LUCUA店 <span class="food-type">咖啡</span></h4>
+                    </div>
+                    <p class="food-desc">LUCUA高樓層，可俯瞰大阪車站美景。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.56</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (1,125則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E6%98%9F%E5%B7%B4%E5%85%8B%20%E6%A2%85%E7%94%B0LUCUA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">21. 達摩 LUCUA大阪店 <span class="food-type">串炸</span></h4>
+                    </div>
+                    <p class="food-desc">車站直結，麵衣薄脆的美味串炸。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.75</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (1,855則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,200</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E9%81%94%E6%91%A9%20LUCUA%E5%A4%A7%E9%98%AA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">22. 麥當勞 梅田茶屋町店 <span class="food-type">速食</span></h4>
+                    </div>
+                    <p class="food-desc">茶屋町鬧區的寬敞麥當勞。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.69</div>
+                        <div class="score-box gmap-score">🗺️ Google: 3.8 (3,911則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E9%BA%A5%E7%95%B6%E5%8B%9E%20%E6%A2%85%E7%94%B0%E8%8C%B6%E5%B1%8B%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">23. 松屋 梅田店 <span class="food-type">牛丼</span></h4>
+                    </div>
+                    <p class="food-desc">省時省錢的平價日式連鎖定食。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.65</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.6 (580則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E6%9D%BE%E5%B1%8B%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">24. 藏壽司 梅田店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">無添加色素香料的安心平價壽司。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.8</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.1 (524則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E8%97%8F%E5%A3%BD%E5%8F%B8%20%E6%A2%85%E7%94%B0%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">25. 壽司郎 梅田茶屋町店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">使用高級海鮮食材的高CP值連鎖店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.83</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (3,995則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥2,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E5%A3%BD%E5%8F%B8%E9%83%8E%20%E6%A2%85%E7%94%B0%E8%8C%B6%E5%B1%8B%E7%94%BA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">26. 燒肉 力丸 梅田東通店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">大口吃肉大口喝酒的超值燒肉店。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.81</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (3,509則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E7%87%92%E8%82%89%20%E5%8A%9B%E4%B8%B8%20%E6%A2%85%E7%94%B0%E6%9D%B1%E9%80%9A%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">27. 敘敘苑 梅田大丸店 <span class="food-type">燒肉</span></h4>
+                    </div>
+                    <p class="food-desc">高樓絕美夜景配上無可挑剔的和牛。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.7</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.5 (2,499則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥4,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E6%95%98%E6%95%98%E8%8B%91%20%E6%A2%85%E7%94%B0%E5%A4%A7%E4%B8%B8%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">28. 溫野菜 梅田北口店 <span class="food-type">涮涮鍋</span></h4>
+                    </div>
+                    <p class="food-desc">健康取向，蔬菜肉類吃到飽的暖心火鍋。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.58</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.2 (2,092則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E6%BA%AB%E9%87%8E%E8%8F%9C%20%E6%A2%85%E7%94%B0%E5%8C%97%E5%8F%A3%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">29. 根室花丸 LUCUA大阪店 <span class="food-type">迴轉壽司</span></h4>
+                    </div>
+                    <p class="food-desc">北海道超人氣壽司，漁獲極度鮮甜。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.62</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.4 (3,942則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥3,000</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E6%A0%B9%E5%AE%A4%E8%8A%B1%E4%B8%B8%20LUCUA%E5%A4%A7%E9%98%AA%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+
+                <div class="food-item">
+                    <div class="food-header">
+                        <h4 class="food-name">30. 鼎泰豐 梅田阪急店 <span class="food-type">中華料理</span></h4>
+                    </div>
+                    <p class="food-desc">揚名國際的小籠包名店，服務一流。</p>
+                    
+                    <div class="food-scores">
+                        <div class="score-box tabelog-score">🎌 Tabelog: 3.67</div>
+                        <div class="score-box gmap-score">🗺️ Google: 4.6 (2,687則)</div>
+                    </div>
+
+                    <div class="food-footer">
+                        <span class="food-price">💰 預算: ￥1,500</span>
+                        <a href="https://www.google.com/maps/search/?api=1&query=%E6%A2%85%E7%94%B0%20%E9%BC%8E%E6%B3%B0%E8%B1%90%20%E6%A2%85%E7%94%B0%E9%98%AA%E6%80%A5%E5%BA%97" target="_blank" class="map-btn">📍 Google Maps</a>
+                    </div>
+                </div>
+</div>
+
+        </section>
+
+        <!-- 梅田指南 -->
+        <section id="umeda">
+            <div class="section-title">🛍️ 梅田防迷路指南</div>
+            
+            <div class="guide-card">
+                <h4 style="margin-top:0; color:var(--primary);">🚶‍♂️ 拒絕下地，走 2 樓天橋！</h4>
+                <p style="font-size:0.9rem; margin-bottom:5px;">梅田地下街是迷宮，強烈建議：</p>
+                <ol style="font-size:0.85rem; padding-left:20px; margin:0; color:var(--text-muted);">
+                    <li>抵達JR大阪站出站後，直接搭手扶梯上 <strong>2 樓</strong>。</li>
+                    <li>利用 2F 聯絡橋，往北通 LUCUA/Grand Front，往東通阪急。</li>
+                    <li>全程免擠地下街，Google Maps 定位不飄移！</li>
+                </ol>
+            </div>
+
+            <div class="mall-card">
+                <h4>LUCUA & LUCUA 1100 <span class="mall-loc">JR直結</span></h4>
+                <p><strong>適合：</strong>年輕族群、喜愛日系潮流服飾美妝。</p>
+                <p><strong>必逛：</strong>B2超熱門美食街 (人類都是麵類、敘敘苑)。</p>
+            </div>
+
+            <div class="mall-card">
+                <h4>Grand Front Osaka <span class="mall-loc">北側</span></h4>
+                <p><strong>適合：</strong>都會生活風格、戶外品牌、質感家居。</p>
+                <p><strong>必逛：</strong>西日本最大的 MUJI 無印良品旗艦店。</p>
+            </div>
+
+            <div class="mall-card">
+                <h4>阪急百貨 (梅田本店) <span class="mall-loc">東側</span></h4>
+                <p><strong>適合：</strong>國際精品、專櫃彩妝、高級伴手禮。</p>
+                <p><strong>必逛：</strong>B1/B2 伴手禮界的LV，Bâton d'or 等頂級洋菓子。</p>
+            </div>
+
+            <div class="mall-card">
+                <h4>大丸百貨 (梅田店) <span class="mall-loc">南口</span></h4>
+                <p><strong>適合：</strong>動漫迷、親子家庭。</p>
+                <p><strong>必逛：</strong>13F 寶可夢中心與任天堂直營店，B1老爺爺起司蛋糕。</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 底部導覽列 -->
+    <div class="bottom-nav">
+        <a href="#top10" onclick="setActiveNav(this)">
+            <span class="nav-icon">🏆</span>
+            <span>景點</span>
+        </a>
+        <a href="#itinerary" onclick="setActiveNav(this)">
+            <span class="nav-icon">🗓️</span>
+            <span>行程</span>
+        </a>
+        <a href="#food" onclick="setActiveNav(this)">
+            <span class="nav-icon">🍽️</span>
+            <span>美食</span>
+        </a>
+        <a href="#umeda" onclick="setActiveNav(this)">
+            <span class="nav-icon">🛍️</span>
+            <span>梅田</span>
+        </a>
+    </div>
+
+    <script>
+        function showArea(areaId, element) {
+            document.querySelectorAll('.food-list').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.area-tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(areaId).style.display = 'flex';
+            element.classList.add('active');
+        }
+
+        function setActiveNav(element) {
+            document.querySelectorAll('.bottom-nav a').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.bottom-nav a');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
