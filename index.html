@@ -1,8 +1,21 @@
-{% assign doclist = site.pages | sort: 'url'  %}
-    <ul>
-       {% for doc in doclist %}
-            {% if doc.name contains '.md' or doc.name contains '.html' %}
-                <li><a href="{{ site.baseurl }}{{ doc.url }}">{{ doc.url }}</a></li>
-            {% endif %}
-        {% endfor %}
-    </ul>
+---
+layout: default
+---
+
+<ul>
+  {%- comment -%}
+    Pages with front matter are exposed through site.pages. Static HTML files
+    without front matter are exposed through site.static_files.
+  {%- endcomment -%}
+  {% assign pages = site.pages | sort: 'url' %}
+  {% for doc in pages %}
+    {% if doc.path contains '.html' %}
+      <li><a href="{{ doc.url | relative_url }}">{{ doc.url }}</a></li>
+    {% endif %}
+  {% endfor %}
+
+  {% assign html_files = site.static_files | where_exp: 'file', "file.extname == '.html'" | sort: 'path' %}
+  {% for file in html_files %}
+    <li><a href="{{ file.path | relative_url }}">{{ file.path }}</a></li>
+  {% endfor %}
+</ul>
