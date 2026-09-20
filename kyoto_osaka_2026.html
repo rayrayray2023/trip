@@ -3,228 +3,780 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f3ec">
-<title>Kyoto × Osaka 2026｜09/28–10/04</title>
+<meta name="theme-color" content="#111827">
+<title>京都大阪 2026｜7日完整行程・三餐・交通・購物</title>
 <style>
-:root{--bg:#f7f3ec;--card:#fffdf9;--ink:#27231f;--muted:#756d64;--line:#e7dfd5;--accent:#8d4f3f;--soft:#efe4da;--green:#536b5b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;line-height:1.6}
-header{padding:28px 18px 22px;background:linear-gradient(145deg,#f4e7dc,#faf7f0);border-bottom:1px solid var(--line)}
-.container{max-width:900px;margin:auto;padding:0 14px 90px}.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--accent);font-weight:700}
-h1{font-size:31px;line-height:1.15;margin:7px 0}.subtitle{color:var(--muted);font-size:14px}
-nav{position:sticky;top:0;z-index:10;background:#fffdf9ee;backdrop-filter:blur(10px);border-bottom:1px solid var(--line);overflow:auto;white-space:nowrap}
-nav a{display:inline-block;padding:11px 12px;color:var(--ink);text-decoration:none;font-size:13px}.hero{margin:16px 0}.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 4px 18px #49332208}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--muted)}
-h2{font-size:22px;margin:30px 0 12px}h3{font-size:17px;margin:10px 0}.day{margin:16px 0;padding:16px;border-radius:18px;background:var(--card);border:1px solid var(--line)}.dayhead{display:flex;justify-content:space-between;gap:10px}.dayhead strong{font-size:18px}.tag{font-size:11px;padding:4px 8px;border-radius:99px;background:var(--soft);color:var(--accent);white-space:nowrap}
-.timeline{margin-top:12px;border-left:2px solid #d8c7ba;padding-left:15px}.item{margin:0 0 15px;position:relative}.item:before{content:"";position:absolute;left:-21px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent)}.time{font-weight:700;font-size:13px}.meta{font-size:12px;color:var(--muted)}
-table{width:100%;border-collapse:collapse;font-size:12px;background:var(--card);border-radius:14px;overflow:hidden}th,td{text-align:left;padding:9px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#f0e7de}
-.route{display:flex;flex-wrap:wrap;gap:7px;align-items:center;font-size:13px}.route span{background:#fff;border:1px solid var(--line);padding:7px 9px;border-radius:10px}.arrow{color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.food{min-height:130px}.rating{font-size:12px;color:var(--green);font-weight:700}.price{font-size:12px;color:var(--accent);font-weight:700}.map{display:inline-flex;margin-top:8px;padding:6px 9px;border-radius:9px;background:#eee8e1;color:#3e3832;text-decoration:none;font-size:12px}
-.filter{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.filter button{border:1px solid var(--line);background:white;border-radius:99px;padding:7px 10px}.filter button.active{background:var(--accent);color:white}
-.note{font-size:12px;color:var(--muted);background:#f0e9e1;padding:11px;border-radius:12px}.check{padding:8px 0;border-bottom:1px dashed var(--line)}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#fffdf9f2;backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:20}.bottom a{flex:1;max-width:180px;text-align:center;padding:9px 3px;text-decoration:none;color:var(--ink);font-size:11px}
-@media(min-width:700px){.container{padding-left:20px;padding-right:20px}.grid{grid-template-columns:repeat(3,1fr)}h1{font-size:42px}}
-.flight-note{margin:12px 0;padding:12px 14px;border-radius:12px;background:#fff7ed;border:1px solid #fed7aa;line-height:1.6}.filter{display:flex;gap:8px;flex-wrap:wrap}.filter button{cursor:pointer;touch-action:manipulation}\n</style>
+:root{--bg:#f6f5f2;--card:#fff;--ink:#202124;--muted:#6b7280;--line:#e5e7eb;--accent:#9b2c2c;--soft:#f3e8e8;--green:#166534;--greenbg:#ecfdf5;--warn:#92400e;--warnbg:#fffbeb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Helvetica Neue",Arial,sans-serif;line-height:1.65;padding-bottom:78px}
+a{color:inherit} .wrap{width:min(100%,920px);margin:auto;padding:0 14px}
+.hero{background:linear-gradient(135deg,#18181b,#3f3f46);color:white;padding:28px 16px 24px}.hero .wrap{padding:0}.eyebrow{font-size:12px;letter-spacing:.18em;opacity:.75}.hero h1{font-size:30px;line-height:1.15;margin:8px 0}.hero .date{font-size:18px;font-weight:700}.hero .sub{font-size:13px;opacity:.8;margin-top:6px}
+.notice{margin:14px 0;padding:12px 14px;border-radius:14px;background:var(--warnbg);border:1px solid #fde68a;color:var(--warn);font-size:13px}
+.section{padding:22px 0}.section h2{font-size:22px;margin:0 0 12px}.section h3{font-size:17px;margin:18px 0 8px}
+.day-card,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;margin:12px 0;padding:15px;box-shadow:0 3px 14px rgba(0,0,0,.035)}
+.day-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.day{font-size:22px;font-weight:800}.route{color:var(--accent);font-weight:700;font-size:14px}.badge{display:inline-block;background:var(--soft);color:var(--accent);padding:3px 8px;border-radius:999px;font-size:11px}
+.timeline{margin-top:10px}.row{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line)}.row:last-child{border-bottom:0}.time{font-weight:800;font-variant-numeric:tabular-nums}.small{font-size:12px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px;background:white;border-radius:14px;overflow:hidden}th,td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{background:#f3f4f6;font-weight:800}tr:last-child td{border-bottom:0}
+.pill{display:inline-block;margin:3px 3px 3px 0;padding:4px 8px;border-radius:999px;background:#f3f4f6;font-size:12px}.ok{background:var(--greenbg);color:var(--green)}.warn{background:var(--warnbg);color:var(--warn)}
+.map{display:inline-flex;width:31px;height:31px;border-radius:50%;align-items:center;justify-content:center;text-decoration:none;background:#f3f4f6;font-size:16px;margin-left:4px}
+.btn{display:inline-block;padding:9px 12px;border-radius:12px;background:#111827;color:white;text-decoration:none;font-size:13px;font-weight:700;margin:4px 4px 4px 0}
+ul{padding-left:20px;margin:8px 0}.check li{list-style:"☐  ";padding:3px 0}
+.bottom{position:fixed;z-index:20;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 4px calc(7px + env(safe-area-inset-bottom));}.bottom a{text-decoration:none;text-align:center;font-size:11px}.bottom span{display:block;font-size:19px;line-height:22px}
+.routebox{font-size:14px;background:#fafafa;border-radius:14px;padding:12px;margin:10px 0}.routebox strong{color:var(--accent)}
+footer{padding:20px 0 35px;color:var(--muted);font-size:11px}
+@media(min-width:700px){.hero{padding:42px 0 34px}.hero h1{font-size:42px}.section{padding:30px 0}.day-card{padding:20px}.row{grid-template-columns:85px 1fr}}
+<style>.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.filters input,.filters select{padding:10px;border:1px solid #ddd;border-radius:12px;background:#fff}.tabe-link{display:inline-block;margin-top:7px;padding:5px 8px;border-radius:9px;background:#fff4e8;color:#9a4b00;text-decoration:none;font-size:12px}.filter-count{font-size:12px;color:#666;margin:6px 0}.filters select{padding:10px;border:1px solid #ddd;border-radius:12px;background:#fff}.food-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px;margin:8px 0;position:relative}.food-card b{font-size:16px}.metrics{font-size:12px;margin:5px 0}.food-card p{font-size:13px;margin:5px 0}.food-card .map-pin{position:absolute;right:12px;top:12px}
+.food-type{display:inline-block;margin-left:7px;padding:2px 7px;border-radius:999px;background:var(--soft);color:var(--accent);font-size:11px;font-weight:700}.meal-tag{display:inline-block;margin-left:5px;padding:2px 7px;border-radius:999px;background:var(--greenbg);color:var(--green);font-size:11px;font-weight:700}.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.filters input,.filters select{min-height:40px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px}.filter-count{font-size:12px;color:var(--muted);font-weight:700}
+</style></style>
+
+<style>
+.meal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.meal-grid .food-card{margin:0}
+.meal-grid .food-card p{margin:.55rem 0}
+.meal-tag{display:inline-block;margin:.15rem .25rem .45rem 0;padding:.2rem .5rem;border-radius:999px;background:#eef2ff}
+@media(max-width:720px){.meal-grid{grid-template-columns:1fr}}
+</style>
+<style>
+.route-table,.table-wrap{overflow-x:auto}.route-table table{min-width:760px}
+.route-note{font-size:.9rem}.map-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.map-links a{display:block;padding:10px;border:1px solid #ddd;border-radius:8px;text-decoration:none}
+.check-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:760px){.map-links,.check-grid{grid-template-columns:1fr}.route-table table{min-width:700px}}
+</style>
+<style>
+.restaurant-tabs-wrap{margin:12px 0 18px}
+.restaurant-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.restaurant-tab{flex:0 0 auto;border:1px solid #ccc;background:#fff;border-radius:999px;padding:9px 14px;font-size:.95rem;cursor:pointer;white-space:nowrap}
+.restaurant-tab.active{font-weight:700;border-width:2px}
+.tab-help{font-size:.88rem;margin:4px 2px 0;opacity:.8}
+@media(max-width:760px){.restaurant-tabs{position:sticky;top:0;background:inherit;z-index:5}.restaurant-tab{padding:10px 13px}}
+</style>
+
+
+<style>
+.itinerary-table{width:100%;border-collapse:collapse;margin:10px 0 24px}
+.itinerary-table th,.itinerary-table td{border:1px solid #ddd;padding:9px;vertical-align:top;line-height:1.55}
+.itinerary-table th{font-weight:700}
+.itinerary-table a{white-space:nowrap}
+@media(max-width:760px){.itinerary-table{font-size:.88rem;min-width:780px}}
+</style>
 </head>
 <body>
-<header><div class="container">
-<div class="eyebrow">JAPAN TRIP · 2026/09/28 — 10/04</div>
-<h1>KYOTO × OSAKA</h1>
-<div class="subtitle">京都四條 3晚 → 大阪難波 3晚｜嵐山・海遊館・神戶・梅田</div>
-</div></header>
+<section class="section" id="complete-itinerary">
+<h2>01｜✈️ 京都・大阪 7 日完整行程</h2>
+<div class="notice"><strong>照著走：</strong>每天由上往下依時間執行；三餐直接看當日餐飲欄的 A／B／C。交通時間包含基本步行、找站、等車與轉乘緩衝。行程保留彈性，現場若有延誤就順延或使用備案。</div>
 
-<nav><a href="#plan">🗓 行程</a><a href="#transport">🚆 交通</a><a href="#food">🍜 美食</a><a href="#umeda">🛍 梅田</a><a href="#tips">🎒 提醒</a></nav>
-
-<main class="container">
-<section class="hero" id="plan">
-<div class="hero-grid"><div class="flight-note"><strong>✈️ 航班確認</strong>｜09/28 國泰航空 CX564：TPE 11:05 → KIX 16:15；10/04 國泰航空 CX565：KIX → TPE。回程實際起飛時間請以電子機票／國泰航空當日資訊為準。</div>
-<div class="stat"><b>7天6夜</b><span>09/28 → 10/04</span></div>
-<div class="stat"><b>京都 3晚</b><span>四條站周邊</span></div>
-<div class="stat"><b>大阪 3晚</b><span>難波站周邊</span></div>
-</div>
-<div class="note" style="margin-top:10px">已排除：大阪城、金閣寺、二條城。航班實際起飛／抵達時間未在目前資料中確認，因此 Day 1、Day 7 以彈性時間規劃。</div>
-
-
-    <article class="food-card" data-area="kyoto-station">
-      <h3>京都車站｜中村藤吉本店 京都店</h3>
-      <p class="meta">甜點／抹茶｜預算約 ¥1,000–2,000</p>
-      <p>京都車站內的抹茶甜點選擇，適合搭車前後安排，重點可看抹茶甜品與茶類。</p>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=中村藤吉本店+京都店" target="_blank">📍 Google Maps</a>
-    </article>
-    <article class="food-card" data-area="kyoto-station">
-      <h3>京都車站｜本家第一旭 たかばし本店</h3>
-      <p class="meta">拉麵／各類餐廳｜預算約 ¥1,000–2,000</p>
-      <p>京都車站附近的經典拉麵選擇，適合第一天抵達京都後或離站前安排。</p>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=本家第一旭+たかばし本店" target="_blank">📍 Google Maps</a>
-    </article>
-    <article class="food-card" data-area="kobe">
-      <h3>神戶｜神戸牛 吉祥吉 本店</h3>
-      <p class="meta">神戶牛／各類餐廳｜預算依套餐而異</p>
-      <p>神戶牛料理代表性選擇之一；若要嚴格控制人均 ¥5,000，建議選午餐或確認當日套餐價格。</p>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=神戸牛+吉祥吉+本店" target="_blank">📍 Google Maps</a>
-    </article>
-    <article class="food-card" data-area="kobe">
-      <h3>神戶｜洋食の朝日</h3>
-      <p class="meta">洋食／各類餐廳｜平價</p>
-      <p>神戶老字號洋食店，適合安排在神戶市區散步日；熱門時段可能排隊。</p>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=洋食の朝日+神戸" target="_blank">📍 Google Maps</a>
-    </article>
-    <article class="food-card" data-area="kobe">
-      <h3>神戶｜神戶元町食堂</h3>
-      <p class="meta">定食／各類餐廳｜約 ¥1,000–2,000</p>
-      <p>適合神戶行程中快速用餐，若以控制預算為優先可列入備選。</p>
-      <a class="map" href="https://www.google.com/maps/search/?api=1&query=神戸+元町+食堂" target="_blank">📍 Google Maps</a>
-    </article>
-</section>
-
-<h2>🗓 每日行程</h2>
-
-<div class="day"><div class="dayhead"><strong>DAY 1｜09/28 一｜桃園 → 關西 → 京都</strong><span class="tag">輕鬆</span></div>
-<div class="timeline">
-<div class="item"><div class="time">航班</div><div>TPE → KIX｜國泰航空</div><div class="meta">實際航班時間請依已購票行程確認</div></div>
-<div class="item"><div class="time">抵達後 約 2–3 小時</div><div>KIX → 京都 → 四條住宿</div><div class="meta">入境行李 45–75 分＋機場至京都約 75–90 分＋市區移動</div></div>
-<div class="item"><div class="time">晚上</div><div>四條 → 河原町散步 → 晚餐</div><div class="meta">不排正式景點，保留航班延誤彈性</div></div>
-</div></div>
-
-<div class="day"><div class="dayhead"><strong>DAY 2｜09/29 二｜東山・祇園</strong><span class="tag">★★★</span></div>
-<div class="timeline">
-<div class="item"><div class="time">08:00</div><div>早餐</div></div>
-<div class="item"><div class="time">09:15–10:30</div><div>清水寺</div><div class="meta">建議早到避開人潮</div></div>
-<div class="item"><div class="time">10:30–12:00</div><div>三年坂 → 二年坂 → 八坂之塔周邊</div></div>
-<div class="item"><div class="time">12:00–13:00</div><div>午餐</div></div>
-<div class="item"><div class="time">13:15–15:00</div><div>八坂神社 → 祇園 → 花見小路</div></div>
-<div class="item"><div class="time">15:00–16:00</div><div>祇園白川</div></div>
-<div class="item"><div class="time">16:15–18:00</div><div>河原町購物／咖啡甜點</div></div>
-<div class="item"><div class="time">18:00–19:30</div><div>河原町晚餐</div></div>
-</div></div>
-
-<div class="day"><div class="dayhead"><strong>DAY 3｜09/30 三｜嵐山</strong><span class="tag">★★★★</span></div>
-<div class="timeline">
-<div class="item"><div class="time">08:45</div><div>四條 → 阪急烏丸 → 桂 → 嵐山</div><div class="meta">門到門預留約 50–60 分鐘</div></div>
-<div class="item"><div class="time">10:00–10:40</div><div>渡月橋＋桂川</div></div>
-<div class="item"><div class="time">10:45–11:45</div><div>天龍寺</div><div class="meta">官方：庭園 08:30–17:00；庭園 ¥500；阪急嵐山站步行約15分</div></div>
-<div class="item"><div class="time">11:50–12:30</div><div>竹林小徑</div></div>
-<div class="item"><div class="time">12:30–13:30</div><div>嵐山午餐</div></div>
-<div class="item"><div class="time">13:30–15:30</div><div>商店街＋咖啡甜點</div></div>
-<div class="item"><div class="time">15:30–17:00</div><div>嵐山公園／桂川</div></div>
-<div class="item"><div class="time">17:00–18:00</div><div>返回四條</div></div>
-<div class="item"><div class="time">18:00–21:00</div><div>🌙 嵐山月燈路（可選）</div><div class="meta">2026/09/30–11/08，18:00–21:00；當日券 ¥1,500。若參加，建議晚餐改在嵐山或回程。</div></div>
-</div></div>
-
-<div class="day"><div class="dayhead"><strong>DAY 4｜10/01 四｜京都 → 難波＋心齋橋</strong><span class="tag">★★★</span></div>
-<div class="timeline">
-<div class="item"><div class="time">上午</div><div>京都四條退房 → 大阪難波</div><div class="meta">依飯店實際位置選阪急／京阪等路線；門到門預留約60–80分</div></div>
-<div class="item"><div class="time">13:00</div><div>難波住宿放行李</div></div>
-<div class="item"><div class="time">13:30–15:00</div><div>心齋橋</div></div>
-<div class="item"><div class="time">15:00–16:30</div><div>美國村／心齋橋咖啡</div></div>
-<div class="item"><div class="time">16:30–18:00</div><div>道頓堀</div></div>
-<div class="item"><div class="time">18:00–20:30</div><div>道頓堀晚餐＋夜景</div></div>
-</div></div>
-
-<div class="day"><div class="dayhead"><strong>DAY 5｜10/02 五｜海遊館・天保山</strong><span class="tag">★★★</span></div>
-<div class="timeline">
-<div class="item"><div class="time">09:00</div><div>難波早餐</div></div>
-<div class="item"><div class="time">09:30–10:15</div><div>難波 → 大阪港</div></div>
-<div class="item"><div class="time">10:15–13:15</div><div>🐠 海遊館</div><div class="meta">實際入館時間依官方 10/02 當日公告確認</div></div>
-<div class="item"><div class="time">13:15–14:15</div><div>天保山午餐</div></div>
-<div class="item"><div class="time">14:15–16:30</div><div>天保山 Market Place／大阪灣</div></div>
-<div class="item"><div class="time">17:00</div><div>返回難波</div></div>
-<div class="item"><div class="time">18:00–20:00</div><div>難波晚餐</div></div>
-</div></div>
-
-<div class="day"><div class="dayhead"><strong>DAY 6｜10/03 六｜神戶＋梅田</strong><span class="tag">★★★★</span></div>
-<div class="timeline">
-<div class="item"><div class="time">09:00</div><div>難波 → 神戶三宮</div><div class="meta">預留約 35–50 分</div></div>
-<div class="item"><div class="time">10:00–11:15</div><div>三宮／北野周邊</div></div>
-<div class="item"><div class="time">11:30–13:00</div><div>南京町＋神戶午餐</div></div>
-<div class="item"><div class="time">13:00–14:00</div><div>美利堅公園</div></div>
-<div class="item"><div class="time">14:00–15:00</div><div>神戶港</div></div>
-<div class="item"><div class="time">15:00–16:00</div><div>三宮 → 梅田</div></div>
-<div class="item"><div class="time">16:00–20:30</div><div>🛍 阪急 → HEP FIVE → LUCUA → 大丸／KITTE → Grand Front</div></div>
-<div class="item"><div class="time">20:30</div><div>梅田 → 難波</div></div>
-</div></div>
-
-<div class="day"><div class="dayhead"><strong>DAY 7｜10/04 日｜難波 → KIX → TPE</strong><span class="tag">彈性</span></div>
-<div class="timeline">
-<div class="item"><div class="time">起飛前約 3 小時</div><div>抵達 KIX</div><div class="meta">國際線建議預留充足時間；實際離開難波時間依回程航班確認</div></div>
-<div class="item"><div class="time">交通</div><div>南海電鐵：難波 → 關西機場</div></div>
-<div class="item"><div class="time">✈️</div><div>KIX → TPE</div></div>
-</div></div>
-
-<h2 id="transport">🚆 交通快速表</h2>
-<table><thead><tr><th>區間</th><th>方式</th><th>預估</th><th>備註</th></tr></thead><tbody>
-<tr><td>四條 → 嵐山</td><td>阪急</td><td>約50–60分門到門</td><td>烏丸→桂→嵐山</td></tr>
-<tr><td>京都 → 難波</td><td>依飯店位置選阪急／京阪＋大阪市區轉乘</td><td>約60–80分</td><td>換飯店日</td></tr>
-<tr><td>難波 → 海遊館</td><td>大阪 Metro</td><td>約35–45分</td><td>大阪港站後步行</td></tr>
-<tr><td>難波 → 神戶三宮</td><td>阪神等</td><td>約35–50分</td><td>依班次</td></tr>
-<tr><td>神戶 → 梅田</td><td>阪神／JR等</td><td>約35–50分</td><td>預留轉乘步行</td></tr>
-<tr><td>難波 → KIX</td><td>南海</td><td>約40–55分</td><td>Rapi:t／Airport Express 比較後決定</td></tr>
+<h3>09/28（一）台北 → 關西機場 → 京都・四條烏丸</h3>
+<table class="itinerary-table"><thead><tr><th>時間</th><th>行程</th><th>交通／走法</th><th>三餐</th><th>直接連結</th></tr></thead><tbody>
+<tr><td>08:00</td><td>桃園機場報到</td><td>國際線報到、安檢</td><td>早餐：機場／機上</td><td>—</td></tr>
+<tr><td>11:05–14:55</td><td>✈️ CX564 TPE → KIX</td><td>台北桃園→關西機場</td><td>午餐：機上</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport">📍 KIX</a></td></tr>
+<tr><td>15:00–16:00</td><td>入境、領行李、交通卡</td><td>入境→行李→ICOCA／交通準備</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.kansai-airport.or.jp/tw/">KIX</a></td></tr>
+<tr><td>16:00–19:00</td><td>KIX → 京都站</td><td>JR／Haruka 優先</td><td>途中簡餐備用</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Station">📍 京都站</a></td></tr>
+<tr><td>19:00–19:30</td><td>京都站 → KOKO HOTEL Kyoto Shijokarasuma</td><td>地鐵／步行；行李多可短程計程車</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=KOKO+HOTEL+Kyoto+Shijokarasuma">📍 飯店</a></td></tr>
+<tr><td>20:00–21:00</td><td>四條烏丸晚餐</td><td>飯店周邊步行</td><td>A 炸豬排／B 拉麵／C 定食</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Shijo+Karasuma+Kyoto+restaurants">🍽️ 餐廳</a></td></tr>
+<tr><td>21:30</td><td>回飯店休息</td><td>步行</td><td>—</td><td>—</td></tr>
 </tbody></table>
 
-<h2 id="food">🍜 美食快速清單</h2>
-<div class="filter">
-      <button data-area="all" class="active">全部</button>
-      <button data-area="kyoto-kawaramachi">京都河原町</button>
-      <button data-area="kyoto-station">京都車站</button>
-      <button data-area="namba">大阪難波</button>
-      <button data-area="shinsaibashi">心齋橋</button>
-      <button data-area="umeda">梅田</button>
-      <button data-area="kobe">神戶</button>
-    </div>
-<div class="grid" id="foodgrid">
-<div class="card food" data-area="kyoto"><h3>SPICE GATE</h3><div class="rating">Tabelog 約3.67</div><div class="price">咖哩｜約¥1,000–2,999</div><div class="meta">河原町香料咖哩候選</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=SPICE+GATE+Kyoto">📍 Maps</a></div>
-<div class="card food" data-area="kyoto"><h3>スパイスチャンバー</h3><div class="rating">Tabelog 約3.68</div><div class="price">咖哩｜約¥1,000–1,999</div><div class="meta">辛味雞肉／Keema</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=スパイスチャンバー京都">📍 Maps</a></div>
-<div class="card food" data-area="kyoto"><h3>豚ゴリラ 新京極六角店</h3><div class="rating">Tabelog 約3.43</div><div class="price">豬排｜約¥1,000–1,999</div><div class="meta">新京極周邊平價豬排</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=豚ゴリラ+新京極六角店">📍 Maps</a></div>
-<div class="card food" data-area="kyoto"><h3>京都勝牛 三条河原町</h3><div class="rating">Google 約4.5</div><div class="price">豬排｜約¥1,500–3,000</div><div class="meta">河原町動線方便</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=京都勝牛+三条河原町">📍 Maps</a></div>
-<div class="card food" data-area="namba"><h3>元祖とんかつカレー カツヤ</h3><div class="rating">Tabelog 約3.52</div><div class="price">咖哩｜約¥1,000–1,999</div><div class="meta">難波咖哩人氣候選</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=元祖とんかつカレー+カツヤ+大阪">📍 Maps</a></div>
-<div class="card food" data-area="namba"><h3>ニューベイブ 難波店</h3><div class="rating">Tabelog 約3.52</div><div class="price">豬排｜晚餐約¥4,000–4,999</div><div class="meta">接近預算上限</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ニューベイブ+難波店">📍 Maps</a></div>
-<div class="card food" data-area="namba"><h3>アラビヤコーヒー</h3><div class="rating">Tabelog 約3.67</div><div class="price">咖啡</div><div class="meta">難波老派喫茶</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=アラビヤコーヒー+大阪">📍 Maps</a></div>
-<div class="card food" data-area="namba"><h3>Rikuro’s Namba</h3><div class="rating">Google 約4.2</div><div class="price">甜點</div><div class="meta">大阪起司蛋糕</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Rikuro's+Namba">📍 Maps</a></div>
-<div class="card food" data-area="shinsaibashi"><h3>Le Premier Cafe</h3><div class="rating">Tabelog 約3.71</div><div class="price">咖啡</div><div class="meta">心齋橋喫茶候選</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Le+Premier+Cafe+Shinsaibashi">📍 Maps</a></div>
-<div class="card food" data-area="shinsaibashi"><h3>焼肉くるみ 心斎橋本店</h3><div class="rating">Google 約4.9</div><div class="price">燒肉｜預算依點餐</div><div class="meta">高評價候選，訂位前確認菜單</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=焼肉くるみ+心斎橋本店">📍 Maps</a></div>
-<div class="card food" data-area="umeda"><h3>BOTANI：CURRY 梅田店</h3><div class="rating">Tabelog 約3.80</div><div class="price">咖哩｜約¥1,000–1,999</div><div class="meta">梅田咖哩人氣候選</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=BOTANI+CURRY+梅田">📍 Maps</a></div>
-<div class="card food" data-area="umeda"><h3>旧ヤム鐵道</h3><div class="rating">Tabelog 約3.71</div><div class="price">咖哩｜約¥1,000–1,999</div><div class="meta">大阪人氣咖哩</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=旧ヤム鐵道+梅田">📍 Maps</a></div>
-<div class="card food" data-area="umeda"><h3>梅田ミックスジュース本店</h3><div class="rating">Tabelog 約3.76</div><div class="price">咖啡／飲品</div><div class="meta">梅田老字號果汁</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=梅田ミックスジュース本店">📍 Maps</a></div>
-<div class="card food" data-area="umeda"><h3>ツマガリ 大丸梅田店</h3><div class="rating">Tabelog 約3.75</div><div class="price">甜點｜約¥1,000–1,999</div><div class="meta">百貨伴手禮適合</div><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=ツマガリ+大丸梅田店">📍 Maps</a></div>
-</div>
-<div class="note" style="margin-top:10px">評分會變動；此頁的評分為規劃時查到的公開資料。正式出發前請再開啟 Maps／Tabelog 確認營業、價格與當日狀態。未在此列出的店家可於後續擴充版加入完整清單。</div>
+<h3>09/29（二）嵐山 → 河原町</h3>
+<table class="itinerary-table"><thead><tr><th>時間</th><th>行程</th><th>交通／走法</th><th>三餐</th><th>直接連結</th></tr></thead><tbody>
+<tr><td>07:00–07:45</td><td>起床、早餐</td><td>四條烏丸</td><td>A 飯店附近／B 咖啡</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Shijo+Karasuma+Kyoto">📍</a></td></tr>
+<tr><td>07:45–09:00</td><td>前往嵐山</td><td>阪急京都河原町 → 桂 → 嵐山</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hankyu+Arashiyama+Station">📍 嵐山站</a></td></tr>
+<tr><td>09:00–10:00</td><td>渡月橋、桂川</td><td>嵐山站步行約10–15分</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Togetsukyo+Bridge+Kyoto">📍 渡月橋</a></td></tr>
+<tr><td>10:00–11:15</td><td>竹林小徑</td><td>步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Arashiyama+Bamboo+Grove+Kyoto">📍 竹林</a></td></tr>
+<tr><td>11:30–12:30</td><td>嵐山午餐</td><td>商店街周邊</td><td>A 蕎麥／B 定食／C 豆腐料理</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Arashiyama+Kyoto+restaurants">🍜 餐廳</a></td></tr>
+<tr><td>12:30–14:00</td><td>嵐山商店街</td><td>步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Arashiyama+Shopping+Street">📍 商店街</a></td></tr>
+<tr><td>14:00–15:00</td><td>咖啡／抹茶甜點</td><td>步行</td><td>A 抹茶甜點／B 咖啡</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Arashiyama+matcha+cafe+Kyoto">🍵</a></td></tr>
+<tr><td>15:00–17:00</td><td>嵐山 → 河原町</td><td>阪急嵐山 → 桂 → 京都河原町</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Kawaramachi+Station">📍 河原町</a></td></tr>
+<tr><td>18:00–19:30</td><td>河原町晚餐</td><td>步行</td><td>A 燒肉／B 拉麵／C 壽司</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Kawaramachi+restaurants">🍽️ 餐廳</a></td></tr>
+<tr><td>20:00</td><td>回四條烏丸</td><td>步行／阪急</td><td>—</td><td>—</td></tr>
+</tbody></table>
 
-<h2 id="umeda">🛍 梅田百貨攻略</h2>
-<div class="route"><span>大阪梅田站</span><i class="arrow">→</i><span>阪急</span><i class="arrow">→</i><span>HEP FIVE</span><i class="arrow">→</i><span>LUCUA</span><i class="arrow">→</i><span>大丸</span><i class="arrow">→</i><span>KITTE</span><i class="arrow">→</i><span>Grand Front</span></div>
-<div class="grid" style="margin-top:12px">
-<div class="card"><h3>阪急梅田本店</h3><div class="meta">精品／化妝品／地下食品／伴手禮</div><p>10/03 神戶回梅田後優先逛。建議約60–75分。</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=阪急うめだ本店">📍 Maps</a></div>
-<div class="card"><h3>LUCUA</h3><div class="meta">服飾／生活／餐飲</div><p>與大阪站動線緊密，適合快速購物。</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=LUCUA+Osaka">📍 Maps</a></div>
-<div class="card"><h3>大丸梅田</h3><div class="meta">伴手禮／食品／服飾</div><p>2026 年樓層與店舖有調整，出發前以官方資訊確認。</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=大丸梅田店">📍 Maps</a></div>
-<div class="card"><h3>KITTE 大阪</h3><div class="meta">日本地方特色／餐飲／伴手禮</div><p>適合與大丸、Grand Front 串成步行路線。</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=KITTE+大阪">📍 Maps</a></div>
-<div class="card"><h3>Grand Front Osaka</h3><div class="meta">生活／設計／餐飲</div><p>時間充足時再逛，避免 10/03 過度疲勞。</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Grand+Front+Osaka">📍 Maps</a></div>
-<div class="card"><h3>Yodobashi / LINKS</h3><div class="meta">電器／生活用品</div><p>有特定採買需求再安排。</p><a class="map" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Yodobashi+Umeda">📍 Maps</a></div>
+<h3>09/30（三）四條烏丸 → 河原町 → 京都站</h3>
+<table class="itinerary-table"><thead><tr><th>時間</th><th>行程</th><th>交通／走法</th><th>三餐</th><th>直接連結</th></tr></thead><tbody>
+<tr><td>07:30–08:30</td><td>早餐、整理行李</td><td>飯店</td><td>A 飯店附近／B 咖啡</td><td>—</td></tr>
+<tr><td>09:30</td><td>退房、寄放行李</td><td>KOKO HOTEL</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=KOKO+HOTEL+Kyoto+Shijokarasuma">📍</a></td></tr>
+<tr><td>10:00–12:00</td><td>四條、河原町散步購物</td><td>步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Kawaramachi">📍</a></td></tr>
+<tr><td>12:00–13:00</td><td>河原町午餐</td><td>步行</td><td>A 炸豬排／B 拉麵／C 定食</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Kawaramachi+restaurants">🍽️</a></td></tr>
+<tr><td>13:30–14:30</td><td>取行李 → 京都站</td><td>地鐵／步行；大型行李可計程車</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Station">📍</a></td></tr>
+<tr><td>15:00</td><td>入住／寄放行李</td><td>京都站步行約3分</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dormy+Inn+Premium+Kyoto+Ekimae">📍 Dormy Inn</a></td></tr>
+<tr><td>16:00–17:30</td><td>京都站周邊</td><td>步行</td><td>咖啡</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Station+Building">📍</a></td></tr>
+<tr><td>18:00–19:30</td><td>京都站晚餐</td><td>站內／周邊</td><td>A 壽司／B 拉麵／C 定食</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Station+restaurants">🍽️</a></td></tr>
+<tr><td>20:00</td><td>回飯店泡湯、休息</td><td>步行</td><td>—</td><td>—</td></tr>
+</tbody></table>
+
+<h3>10/01（四）京都 → 大阪難波 → 心齋橋</h3>
+<table class="itinerary-table"><thead><tr><th>時間</th><th>行程</th><th>交通／走法</th><th>三餐</th><th>直接連結</th></tr></thead><tbody>
+<tr><td>07:00–08:00</td><td>早餐、退房</td><td>京都站</td><td>A 咖啡／B 飯店</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Station">📍</a></td></tr>
+<tr><td>08:00–09:30</td><td>京都 → 大阪難波</td><td>依當日最快路線；行李多可宅配</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Osaka+Namba+Station">📍</a></td></tr>
+<tr><td>09:30–10:30</td><td>APA 飯店寄放行李</td><td>步行＋找入口</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=APA+Hotel+Resort+Osaka+Namba+Ekimae+Tower">📍 飯店</a></td></tr>
+<tr><td>11:30–12:30</td><td>難波午餐</td><td>步行</td><td>A 牛カツ／B 拉麵／C 定食</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Namba+Osaka+restaurants">🍽️</a></td></tr>
+<tr><td>13:00–15:00</td><td>道頓堀、難波</td><td>步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dotonbori+Osaka">📍</a></td></tr>
+<tr><td>15:00–17:00</td><td>心齋橋筋商店街</td><td>難波→心齋橋步行</td><td>咖啡／甜點</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Shinsaibashi-Suji+Shopping+Street">📍</a></td></tr>
+<tr><td>18:00–19:30</td><td>心齋橋／難波晚餐</td><td>步行</td><td>A 燒肉／B 壽司／C 居酒屋</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Shinsaibashi+Osaka+restaurants">🍽️</a></td></tr>
+<tr><td>20:00</td><td>回飯店</td><td>步行／Metro</td><td>—</td><td>—</td></tr>
+</tbody></table>
+
+<h3>10/02（五）海遊館 → 天保山 → 難波</h3>
+<table class="itinerary-table"><thead><tr><th>時間</th><th>行程</th><th>交通／走法</th><th>三餐</th><th>直接連結</th></tr></thead><tbody>
+<tr><td>07:00–08:00</td><td>早餐</td><td>難波</td><td>A 咖啡／B 便利商店</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Namba+Osaka">📍</a></td></tr>
+<tr><td>08:15–09:15</td><td>難波 → 大阪港</td><td>御堂筋線 Namba→本町，轉中央線→大阪港</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Osaka+Port+Station">📍 大阪港</a></td></tr>
+<tr><td>09:15–09:30</td><td>大阪港站 → 海遊館</td><td>步行約10–15分</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Osaka+Aquarium+Kaiyukan">📍 海遊館</a></td></tr>
+<tr><td>09:30–12:30</td><td>🐟 海遊館</td><td>館內約3小時</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.kaiyukan.com/language/eng/">🎫 海遊館</a></td></tr>
+<tr><td>12:30–13:30</td><td>天保山午餐</td><td>Market Place</td><td>A 丼飯／B 定食／C 麵</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tempozan+Marketplace">📍</a></td></tr>
+<tr><td>13:30–15:00</td><td>天保山散步</td><td>步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tempozan+Osaka">📍</a></td></tr>
+<tr><td>15:00–16:00</td><td>咖啡／甜點</td><td>天保山</td><td>A 咖啡／B 甜點</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tempozan+cafe+Osaka">☕</a></td></tr>
+<tr><td>16:00–17:00</td><td>大阪港 → 難波</td><td>中央線→本町→御堂筋線</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Osaka+Namba+Station">📍</a></td></tr>
+<tr><td>18:00–19:30</td><td>難波／心齋橋晚餐</td><td>步行</td><td>A 燒肉／B 壽司／C 拉麵</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Namba+Osaka+restaurants">🍽️</a></td></tr>
+</tbody></table>
+
+<h3>10/03（六）大阪難波 → 神戶三宮 → 南京町 → 神戶港</h3>
+<table class="itinerary-table"><thead><tr><th>時間</th><th>行程</th><th>交通／走法</th><th>三餐</th><th>直接連結</th></tr></thead><tbody>
+<tr><td>07:00–08:00</td><td>早餐</td><td>難波</td><td>A 咖啡／B 飯店</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Osaka+Namba+Station">📍</a></td></tr>
+<tr><td>08:00–09:00</td><td>難波 → 神戶三宮</td><td>阪神／近鐵直通；必要時尼崎轉乘</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kobe+Sannomiya+Station">📍 三宮</a></td></tr>
+<tr><td>09:00–10:00</td><td>三宮散步</td><td>步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ikuta+Shrine+Kobe">📍 生田神社</a></td></tr>
+<tr><td>10:00–11:30</td><td>南京町</td><td>三宮→南京町步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Nankinmachi+Kobe">📍 南京町</a></td></tr>
+<tr><td>11:30–13:00</td><td>神戶午餐</td><td>南京町／三宮</td><td>A 神戶牛／B 中華／C 定食</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kobe+Sannomiya+restaurants">🍽️</a></td></tr>
+<tr><td>13:00–15:00</td><td>Meriken Park、神戶港</td><td>步行／City Loop視體力</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Meriken+Park+Kobe">📍</a></td></tr>
+<tr><td>15:00–16:00</td><td>港區咖啡／甜點</td><td>步行</td><td>A 咖啡／B 甜點</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kobe+Harborland+cafe">☕</a></td></tr>
+<tr><td>16:00–17:30</td><td>神戶 → 大阪難波</td><td>阪神</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Osaka+Namba+Station">📍</a></td></tr>
+<tr><td>18:30–20:00</td><td>難波晚餐</td><td>步行</td><td>A 燒肉／B 居酒屋／C 拉麵</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Namba+Osaka+restaurants">🍽️</a></td></tr>
+</tbody></table>
+
+<h3>10/04（日）難波 → 梅田購物 → 關西機場 → 台北</h3>
+<table class="itinerary-table"><thead><tr><th>時間</th><th>行程</th><th>交通／走法</th><th>三餐</th><th>直接連結</th></tr></thead><tbody>
+<tr><td>07:00–08:00</td><td>早餐、整理行李</td><td>飯店</td><td>A 咖啡／B 便利商店</td><td>—</td></tr>
+<tr><td>08:00</td><td>退房、寄放行李</td><td>APA Namba Tower</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=APA+Hotel+Resort+Osaka+Namba+Ekimae+Tower">📍</a></td></tr>
+<tr><td>09:00–09:30</td><td>難波 → 梅田</td><td>御堂筋線 Namba→Umeda</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Osaka+Umeda+Station">📍 梅田</a></td></tr>
+<tr><td>10:00–12:00</td><td>阪急 → LUCUA → 大丸／KITTE</td><td>大阪站周邊室內步行</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hankyu+Umeda+Main+Store">🛍️ 阪急</a> <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=LUCUA+Osaka">LUCUA</a></td></tr>
+<tr><td>12:00–13:00</td><td>梅田午餐</td><td>大阪站／梅田</td><td>A 牛カツ／B 拉麵／C 壽司</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Umeda+Osaka+restaurants">🍽️</a></td></tr>
+<tr><td>13:00–14:00</td><td>最後伴手禮</td><td>大丸B1／阪急／KITTE</td><td>甜點／食品</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=KITTE+Osaka">📍 KITTE</a></td></tr>
+<tr><td>14:00</td><td>取回行李</td><td>回難波</td><td>—</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=APA+Hotel+Resort+Osaka+Namba+Ekimae+Tower">📍</a></td></tr>
+<tr><td>14:30–15:30</td><td>難波 → KIX</td><td>南海／JR依當日班次</td><td>機場簡餐備用</td><td><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport">📍 KIX</a></td></tr>
+<tr><td>16:05–18:15</td><td>✈️ CX565 KIX → TPE</td><td>關西→台北</td><td>機上</td><td>—</td></tr>
+</tbody></table>
+</section>
+
+<header class="hero" id="top">
+<div class="wrap">
+<div class="eyebrow">🇯🇵 KYOTO × OSAKA 2026</div>
+<h1>09/28 → 10/04<br>7 DAYS / 6 NIGHTS</h1>
+<div class="date">京都 3 晚 → 大阪 3 晚</div>
+<div class="sub">FINAL｜行程＋交通＋景點＋美食＋梅田完整作戰手冊</div>
+</div>
+</header>
+
+<main class="wrap">
+<div class="notice">
+<strong>資料狀態：</strong>本版為  最終整合版：餐廳依  核心類型分類，並可依地區／類型／餐別／關鍵字篩選。Google 評分、Tabelog 評分、價格、營業時間均標示狀態；若資料未確認，不自行補值。
 </div>
 
-<h2 id="tips">🎒 實用提醒</h2>
+
+
+
+
+<section class="section" id="transport">
+<h2>03｜交通作戰表</h2>
+<table>
+<tr><th>起點 → 終點</th><th>推薦</th><th>實際抓法</th><th>備註</th></tr>
+<tr><td>KIX → 京都</td><td>JR Haruka</td><td>約 95～115 分</td><td>列車約 80 分；另計入境、月台、候車、下車步行。</td></tr>
+<tr><td>四條 → 清水寺</td><td>地鐵＋步行／必要時公車</td><td>約 30～45 分</td><td>尖峰避免過度依賴巴士。</td></tr>
+<tr><td>京都 → 嵯峨嵐山</td><td>JR 嵯峨野線</td><td>約 25～35 分</td><td>JR 車程約 11 分。</td></tr>
+<tr><td>京都 → JR 難波</td><td>JR＋Osaka Metro</td><td>約 60～75 分</td><td>公開資料約 50～55 分／¥820，再加行李與站內步行。</td></tr>
+<tr><td>難波 → 海遊館</td><td>Osaka Metro</td><td>約 35～45 分</td><td>大阪港站下車後步行。</td></tr>
+<tr><td>大阪難波 → 神戶三宮</td><td>阪神</td><td>約 55～65 分</td><td>可直通；公開票價 ¥600。</td></tr>
+<tr><td>神戶 → 大阪梅田</td><td>阪神</td><td>約 40～55 分</td><td>三宮→大阪梅田。</td></tr>
+<tr><td>梅田 → 難波</td><td>Osaka Metro 御堂筋線</td><td>約 20～30 分</td><td>含站內步行抓 20～30 分。</td></tr>
+<tr><td>OCAT → KIX</td><td>機場巴士</td><td>約 60～75 分</td><td>車程約 48 分；成人 ¥1,400。</td></tr>
+</table>
+
+<h3>IC 卡策略</h3>
 <div class="card">
-<div class="check">☑ 住宿：京都四條 09/28–10/01；大阪難波 10/01–10/04</div>
-<div class="check">☑ 09/30 嵐山月燈路從 18:00 開始，可視體力決定是否參加</div>
-<div class="check">☑ 天龍寺官方：庭園 08:30–17:00、庭園 ¥500</div>
-<div class="check">☑ 海遊館 10/02 的營業時間與票價出發前再次確認</div>
-<div class="check">☑ 所有餐廳價格以「單人 ¥5,000 以下」為主要篩選條件；接近上限者另註</div>
-<div class="check">☑ ICOCA 等 IC 卡可作為京都／大阪市區交通的簡化方案；特殊票券是否划算需依最後班次與每日搭乘次數再算</div>
-<div class="check">☑ 10/03 神戶＋梅田屬高步行日，梅田百貨不建議每棟完整逛</div>
-<div class="check">☑ 10/04 回程不要排正式景點</div>
+<strong>本趟主策略：ICOCA／Suica／PASMO 等可用 IC 卡＋必要時單買票。</strong>
+<ul>
+<li>京都、JR、阪急、阪神、Osaka Metro、部分巴士都會讓 IC 卡大幅減少購票操作。</li>
+<li>本行程跨 JR／私鐵／地鐵，不適合為了「看起來划算」而買太多限定票券。</li>
+<li>Osaka Metro Enjoy Eco Card 2026 現行成人平日 ¥820、週六日／假日 ¥620；10/02 若只搭難波↔海遊館往返＋少量移動，未必比 IC 卡划算；若同日再大量搭 Metro，才值得考慮。</li>
+</ul>
 </div>
+</section>
 
-<h2>🔎 官方資料</h2>
+<section class="section" id="arashiyama">
+<h2>04｜嵐山完整攻略</h2>
 <div class="card">
-<p><a href="https://www.tenryuji.com/visit/" target="_blank">天龍寺官方參拜／交通</a></p>
-<p><a href="https://www.kaiyukan.com/info/hours/" target="_blank">海遊館官方營業時間</a></p>
-<p><a href="https://ja.kyoto.travel/event/single.php?event_id=5579" target="_blank">京都市觀光Navi｜2026 嵐山月燈路</a></p>
-<p><a href="https://flights.cathaypacific.com/destinations/zh_TW/從台北到大阪的航班" target="_blank">國泰航空｜台北→大阪</a></p>
+<strong>推薦路線：</strong><br>
+JR 嵯峨嵐山站 → 走到渡月橋 → 桂川河岸 → 竹林小徑 → 嵐山商店街 → 午餐 → 咖啡／甜點 → JR 嵯峨嵐山站
 </div>
+<table>
+<tr><th>地點</th><th>停留</th><th>最佳時段</th><th>門票／預約</th><th>拍照</th></tr>
+<tr><td>渡月橋</td><td>30～45 分</td><td>09:50～10:30</td><td>免費／免預約</td><td>橋上＋桂川南岸</td></tr>
+<tr><td>桂川</td><td>20～30 分</td><td>上午</td><td>免費</td><td>河岸＋山景</td></tr>
+<tr><td>竹林小徑</td><td>45～60 分</td><td>10:45～12:00</td><td>免費／免預約</td><td>竹林中段、入口較少人處</td></tr>
+<tr><td>商店街</td><td>60～90 分</td><td>12:00～14:00</td><td>—</td><td>街景／甜點</td></tr>
+</table>
+<p class="small">京都官方旅遊指南指出嵐山竹林與渡月橋都是熱門地點，並提供擁擠狀況資訊；因此本方案把最需要拍照的竹林放在午前，不安排天龍寺。</p>
+</section>
+
+<section class="section" id="kaiyukan">
+<h2>05｜海遊館攻略</h2>
+<div class="card">
+<strong>10/02 建議：</strong>09:00 左右從難波出發，10:15～10:30 指定時段入館，館內約 2.5～3 小時，13:15 左右離館吃午餐。
+</div>
+<ul>
+<li>2026 年票價採日期型價格／指定入館時段；不要在 HTML 內固定寫死單一票價。</li>
+<li>目前 2026/09～10/31 的公開價格資料顯示成人會依日期落在不同價格級距；10/02 的最終金額以官方購票日曆結帳頁為準。</li>
+<li>參觀方向：入口 → 上層開始 → 中央大水槽 → 各區域往下走 → 出口／商店。</li>
+<li>雨天適合度高，海遊館可作為大阪行程的核心室內景點。</li>
+</ul>
+</section>
+
+<section class="section" id="kobe">
+<h2>06｜神戶攻略</h2>
+<div class="card"><strong>路線：</strong>大阪難波 → 三宮 → 北野／生田 → 南京町 → Meriken Park → Harborland → 三宮 → 大阪梅田</div>
+<table>
+<tr><th>地點</th><th>停留</th><th>特色</th></tr>
+<tr><td>三宮／北野</td><td>90 分</td><td>山手街區、異人館景觀、生田神社</td></tr>
+<tr><td>南京町</td><td>90 分</td><td>日本三大中華街之一，適合午餐與小吃</td></tr>
+<tr><td>Meriken Park</td><td>60 分</td><td>港灣、BE KOBE、神戶港塔周邊</td></tr>
+<tr><td>Harborland</td><td>60 分</td><td>MOSAIC、海景與購物</td></tr>
+</table>
+<p class="small">本方案不排摩耶山／六甲山，原因是山區交通與天候會增加不確定性；把神戶市中心與港灣完整串起來，再接梅田。</p>
+</section>
+
+<section class="section" id="umeda">
+<h2>07｜梅田百貨／商圈 Phase 1</h2>
+<div class="card">
+<strong>10/03 17:30～20:00：</strong>由阪神大阪梅田站進入梅田核心區，優先走阪神／阪急／大丸一帶；若要深入 LUCUA、Grand Front、KITTE、Yodobashi，建議放在 Phase 2 的完整購物地圖中再依樓層與營業時間微調。
+</div>
+<table>
+<tr><th>設施</th><th>目前營業資訊</th><th>位置重點</th></tr>
+<tr><td>阪急梅田本店</td><td>10:00～20:00（部分店／餐廳不同）</td><td>阪急大阪梅田站核心</td></tr>
+<tr><td>阪神梅田本店</td><td>10:00～20:00；阪神大食堂 11:00～22:00</td><td>大阪梅田站南側</td></tr>
+<tr><td>大丸梅田店</td><td>10:00～20:00</td><td>JR 大阪站直結</td></tr>
+<tr><td>LUCUA／LUCUA 1100</td><td>購物層多為 10:30～20:30；餐飲另有時間</td><td>JR 大阪站北側／直結</td></tr>
+<tr><td>Grand Front Osaka</td><td>SHOP 11:00～21:00；餐飲 11:00～23:00</td><td>大阪站北側</td></tr>
+<tr><td>KITTE 大阪</td><td>1～3F 多為 11:00～20:00；餐飲樓層延長</td><td>JR 大阪站西側</td></tr>
+</table>
+<p class="small">2026/09 官方網站已顯示 Grand Front 有 9/18～10/4 的期間限定活動，因此 10/03 正在活動期間內；實際店舖仍要以當日公告為準。</p>
+</section>
+
+<section class="section" id="rain">
+<h2>08｜雨天備案</h2>
+<div class="card">
+<strong>京都：</strong>清水寺縮短 → 錦市場 → 京都車站 → Porta／伊勢丹 → 京都站周邊咖啡；若嵐山大雨，直接改京都站＋室內行程。
+</div>
+<div class="card">
+<strong>大阪：</strong>海遊館本身就是雨天核心；梅田可改為阪急／阪神／大丸／LUCUA／Grand Front／KITTE／地下街串連。
+</div>
+<div class="card">
+<strong>神戶：</strong>若港區天候惡劣，縮短 Meriken Park，增加三宮／元町／百貨／南京町室內時間；不要為了山景硬上六甲山。</div>
+</section>
+
+<section class="section" id="budget">
+<h2>09｜每日預算（不含住宿／國際機票）</h2>
+<table>
+<tr><th>日</th><th>交通</th><th>門票</th><th>餐飲</th><th>建議抓總額</th></tr>
+<tr><td>09/28</td><td>¥3,000～3,500</td><td>—</td><td>¥3,000～5,000</td><td>¥6,000～8,500</td></tr>
+<tr><td>09/29</td><td>¥800～1,500</td><td>清水寺依官方票價</td><td>¥4,000～6,000</td><td>約 ¥6,000～9,000＋門票</td></tr>
+<tr><td>09/30</td><td>¥500～1,500</td><td>竹林免費</td><td>¥4,000～6,000</td><td>約 ¥4,500～7,500</td></tr>
+<tr><td>10/01</td><td>¥1,500～2,500</td><td>—</td><td>¥4,000～6,000</td><td>約 ¥5,500～8,500</td></tr>
+<tr><td>10/02</td><td>¥600～1,000</td><td>海遊館依日期型票價</td><td>¥4,000～6,000</td><td>約 ¥7,000～10,000</td></tr>
+<tr><td>10/03</td><td>約 ¥1,500～2,500</td><td>視神戶設施而定</td><td>¥5,000～8,000</td><td>約 ¥6,500～10,500</td></tr>
+<tr><td>10/04</td><td>¥1,400 機場巴士</td><td>—</td><td>¥1,500～2,500</td><td>約 ¥3,000～4,000</td></tr>
+</table>
+<p class="small">餐飲預算先採保守範圍；Phase 2 會依「每人 ¥5,000 以下」篩選餐廳並替換成具體店家。</p>
+</section>
+
+<section class="section" id="tickets">
+<h2>10｜票券判斷</h2>
+<div class="card">
+<strong>① IC 卡：主力</strong><br>
+本趟跨 JR、阪急／阪神、Osaka Metro，IC 卡最簡單。建議預先準備足夠餘額。
+</div>
+<div class="card">
+<strong>② Osaka Metro Enjoy Eco Card：選擇性</strong><br>
+2026 現行成人平日 ¥820、週六日／假日 ¥620。10/02 若主要只有難波↔大阪港往返，通常不需要為了海遊館單獨買；若再大量搭 Metro 才考慮。
+</div>
+<div class="card">
+<strong>③ Kansai 周遊類套票：暫不優先</strong><br>
+本行程沒有連續多日大量使用私鐵的需求；先用 IC＋單買指定交通較容易控制成本與彈性。
+</div>
+</section>
+
+<section class="section" id="check">
+<h2>11｜出發前 Checklist</h2>
+<ul class="check">
+<li>護照</li><li>CX564／CX565 航班確認</li><li>三間飯店訂房確認</li><li>eSIM／漫遊</li><li>ICOCA／Suica／PASMO 等 IC 卡</li><li>信用卡＋日圓</li><li>海遊館指定入館時段</li><li>餐廳預約</li><li>Google Maps 離線／收藏地點</li><li>行動電源</li><li>雨具</li><li>免稅購物規則確認</li><li>再次確認航班、天氣、景點臨時休館與交通異動</li>
+</ul>
+</section>
+
+<section class="section" id="sources">
+<h2>12｜本 Phase 1 主要來源</h2>
+<div class="card">
+<a class="btn" target="_blank" rel="noopener" href="https://www.kansai-airport.or.jp/">KIX 官方</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www3.jr-odekake.net/eki/timetable?id=0610130">JR West</a>
+<a class="btn" target="_blank" rel="noopener" href="https://kyoto.travel/en/areas/saga-arashiyama/">Kyoto Travel｜嵐山</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.kiyomizudera.or.jp/en/location/">清水寺官方</a>
+<a class="btn" target="_blank" rel="noopener" href="https://subway.osakametro.co.jp/en/guide/page/enjoy-eco.php">Osaka Metro</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.kaiyukan.com/">海遊館官方</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.feel-kobe.jp/en/">VISIT KOBE</a>
+<a class="btn" target="_blank" rel="noopener" href="https://website.hankyu-dept.co.jp/fl/english/honten/">阪急梅田</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.hanshin-dept.jp/hshonten/english/index.html">阪神梅田</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.daimaru.co.jp/umedamise/hours.html">大丸梅田</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.lucua.jp/en/information/">LUCUA</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.gfo-sc.jp/information/">Grand Front Osaka</a>
+<a class="btn" target="_blank" rel="noopener" href="https://osaka.jp-kitte.jp/gb/page.jsp?id=1">KITTE 大阪</a>
+<a class="btn" target="_blank" rel="noopener" href="https://www.kate.co.jp/en/timetable/detail/oc">KIX↔OCAT 巴士</a>
+</div>
+</section>
+
+
+
+<div class="restaurant-tabs-wrap" id="restaurant-tabs">
+  <div class="restaurant-tabs" role="tablist" aria-label="餐廳資料頁籤">
+    <button class="restaurant-tab active" data-tab="all" role="tab" aria-selected="true">🍽️ 全部</button>
+    <button class="restaurant-tab" data-tab="kawaramachi" role="tab" aria-selected="false">📍 河原町</button>
+    <button class="restaurant-tab" data-tab="namba" role="tab" aria-selected="false">📍 難波</button>
+    <button class="restaurant-tab" data-tab="shinsaibashi" role="tab" aria-selected="false">📍 心齋橋</button>
+    <button class="restaurant-tab" data-tab="umeda" role="tab" aria-selected="false">📍 梅田</button>
+    <button class="restaurant-tab" data-tab="cafe" role="tab" aria-selected="false">☕ 咖啡</button>
+    <button class="restaurant-tab" data-tab="dessert" role="tab" aria-selected="false">🍵 甜點</button>
+  </div>
+  <p class="tab-help">改用頁籤瀏覽，不使用下拉選單或條件篩選。點選地區／類型後，直接往下看該頁內容。</p>
+</div>
+<section class="section" id="food"><h2>13｜🍜 餐廳資料庫</h2>
+<div class="notice"><b>原則：</b>不虛構 Google／Tabelog 評分。資料未確認即保留「未確認」。餐廳排名只是本趟指定區域、類型、預算下的候選，不代表全日本排名。Tabelog 區域資料會變動，出發前請再次確認。citeturn1search3turn1search7turn2search0</div>
+<div id="foods"><article class="food-card" data-t="拉麵" data-meal="午餐／晚餐" data-a="河原町" ><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><b>🍜 麺屋 猪一 / Menya Inoichi</b><div class="metrics">⭐ Google Maps：4.5（78）　🍽 Tabelog：3.71　💴 ¥1,000–1,999</div><small>🚶 京都河原町站約310m</small><p>Tabelog Ramen WEST 2025；人氣高</p><a class="tabe-link" href="https://tabelog.com/en/kyoto/A2601/A260201/26032368/" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=%E9%BA%BA%E5%B1%8B%20%E7%8C%AA%E4%B8%80%20/%20Menya%20Inoichi%20%E6%B2%B3%E5%8E%9F%E7%94%BA%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="拉麵" data-meal="午餐／晚餐" data-a="河原町" ><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><b>🍜 Gion Duck Noodles</b><div class="metrics">⭐ Google Maps：4.4（約1,953）　🍽 Tabelog：3.68　💴 ¥2,000–2,999</div><small>🚶 祇園四条站約452m</small><p>鴨系拉麵／沾麵</p><a class="tabe-link" href="https://tabelog.com/en/kyoto/A2601/A260301/26031755/" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Gion%20Duck%20Noodles%20%E6%B2%B3%E5%8E%9F%E7%94%BA%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="咖哩" data-meal="午餐／晚餐" data-a="河原町" ><span class="food-type">咖哩</span><span class="meal-tag">午餐／晚餐</span><b>🍜 KARA-KUSA curry</b><div class="metrics">⭐ Google Maps：4.7（93）　🍽 Tabelog：未確認　💴 ¥1,000–2,000</div><small>🚶 四條站約175m</small><p>小型吧台咖哩</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=KARA-KUSA%20curry" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=KARA-KUSA%20curry%20%E6%B2%B3%E5%8E%9F%E7%94%BA%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="炸豬排" data-meal="午餐／晚餐" data-a="河原町" ><span class="food-type">炸豬排</span><span class="meal-tag">午餐／晚餐</span><b>🍜 京都かつだ 四条烏丸店</b><div class="metrics">⭐ Google Maps：4.9（173）　🍽 Tabelog：未確認　💴 ¥2,000–4,000</div><small>🚶 四條／烏丸步行圈</small><p>炸豬排定食</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=%E4%BA%AC%E9%83%BD%E3%81%8B%E3%81%A4%E3%81%A0%20%E5%9B%9B%E6%9D%A1%E7%83%8F%E4%B8%B8%E5%BA%97" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E3%81%8B%E3%81%A4%E3%81%A0%20%E5%9B%9B%E6%9D%A1%E7%83%8F%E4%B8%B8%E5%BA%97%20%E6%B2%B3%E5%8E%9F%E7%94%BA%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="壽司" data-meal="晚餐" data-a="河原町" ><span class="food-type">壽司</span><span class="meal-tag">晚餐</span><b>🍜 鯛壽司 / Tai Sushi</b><div class="metrics">⭐ Google Maps：4.5（32）　🍽 Tabelog：未確認　💴 未確認</div><small>🚶 河原町／先斗町</small><p>傳統吧台壽司</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=%E9%AF%9B%E5%A3%BD%E5%8F%B8%20/%20Tai%20Sushi" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=%E9%AF%9B%E5%A3%BD%E5%8F%B8%20/%20Tai%20Sushi%20%E6%B2%B3%E5%8E%9F%E7%94%BA%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="燒肉" data-meal="晚餐" data-a="河原町" ><span class="food-type">燒肉</span><span class="meal-tag">晚餐</span><b>🍜 Keiraku Yakiniku Yabu</b><div class="metrics">⭐ Google Maps：4.7（1,565）　🍽 Tabelog：3.56　💴 ¥4,000–4,999</div><small>🚶 京都河原町站約219m</small><p>黑毛和牛／內臟</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Keiraku%20Yakiniku%20Yabu" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Keiraku%20Yakiniku%20Yabu%20%E6%B2%B3%E5%8E%9F%E7%94%BA%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="定食" data-meal="午餐" data-a="河原町" ><span class="food-type">定食</span><span class="meal-tag">午餐</span><b>🍜 Sancho Kawaramachi</b><div class="metrics">⭐ Google Maps：未確認　🍽 Tabelog：未確認　💴 ¥1,000–2,000</div><small>🚶 河原町步行圈</small><p>老牌洋食；不接受座位預約</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Sancho%20Kawaramachi" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Sancho%20Kawaramachi%20%E6%B2%B3%E5%8E%9F%E7%94%BA%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="燒肉" data-meal="晚餐" data-a="難波" ><span class="food-type">燒肉</span><span class="meal-tag">晚餐</span><b>🍜 Live Yakiniku Tengu Sennichimae</b><div class="metrics">⭐ Google Maps：4.7（約793）　🍽 Tabelog：3.58　💴 ¥4,000–4,999</div><small>🚶 日本橋站約180m</small><p>Tabelog 大阪市燒肉候選</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Live%20Yakiniku%20Tengu%20Sennichimae" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Live%20Yakiniku%20Tengu%20Sennichimae%20%E9%9B%A3%E6%B3%A2%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="居酒屋" data-meal="晚餐" data-a="難波" ><span class="food-type">居酒屋</span><span class="meal-tag">晚餐</span><b>🍜 KICHIRI Namba-ekimae</b><div class="metrics">⭐ Google Maps：4.7（約1,973）　🍽 Tabelog：未確認　💴 ¥3,000–4,000</div><small>🚶 難波站約1分</small><p>現代居酒屋</p><a class="tabe-link" href="https://tabelog.com/en/osaka/A2701/A270202/27009273/" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=KICHIRI%20Namba-ekimae%20%E9%9B%A3%E6%B3%A2%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="居酒屋" data-meal="晚餐" data-a="難波" ><span class="food-type">居酒屋</span><span class="meal-tag">晚餐</span><b>🍜 Okinawa Restaurant Haisai Namba Komejirushi</b><div class="metrics">⭐ Google Maps：4.7（約1,576）　🍽 Tabelog：未確認　💴 ¥2,000–4,000</div><small>🚶 南海難波步行圈</small><p>沖繩料理居酒屋</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Okinawa%20Restaurant%20Haisai%20Namba%20Komejirushi" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Okinawa%20Restaurant%20Haisai%20Namba%20Komejirushi%20%E9%9B%A3%E6%B3%A2%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="燒肉" data-meal="晚餐" data-a="心齋橋" ><span class="food-type">燒肉</span><span class="meal-tag">晚餐</span><b>🍜 Kuroge Wagyu Ittogai Yakiniku Dotonbori Mitsuru</b><div class="metrics">⭐ Google Maps：4.6（258）　🍽 Tabelog：3.33　💴 ¥4,000–4,999</div><small>🚶 心齋橋站約230m</small><p>A5黑毛和牛</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Kuroge%20Wagyu%20Ittogai%20Yakiniku%20Dotonbori%20Mitsuru" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Kuroge%20Wagyu%20Ittogai%20Yakiniku%20Dotonbori%20Mitsuru%20%E5%BF%83%E9%BD%8B%E6%A9%8B%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="燒肉" data-meal="午餐／晚餐" data-a="心齋橋" ><span class="food-type">燒肉</span><span class="meal-tag">午餐／晚餐</span><b>🍜 Yakiniku Kitan Minami senba</b><div class="metrics">⭐ Google Maps：5.0（4；樣本極少）　🍽 Tabelog：3.56　💴 晚餐¥8,000–9,999／午餐¥1,000–1,999</div><small>🚶 心齋橋站249m</small><p>晚餐超預算；午餐較符合</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Yakiniku%20Kitan%20Minami%20senba" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Yakiniku%20Kitan%20Minami%20senba%20%E5%BF%83%E9%BD%8B%E6%A9%8B%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="烏龍麵／蕎麥" data-meal="午餐／晚餐" data-a="心齋橋" ><span class="food-type">烏龍麵／蕎麥</span><span class="meal-tag">午餐／晚餐</span><b>🍜 美々卯 心斎橋店</b><div class="metrics">⭐ Google Maps：4.0（113）　🍽 Tabelog：3.16　💴 午餐¥2,000–2,999／晚餐¥4,000–4,999</div><small>🚶 心齋橋站3分</small><p>烏龍壽喜燒／蕎麥；週二休</p><a class="tabe-link" href="https://tabelog.com/en/osaka/A2701/A270201/27000535/" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E3%80%85%E5%8D%AF%20%E5%BF%83%E6%96%8E%E6%A9%8B%E5%BA%97%20%E5%BF%83%E9%BD%8B%E6%A9%8B%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="拉麵" data-meal="午餐／晚餐" data-a="梅田" ><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><b>🍜 京都麵屋武井 阪急梅田店</b><div class="metrics">⭐ Google Maps：3.8（約1,855）　🍽 Tabelog：3.70　💴 ¥1,000–1,999</div><small>🚶 阪急大阪梅田站43m</small><p>Tabelog Ramen OSAKA 2025 100</p><a class="tabe-link" href="https://tabelog.com/en/osaka/A2701/A270101/27092383/" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=%E4%BA%AC%E9%83%BD%E9%BA%B5%E5%B1%8B%E6%AD%A6%E4%BA%95%20%E9%98%AA%E6%80%A5%E6%A2%85%E7%94%B0%E5%BA%97%20%E6%A2%85%E7%94%B0%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="拉麵" data-meal="午餐／晚餐" data-a="梅田" ><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><b>🍜 Naniwa Menjiro Zen</b><div class="metrics">⭐ Google Maps：4.0（2；樣本極少）　🍽 Tabelog：3.68　💴 ¥1,000–1,999</div><small>🚶 大阪梅田站約48m</small><p>梅田站近</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Naniwa%20Menjiro%20Zen" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Naniwa%20Menjiro%20Zen%20%E6%A2%85%E7%94%B0%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="拉麵" data-meal="午餐／晚餐" data-a="梅田" ><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><b>🍜 Sharin KITTE Osaka</b><div class="metrics">⭐ Google Maps：3.3（3；樣本極少）　🍽 Tabelog：3.30　💴 ¥1,000–1,999</div><small>🚶 西梅田站170m</small><p>KITTE 大阪內</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Sharin%20KITTE%20Osaka" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Sharin%20KITTE%20Osaka%20%E6%A2%85%E7%94%B0%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="拉麵" data-meal="午餐／晚餐" data-a="梅田" ><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><b>🍜 Mugi to Mensuke</b><div class="metrics">⭐ Google Maps：4.1（7；目前 Business 樣本少）　🍽 Tabelog：3.84　💴 午餐¥2,000–2,999／晚餐¥3,000–3,999</div><small>🚶 中津站281m</small><p>Tabelog Ramen OSAKA 2025 100</p><a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Mugi%20to%20Mensuke" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Mugi%20to%20Mensuke%20%E6%A2%85%E7%94%B0%20Japan" target="_blank" rel="noopener">📍</a></article><article class="food-card" data-t="壽司" data-meal="午餐／晚餐" data-a="梅田" ><span class="food-type">壽司</span><span class="meal-tag">午餐／晚餐</span><b>🍜 Sanchoku Sushi Isseki Sanchou</b><div class="metrics">⭐ Google Maps：5.0（1；樣本極少）　🍽 Tabelog：3.50　💴 午餐¥4,000–4,999／晚餐¥6,000–7,999</div><small>🚶 大阪站300m</small><p>午餐符合；晚餐超預算</p><a class="tabe-link" href="https://tabelog.com/en/osaka/A2701/A270101/27189378/" target="_blank" rel="noopener">T 食べログ</a> <a class="map-pin" href="https://www.google.com/maps/search/?api=1&query=Sanchoku%20Sushi%20Isseki%20Sanchou%20%E6%A2%85%E7%94%B0%20Japan" target="_blank" rel="noopener">📍</a></article></div></section>
+<section class="section" id="coffee"><h2>14｜☕ 咖啡／甜點</h2>
+<div class="card"><b>河原町：</b>09/29 17:30～19:00，優先在河原町／祇園四条步行圈找咖啡與甜點。</div>
+<div class="card"><b>嵐山：</b>09/30 13:30～14:30，商店街自由選擇甜點，保留彈性避免為單店折返。</div>
+<div class="card"><b>梅田：</b>10/03 17:30 後可利用阪急食品樓層、LUCUA、KITTE、Grand Front；依當日店舖營業時間。</div></section>
+<section class="section" id="umeda-final"><h2>15｜🛍 UMEDA SHOPPING GUIDE</h2>
+<table><tr><th>設施</th><th>營業時間</th><th>推薦</th></tr>
+<tr><td>阪急梅田本店</td><td>10:00–20:00；餐廳11:00–22:00</td><td>精品、服飾、9F活動、B1食品</td></tr>
+<tr><td>阪神梅田本店</td><td>多數10:00–20:00</td><td>B1食品／伴手禮</td></tr>
+<tr><td>HEP FIVE</td><td>11:00–21:00；餐飲／娛樂至23:00</td><td>年輕服飾、動漫、摩天輪</td></tr>
+<tr><td>LUCUA／1100</td><td>購物10:00–21:00；餐飲11:00–23:00</td><td>服飾、生活雜貨、甜點</td></tr>
+<tr><td>大丸梅田</td><td>多數10:00–20:00</td><td>食品、精品、生活用品</td></tr>
+<tr><td>KITTE大阪</td><td>1–3F多為11:00–20:00；高樓層延長</td><td>地方特色、餐飲、伴手禮</td></tr>
+<tr><td>Grand Front Osaka</td><td>SHOP 11:00–21:00；餐飲11:00–23:00</td><td>生活、設計、科技、餐飲</td></tr>
+<tr><td>Yodobashi／LINKS</td><td>依店舖</td><td>電器、家電、生活用品</td></tr></table>
+<div class="routebox"><b>10/03 步行：</b>阪神 → 阪急 → HEP FIVE → LUCUA／大丸 → KITTE → Grand Front → Yodobashi。17:30～20:00 建議挑3～4個核心點，不要全部硬逛。</div>
+<p class="small">阪急、HEP FIVE、LUCUA、KITTE 的現行營業資料已；不同樓層／店舖仍可能不同。citeturn0search4turn0search6turn0search7turn0search8</p></section>
+<section class="section" id="maps-final"><h2>16｜📍 Maps 快速入口</h2><div class="card">
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=KOKO+HOTEL+Kyoto+Shijokarasuma">KOKO</a>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Dormy+Inn+Premium+Kyoto+Ekimae">Dormy</a>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=APA+Hotel+Resort+Osaka+Namba+Ekimae+Tower">APA難波</a>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Osaka+Aquarium+Kaiyukan">海遊館</a>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Meriken+Park+Kobe">Meriken Park</a>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Hankyu+Umeda+Main+Store">阪急梅田</a>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=KITTE+Osaka">KITTE大阪</a>
+<a class="btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Grand+Front+Osaka">Grand Front</a></div></section>
+<footer>
+本頁為 Phase 1「行程＋交通＋景點」版本。資料以 2026/09/19 結果建立；班表、票價、營業時間、天候與交通可能臨時變更。Phase 2 應在同一份主資料上加入：河原町／難波／心齋橋／梅田餐廳、Google／Tabelog 評分、價格、營業時間、Maps Place URL、咖啡甜點、完整梅田樓層攻略，最後再整合成正式版 kyoto_osaka_2026_phase2.html。
+</footer>
 </main>
 
-<div class="bottom"><a href="#plan">🗓<br>行程</a><a href="#transport">🚆<br>交通</a><a href="#food">🍜<br>美食</a><a href="#umeda">🛍<br>梅田</a><a href="#tips">🎒<br>提醒</a></div>
+<nav class="bottom">
+<a href="#plan"><span>🏠</span>行程</a>
+<a href="#days"><span>🍜</span>每日</a>
+<a href="#umeda"><span>🛍</span>梅田</a>
+<a href="#transport"><span>🚆</span>交通</a>
+<a href="#sources"><span>📍</span>來源</a>
+</nav>
+<script>(function(){function ready(){const q=document.getElementById("fq"),a=document.getElementById("fa"),t=document.getElementById("ft"),m=document.getElementById("fm"),r=document.getElementById("fr"),c=document.getElementById("fc"),cards=[...document.querySelectorAll("#foods .food-card")];if(!q||!a||!t||!m||!r||!c||!cards.length)return;function f(){let n=0;const qs=q.value.trim().toLowerCase();cards.forEach(x=>{const text=x.textContent.toLowerCase();const okA=!a.value||x.dataset.a===a.value;const okT=!t.value||x.dataset.t===t.value;const okM=!m.value||((x.dataset.meal||"").includes(m.value)||text.includes(m.value));const okQ=!qs||text.includes(qs);const ok=okA&&okT&&okM&&okQ;x.hidden=!ok;if(ok)n++});c.textContent=`顯示 ${n} 間｜可用 Google Maps／食べログ 開啟`;}[q,a,t,m].forEach(x=>x.addEventListener(x.tagName==='INPUT'?'input':'change',f));r.addEventListener('click',()=>{q.value='';a.value='';t.value='';m.value='';f()});f()}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();})();</script>
+
+
+
+<section class="section" id="phase2-food">
+  <h2>17｜🔎 Phase 2 版：餐廳／咖啡／甜點</h2>
+  <p class="note">
+    本區以 2026/09/19 資料為基準。Google 評分／評論數與營業時間會變動；Tabelog 評分亦會更新。
+    「Google Maps」按鈕採 Google Maps 搜尋 URL，只有在能確認 Place URL 時才應標示為 Place URL，避免製造假連結。
+    預算以每人估算為主，實際仍以當日菜單為準。
+  </p>
+
+  <h3>17-1｜京都・河原町／四條周邊</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>店家</th><th>類型</th><th>Google</th><th>Tabelog</th><th>價格</th><th>營業時間／特徵</th><th>Maps</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>麺屋 猪一（Men-ya Inoichi）</strong></td><td>拉麵／出汁</td>
+        <td>4.5（78）</td><td>3.71 左右</td><td>¥1,000–2,000</td>
+        <td>11:00–14:30／17:30–21:00；以京都風出汁拉麵見長，尖峰可能排隊。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Men-ya+Inoichi+Kyoto">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/kyoto/A2601/A260201/26032368/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>京都焼肉enen 四条河原町店</strong></td><td>燒肉</td>
+        <td>4.9（276）</td><td>3.42</td><td>約¥3,000–8,000</td>
+        <td>17:00–22:00；河原町步行可，偏創意／和牛燒肉，適合晚餐。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kyoto+Yakiniku+enen+Shijo+Kawaramachi">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E4%BA%AC%E9%83%BD%E7%84%BC%E8%82%89enen%20%E5%9B%9B%E6%9D%A1%E6%B2%B3%E5%8E%9F%E7%94%BA%E5%BA%97">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Keiraku Yakiniku Yabu</strong></td><td>燒肉</td>
+        <td>未確認</td><td>3.56（264）</td><td>¥4,000–4,999</td>
+        <td>距京都河原町站約219m；黑毛和牛／內臟，Tabelog 可見線上預約。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Keiraku+Yakiniku+Yabu+Kyoto">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/kyoto/A2601/A260201/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Sushi Dokoro Susabiyu</strong></td><td>壽司</td>
+        <td>未確認</td><td>3.43（406）</td><td>午餐¥2,000–2,999／晚餐¥4,000–4,999</td>
+        <td>距四條站約187m；壽司＋日本料理，預算相對容易控制。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sushi+Dokoro+Susabiyu+Kyoto">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/kyoto/A2601/A260201/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Ogawa Coffee Kyoto Sanjo</strong></td><td>咖啡</td>
+        <td>4.3（88）</td><td>未確認</td><td>¥1,000–2,000</td>
+        <td>09:00 起；週六至21:00，其餘多至20:00；適合河原町／三条散步中的咖啡休息。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ogawa+Coffee+Kyoto+Sanjo">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/kyoto/A2601/A260301/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>和栗専門 紗織</strong></td><td>栗子甜點／咖啡</td>
+        <td>4.8（330）</td><td>未確認</td><td>未確認</td>
+        <td>10:00–18:00；和栗蒙布朗為主題，建議排在河原町／木屋町散步時段。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Waguri+Senmon+Saori+Kyoto">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E5%92%8C%E6%A0%97%E5%B0%82%E9%96%80%20%E7%B4%97%E7%B9%94">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>SOUP CURRY OHMIYA</strong></td><td>咖哩</td>
+        <td>4.5（2；樣本較少）</td><td>未確認</td><td>未確認</td>
+        <td>午餐／晚餐時段營業；約河原町站步行2分鐘，京都食材湯咖哩。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=SOUP+CURRY+OHMIYA+Kyoto">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=SOUP%20CURRY%20OHMIYA">T 食べログ</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>17-2｜大阪・難波／心齋橋</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>店家</th><th>類型</th><th>Google</th><th>Tabelog</th><th>價格</th><th>營業時間／特徵</th><th>Maps</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>なにわ麺次郎</strong></td><td>拉麵</td>
+        <td>4.0（21）</td><td>約3.68</td><td>¥1,000–1,999</td>
+        <td>11:00–22:00；近鐵大阪難波站改札內 Time's Place，適合轉乘或行程間快速用餐。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Naniwa+Menjiro+Osaka+Namba">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270202/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Yakiniku Kurumi Namba</strong></td><td>燒肉</td>
+        <td>4.9（2,423）</td><td>未確認</td><td>未確認</td>
+        <td>11:30–23:30；約難波站6分鐘／日本橋站更近；晚餐熱門，建議預約。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Yakiniku+Kurumi+Namba">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270202/27154103/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>裏難波スシトフジ</strong></td><td>壽司／居酒屋</td>
+        <td>4.8（18）</td><td>未確認</td><td>未確認</td>
+        <td>晚餐17:00–23:30；週末另有午餐；近日本橋／裏難波，適合晚餐。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ura+Namba+Sushi+Tofuji">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E8%A3%8F%E9%9B%A3%E6%B3%A2%E3%82%B9%E3%82%B7%E3%83%88%E3%83%95%E3%82%B8">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>ニューベイブ 難波店</strong></td><td>炸豬排</td>
+        <td>未確認</td><td>未確認</td><td>約¥3,000–4,000</td>
+        <td>約難波站步行5分鐘；品牌豬炸豬排定食，適合午餐。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=New+Babe+Namba+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%99%E3%82%A4%E3%83%96%20%E9%9B%A3%E6%B3%A2%E5%BA%97">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>つじ田 心斎橋店</strong></td><td>沾麵</td>
+        <td>4.8（5,317）</td><td>未確認</td><td>未確認</td>
+        <td>平日11:00–00:00；週末10:00–22:00；心齋橋／南船場，適合購物日安排。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tsujita+Shinsaibashi">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270201/27144447/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>心斎橋 かつ喜</strong></td><td>炸豬排</td>
+        <td>5.0（1；樣本極少）</td><td>未確認</td><td>¥1,000–2,000</td>
+        <td>心齋橋PARCO 13F；11:00–16:00／17:00–22:00；適合與心齋橋購物串接。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Shinsaibashi+Katsuki">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E5%BF%83%E6%96%8E%E6%A9%8B%20%E3%81%8B%E3%81%A4%E5%96%9C">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>UNREAL BAKE & Cafe Bar</strong></td><td>咖啡／早餐</td>
+        <td>4.8（16）</td><td>未確認</td><td>未確認</td>
+        <td>08:00–19:00；道頓堀河畔，約難波站4分鐘，適合早午餐。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=UNREAL+BAKE+Cafe+Bar+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=UNREAL%20BAKE%20%26%20Cafe%20Bar">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Le Premier Cafe 心斎橋本店</strong></td><td>咖啡</td>
+        <td>4.3（12）</td><td>未確認</td><td>¥1,000–2,000</td>
+        <td>10:00 起，多數日營業至23:30；適合購物中途或晚間咖啡。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Le+Premier+Cafe+Shinsaibashi">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=Le%20Premier%20Cafe%20%E5%BF%83%E6%96%8E%E6%A9%8B%E6%9C%AC%E5%BA%97">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>法善寺 夫婦善哉</strong></td><td>和菓子／甜點</td>
+        <td>3.9（75）</td><td>未確認</td><td>通常¥1,000以下</td>
+        <td>10:00–22:00；法善寺橫丁旁，適合晚餐後甜點與夜間散步。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Meoto+Zenzai+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E6%B3%95%E5%96%84%E5%AF%BA%20%E5%A4%AB%E5%A9%A6%E5%96%84%E5%93%89">T 食べログ</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>17-3｜大阪・梅田／大阪站</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>店家</th><th>類型</th><th>Google</th><th>Tabelog</th><th>價格</th><th>營業時間／特徵</th><th>Maps</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>らぁ麺 鴨と葱 梅田店</strong></td><td>拉麵</td>
+        <td>4.5（資料樣本較少）</td><td>未確認</td><td>¥1,000–2,000</td>
+        <td>10:00–23:00；Innogate Osaka Barchica 03 3F，JR大阪站西口附近。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ramen+Kamo+to+Negi+Osaka+Umeda">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E3%82%89%E3%81%81%E9%BA%BA%20%E9%B4%A8%E3%81%A8%E8%91%B1%20%E6%A2%85%E7%94%B0%E5%BA%97">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>なにわ麺次郎 然</strong></td><td>拉麵</td>
+        <td>4.0（2；樣本極少）</td><td>約3.68</td><td>¥1,000–1,999</td>
+        <td>阪神梅田本店 B2；11:00–21:00；高需求店，適合逛阪神時順路。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Naniwa+Menjiro+ZEN+Hanshin+Umeda">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E3%81%AA%E3%81%AB%E3%82%8F%E9%BA%BA%E6%AC%A1%E9%83%8E%20%E7%84%B6">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>小麦の麺神</strong></td><td>拉麵</td>
+        <td>4.5（1,336）</td><td>未確認</td><td>¥1,000–2,000</td>
+        <td>KITTE大阪 4F；11:00–21:00；雞白湯／麵食，購物動線非常方便。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Komugi+no+Megami+KITTE+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E5%B0%8F%E9%BA%A6%E3%81%AE%E9%BA%BA%E7%A5%9E%20KITTE%E5%A4%A7%E9%98%AA">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Sanchoku Sushi Isseki Sanchou</strong></td><td>壽司</td>
+        <td>未確認</td><td>3.50（246）</td><td>午餐¥4,000–4,999／晚餐¥6,000–7,999</td>
+        <td>大阪站約300m；週一休；Tabelog 可見線上預約。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sanchoku+Sushi+Isseki+Sanchou+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270101/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Sushi Sakaba Teppei</strong></td><td>壽司／居酒屋</td>
+        <td>未確認</td><td>3.53（706）</td><td>午餐¥3,000–3,999／晚餐¥4,000–4,999</td>
+        <td>東梅田站約297m；預算較符合本次餐飲控制。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sushi+Sakaba+Teppei+Umeda">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270101/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>epais Hanshin Umeda</strong></td><td>炸豬排／咖哩</td>
+        <td>未確認</td><td>3.65（約600）</td><td>午餐¥2,000–2,999／晚餐¥3,000–3,999</td>
+        <td>阪神大阪梅田站約38m；購物日午餐非常順路。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=epais+Hanshin+Umeda">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270101/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>牛かつもと村 LUCUA店</strong></td><td>牛排／牛カツ</td>
+        <td>4.7（69）</td><td>未確認</td><td>¥2,000–3,000</td>
+        <td>LUCUA 10F；11:00–23:00；大阪站直結，適合購物日。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Gyukatsu+Motomura+LUCUA+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270101/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>GYUKATSU Kyoto Katsugyu Yodobashi LINKS Umeda</strong></td><td>牛カツ</td>
+        <td>5.0（90）</td><td>3.07（約73）</td><td>約¥1,000–1,999</td>
+        <td>LINKS UMEDA 8F；11:00–23:00；預算友善、適合購物中途。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=GYUKATSU+Kyoto+Katsugyu+Yodobashi+LINKS+Umeda">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/en/osaka/A2701/A270101/27130976/">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>梅田珈琲館YC</strong></td><td>昭和喫茶／咖啡</td>
+        <td>3.4（17）</td><td>未確認</td><td>¥1,000以下</td>
+        <td>07:00–23:00；新梅田食道街附近，適合早餐／復古喫茶體驗。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Umeda+Coffeehouse+YC">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E6%A2%85%E7%94%B0%E7%8F%88%E7%90%B2%E9%A4%A8YC">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Sunshine</strong></td><td>昭和喫茶／咖啡</td>
+        <td>3.9（35）</td><td>未確認</td><td>¥1,000以下</td>
+        <td>大阪站前第3大樓 B2；約07:30/08:00起，復古早餐與咖啡。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Sunshine+Osaka+Station+3+Building">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=Sunshine">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>Blue Bottle Coffee Umeda Chayamachi</strong></td><td>精品咖啡</td>
+        <td>4.3（1,208）</td><td>未確認</td><td>¥1,000–2,000</td>
+        <td>08:00–21:00；茶屋町，適合阪急／HEP FIVE／茶屋町購物路線。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Blue+Bottle+Coffee+Umeda+Chayamachi">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=Blue%20Bottle%20Coffee%20Umeda%20Chayamachi">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>りくろーおじさんの店 大丸梅田店</strong></td><td>起司蛋糕／伴手禮</td>
+        <td>4.3（184）</td><td>未確認</td><td>低預算</td>
+        <td>大丸梅田 B1；10:00–20:00；人氣高，尖峰可能排隊，適合最後採買伴手禮。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Rikuro+Ojisan+Daimaru+Umeda">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=%E3%82%8A%E3%81%8F%E3%82%8D%E3%83%BC%E3%81%8A%E3%81%98%E3%81%95%E3%82%93%E3%81%AE%E5%BA%97%20%E5%A4%A7%E4%B8%B8%E6%A2%85%E7%94%B0%E5%BA%97">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>grenier Umeda</strong></td><td>甜點／糕點</td>
+        <td>4.5（973）</td><td>未確認</td><td>未確認</td>
+        <td>阪急Grand Building 1F；10:00–20:00；適合茶屋町／阪急側甜點。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=grenier+Umeda+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=grenier%20Umeda">T 食べログ</a></td>
+      </tr>
+      <tr>
+        <td><strong>CHOCOLATIER PALET D'OR</strong></td><td>巧克力／甜點咖啡</td>
+        <td>4.5（29）</td><td>未確認</td><td>偏高</td>
+        <td>HERBIS PLAZA ENT 4F；11:00–20:00；偏高級甜點，適合西梅田。</td>
+        <td><a class="map-pin" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=CHOCOLATIER+PALET+DOR+Osaka">📍</a> <a class="tabe-link" target="_blank" rel="noopener" href="https://tabelog.com/rstLst/?vs=1&sa=CHOCOLATIER%20PALET%20D%27OR">T 食べログ</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>17-4｜評分資料使用規則</h3>
+  <ul>
+    <li><strong>Google：</strong>本版優先呈現 Business 到的 Google 評分與評論數；評論數太少時明確標示「樣本少」，不拿少量評論與大量評論店直接比較。</li>
+    <li><strong>Tabelog：</strong>採當下頁面資料；同一家店不同搜尋條件可能出現微小差異，HTML 應以「約」或「日期」處理。</li>
+    <li><strong>價格：</strong>優先採 Tabelog／Business 顯示區間；若沒有可靠資料則寫「未確認」，不自行估算。</li>
+    <li><strong>營業時間：</strong>以官方／Business／Tabelog 結果為主；出發前仍需再次確認臨時休店、假日與最後點餐。</li>
+    <li><strong>Google Maps：</strong>本版按鈕使用 Google Maps Search URL；若後續取得可驗證的 Place URL，再替換成精確 Place URL。</li>
+  </ul>
+</section>
+
+<section class="section" id="umeda-floor-2026">
+  <h2>18｜🛍 梅田 2026/09 版：百貨＋樓層攻略</h2>
+  <p class="note">重點是「逛什麼、從哪層開始、哪些樓層值得優先」。2026 年大丸梅田正在大改裝，不能沿用舊版完整樓層印象。</p>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>設施</th><th>2026 重點</th><th>建議逛法</th><th>適合買什麼</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>阪急うめだ本店</strong></td>
+        <td>一般營業約10:00–20:00；餐廳等部分店鋪另計。官方有樓層指南與品牌搜尋，並提醒改裝／搬遷資訊。</td>
+        <td>從 1F／入口開始；想買精品、化妝品先處理，再上食品／甜點與活動樓層。</td>
+        <td>精品、化妝品、伴手禮、食品甜點、日本品牌。</td>
+      </tr>
+      <tr>
+        <td><strong>阪神梅田本店</strong></td>
+        <td>一般營業約10:00–20:00；官方樓層為 B2～9F，9F 為阪神大食堂，並有食品／餐廳／咖啡等分類。</td>
+        <td>食品與午餐可直接鎖定 B1/B2；吃飯再往9F；若只想快速購物，地下層效率最高。</td>
+        <td>食品、伴手禮、地下街美食、化妝品、日用品。</td>
+      </tr>
+      <tr>
+        <td><strong>大丸梅田店</strong></td>
+        <td>2026/4起大改裝；目前主要營運 B2～9F。10～15F相關區域轉為 LUCUA SOUTH。現行樓層資料顯示 B1食品、1F時計／女性雜貨、2F化妝品、3F國際精品／珠寶、6F女性服飾、7F女性／男性／兒童／禮品等、8F男性／運動／旅行用品。</td>
+        <td>把大丸定位成「JR大阪站旁的伴手禮＋化妝品＋部分品牌」；不要再用舊版10～15F大丸攻略。</td>
+        <td>B1食品、化妝品、精品、旅行用品、時計。</td>
+      </tr>
+      <tr>
+        <td><strong>LUCUA／LUCUA 1100</strong></td>
+        <td>與JR大阪站直結；適合服飾、生活雜貨、餐飲與年輕品牌。10F有牛かつもと村等餐飲。</td>
+        <td>與大丸／大阪站 City 一起安排；雨天特別好用，地下及站體內移動多。</td>
+        <td>服飾、生活雜貨、年輕品牌、餐飲。</td>
+      </tr>
+      <tr>
+        <td><strong>KITTE大阪</strong></td>
+        <td>官方資料：B1約07:00–23:00；1～3F約11:00–20:00；4～5F約11:00–23:00；6F約09:00–23:00，個別店鋪可能不同。</td>
+        <td>安排在「大阪站西口→KITTE→西梅田」路線；4F可順吃小麦の麺神。</td>
+        <td>地方特產、餐飲、伴手禮、特色店。</td>
+      </tr>
+      <tr>
+        <td><strong>LINKS UMEDA／Yodobashi</strong></td>
+        <td>大型家電＋生活雜貨＋餐飲複合體；8F有牛かつ京都勝牛等餐飲。</td>
+        <td>最後採買電器／藥妝／生活用品很方便；與阪急側可用天橋／地下動線串接。</td>
+        <td>家電、3C、生活用品、餐飲。</td>
+      </tr>
+      <tr>
+        <td><strong>HEP FIVE</strong></td>
+        <td>購物約11:00–21:00；餐廳／娛樂約11:00–23:00。</td>
+        <td>與阪急、茶屋町一起排；適合年輕品牌與夜間逛街。</td>
+        <td>服飾、潮流、娛樂、餐飲。</td>
+      </tr>
+      <tr>
+        <td><strong>Grand Front Osaka</strong></td>
+        <td>北館／南館／Umekita廣場的大型商業複合區；適合與大阪站北側一起走。</td>
+        <td>排在阪急／茶屋町之後，避免來回穿越梅田。</td>
+        <td>生活風格、家居、科技、餐飲、咖啡。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>18-1｜建議「半日梅田不走回頭路」</h3>
+  <ol>
+    <li><strong>10:00 阪急梅田本店</strong>：先處理精品／化妝品／食品，避開下午人潮。</li>
+    <li><strong>11:30 阪急→茶屋町／HEP FIVE</strong>：依購物需求二選一，不必兩邊都逛到底。</li>
+    <li><strong>12:30 午餐</strong>：若想省移動，選阪神／LUCUA／LINKS 站體內餐廳。</li>
+    <li><strong>13:30 LUCUA／LUCUA 1100</strong>：服飾、生活雜貨、餐飲。</li>
+    <li><strong>15:00 大丸梅田</strong>：以目前 B2～9F 為主；特別注意2026改裝後樓層已變動。</li>
+    <li><strong>16:00 KITTE大阪→西梅田</strong>：伴手禮／特色店／咖啡。</li>
+    <li><strong>17:30～18:00</strong>：視體力選擇 Grand Front、Yodobashi/LINKS 或直接晚餐。</li>
+  </ol>
+
+  <h3>18-2｜2026 大丸特別提醒</h3>
+  <div class="alert">
+    <strong>不要使用舊版「大丸梅田10～15F完整樓層攻略」。</strong>
+    2026/4/5 起，原10～15F相關區域轉為 LUCUA SOUTH；官方目前資料顯示大丸梅田主要營運 B2～9F，且部分店鋪仍有搬遷／改裝更新。出發前應再看官方最新樓層與店鋪資訊。
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="notice"><strong>V6 餐廳瀏覽方式：</strong>已取消餐廳「下拉選單／條件篩選」操作，改為手機友善頁籤：全部、河原町、難波、心齋橋、梅田、咖啡、甜點。每個頁籤直接顯示對應餐廳卡片。</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
-function filterFood(area,btn){
- document.querySelectorAll('.filter button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
- document.querySelectorAll('#foodgrid .food').forEach(x=>x.style.display=(area==='all'||x.dataset.area===area)?'block':'none');
-}
+document.addEventListener('DOMContentLoaded', function(){
+  const tabs=[...document.querySelectorAll('.restaurant-tab')];
+  const cards=[...document.querySelectorAll('.food-card[data-t], .food-card[data-meal], article.food-card')];
+  if(!tabs.length || !cards.length) return;
+
+  function normalize(v){return (v||'').toLowerCase().trim();}
+  function matches(card, tab){
+    const key=tab.dataset.tab;
+    if(key==='all') return true;
+    const text=normalize(card.innerText);
+    const t=normalize(card.dataset.t);
+    const area=normalize(card.dataset.area);
+    if(key==='kawaramachi') return area.includes('河原町') || text.includes('河原町');
+    if(key==='namba') return area.includes('難波') || text.includes('難波') || text.includes('namba');
+    if(key==='shinsaibashi') return area.includes('心齋橋') || text.includes('心斎橋') || text.includes('shinsaibashi');
+    if(key==='umeda') return area.includes('梅田') || text.includes('梅田') || text.includes('umeda');
+    if(key==='cafe') return t.includes('咖啡') || text.includes('咖啡') || text.includes('cafe');
+    if(key==='dessert') return t.includes('甜點') || text.includes('甜點') || text.includes('dessert') || text.includes('和菓子');
+    return true;
+  }
+  function activate(tab){
+    tabs.forEach(x=>{
+      const active=x===tab;
+      x.classList.toggle('active',active);
+      x.setAttribute('aria-selected',active?'true':'false');
+    });
+    cards.forEach(card=>{
+      card.style.display=matches(card,tab)?'':'none';
+    });
+  }
+  tabs.forEach(tab=>tab.addEventListener('click',()=>activate(tab)));
+  activate(tabs[0]);
+});
 </script>
-</body></html>
+
+</body>
+</html
+<article class="food-card" data-a="河原町" data-t="咖啡" data-meal="早餐／咖啡"><b>Ogawa Coffee Kyoto Sanjo</b><span class="food-type">咖啡</span><span class="meal-tag">早餐／咖啡</span><div class="metrics">⭐ Google Maps：4.3（88）　🍽 Tabelog：未確認　💴 ¥1,000–2,000</div><small>🚶 三条／河原町步行圈</small><p>京都咖啡老舖；適合早上或下午休息。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Ogawa+Coffee+Kyoto+Sanjo" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Ogawa%20Coffee%20Kyoto%20Sanjo" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="河原町" data-t="甜點" data-meal="早餐／咖啡"><b>和栗専門 紗織</b><span class="food-type">甜點</span><span class="meal-tag">甜點</span><div class="metrics">⭐ Google Maps：4.8（330）　🍽 Tabelog：未確認　💴 未確認</div><small>🚶 木屋町／河原町步行圈</small><p>和栗蒙布朗；建議下午甜點時段。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Waguri+Senmon+Saori+Kyoto" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=和栗専門%20紗織" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="難波" data-t="炸豬排" data-meal="午餐"><b>ニューベイブ 難波店</b><span class="food-type">炸豬排</span><span class="meal-tag">午餐</span><div class="metrics">⭐ Google Maps：未確認　🍽 Tabelog：未確認　💴 約¥3,000–4,000</div><small>🚶 難波站約5分</small><p>豬排定食；適合午餐。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=ニューベイブ%20難波店" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=ニューベイブ%20難波店" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="難波" data-t="咖啡" data-meal="早餐／咖啡"><b>UNREAL BAKE & Cafe Bar</b><span class="food-type">咖啡</span><span class="meal-tag">早餐／咖啡</span><div class="metrics">⭐ Google Maps：4.8（16）　🍽 Tabelog：未確認　💴 未確認</div><small>🚶 難波站約4分</small><p>08:00起；適合早餐／早午餐。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=UNREAL+BAKE+Cafe+Bar+Osaka" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=UNREAL%20BAKE%20Cafe%20Bar" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="心齋橋" data-t="拉麵" data-meal="午餐／晚餐"><b>つじ田 心斎橋店</b><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><div class="metrics">⭐ Google Maps：4.8（5,317）　🍽 Tabelog：未確認　💴 未確認</div><small>🚶 心齋橋站步行圈</small><p>沾麵；購物日快速用餐。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Tsujita+Shinsaibashi" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=つじ田%20心斎橋店" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="心齋橋" data-t="咖啡" data-meal="早餐／咖啡"><b>Le Premier Cafe 心斎橋本店</b><span class="food-type">咖啡</span><span class="meal-tag">早餐／咖啡</span><div class="metrics">⭐ Google Maps：4.3（12）　🍽 Tabelog：未確認　💴 ¥1,000–2,000</div><small>🚶 心齋橋站步行圈</small><p>10:00起；適合購物中途／晚間咖啡。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Le+Premier+Cafe+Shinsaibashi" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Le%20Premier%20Cafe%20心斎橋本店" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="難波" data-t="甜點" data-meal="晚餐"><b>法善寺 夫婦善哉</b><span class="food-type">甜點</span><span class="meal-tag">晚餐後</span><div class="metrics">⭐ Google Maps：3.9（75）　🍽 Tabelog：未確認　💴 通常¥1,000以下</div><small>🚶 法善寺橫丁／難波步行圈</small><p>晚餐後和菓子甜點。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Meoto+Zenzai+Osaka" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=法善寺%20夫婦善哉" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="拉麵" data-meal="午餐／晚餐"><b>らぁ麺 鴨と葱 梅田店</b><span class="food-type">拉麵</span><span class="meal-tag">午餐／晚餐</span><div class="metrics">⭐ Google Maps：4.5（樣本資料）　🍽 Tabelog：未確認　💴 ¥1,000–2,000</div><small>🚶 JR大阪站西口步行圈</small><p>鴨與葱拉麵；適合大阪站行程。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=らぁ麺+鴨と葱+梅田店" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=らぁ麺%20鴨と葱%20梅田店" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="炸豬排" data-meal="午餐／晚餐"><b>epais Hanshin Umeda</b><span class="food-type">炸豬排</span><span class="meal-tag">午餐／晚餐</span><div class="metrics">⭐ Google Maps：未確認　🍽 Tabelog：3.65（約600）　💴 午餐¥2,000–2,999／晚餐¥3,000–3,999</div><small>🚶 阪神大阪梅田站約38m</small><p>購物日午餐方便；位於阪神梅田。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=epais+Hanshin+Umeda" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=epais%20Hanshin%20Umeda" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="牛カツ" data-meal="午餐／晚餐"><b>牛かつもと村 LUCUA店</b><span class="food-type">牛カツ</span><span class="meal-tag">午餐／晚餐</span><div class="metrics">⭐ Google Maps：4.7（69）　🍽 Tabelog：未確認　💴 ¥2,000–3,000</div><small>🚶 LUCUA 10F</small><p>大阪站直結；購物日適合。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Gyukatsu+Motomura+LUCUA+Osaka" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=牛かつもと村%20LUCUA店" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="牛カツ" data-meal="午餐／晚餐"><b>GYUKATSU Kyoto Katsugyu Yodobashi LINKS Umeda</b><span class="food-type">牛カツ</span><span class="meal-tag">午餐／晚餐</span><div class="metrics">⭐ Google Maps：5.0（90）　🍽 Tabelog：3.07（約73）　💴 ¥1,000–1,999</div><small>🚶 LINKS UMEDA 8F</small><p>預算友善；購物中途用餐。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=GYUKATSU+Kyoto+Katsugyu+Yodobashi+LINKS+Umeda" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=GYUKATSU%20Kyoto%20Katsugyu%20Yodobashi%20LINKS%20Umeda" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="咖啡" data-meal="早餐／咖啡"><b>梅田珈琲館YC</b><span class="food-type">咖啡</span><span class="meal-tag">早餐／咖啡</span><div class="metrics">⭐ Google Maps：3.4（17）　🍽 Tabelog：未確認　💴 ¥1,000以下</div><small>🚶 新梅田食道街</small><p>07:00起；昭和喫茶早餐。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Umeda+Coffeehouse+YC" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=梅田珈琲館YC" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="咖啡" data-meal="早餐／咖啡"><b>Sunshine</b><span class="food-type">咖啡</span><span class="meal-tag">早餐／咖啡</span><div class="metrics">⭐ Google Maps：3.9（35）　🍽 Tabelog：未確認　💴 ¥1,000以下</div><small>🚶 大阪站前第3大樓 B2</small><p>復古喫茶；適合早餐。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Sunshine+Osaka+Station+3+Building" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Sunshine%20Osaka%20Station%203%20Building" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="咖啡" data-meal="早餐／咖啡"><b>Blue Bottle Coffee Umeda Chayamachi</b><span class="food-type">咖啡</span><span class="meal-tag">早餐／咖啡</span><div class="metrics">⭐ Google Maps：4.3（1,208）　🍽 Tabelog：未確認　💴 ¥1,000–2,000</div><small>🚶 茶屋町／阪急側</small><p>08:00起；適合阪急／HEP FIVE 行程。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Blue+Bottle+Coffee+Umeda+Chayamachi" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=Blue%20Bottle%20Coffee%20Umeda%20Chayamachi" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="甜點" data-meal="午餐"><b>りくろーおじさんの店 大丸梅田店</b><span class="food-type">甜點</span><span class="meal-tag">伴手禮／甜點</span><div class="metrics">⭐ Google Maps：4.3（184）　🍽 Tabelog：未確認　💴 低預算</div><small>🚶 大丸梅田 B1</small><p>起司蛋糕；適合回程伴手禮。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=Rikuro+Ojisan+Daimaru+Umeda" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=りくろーおじさんの店%20大丸梅田店" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="甜點" data-meal="早餐／咖啡"><b>grenier Umeda</b><span class="food-type">甜點</span><span class="meal-tag">甜點／咖啡</span><div class="metrics">⭐ Google Maps：4.5（973）　🍽 Tabelog：未確認　💴 未確認</div><small>🚶 阪急Grand Building 1F</small><p>法式風格甜點；適合下午。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=grenier+Umeda+Osaka" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=grenier%20Umeda" target="_blank" rel="noopener">T 食べログ</a></article>
+<article class="food-card" data-a="梅田" data-t="甜點" data-meal="早餐／咖啡"><b>CHOCOLATIER PALET D'OR</b><span class="food-type">甜點</span><span class="meal-tag">甜點／咖啡</span><div class="metrics">⭐ Google Maps：4.5（29）　🍽 Tabelog：未確認　💴 偏高</div><small>🚶 HERBIS PLAZA ENT 4F</small><p>巧克力／甜點咖啡。</p><a class="tabe-link" href="https://www.google.com/maps/search/?api=1&query=CHOCOLATIER+PALET+DOR+Osaka" target="_blank" rel="noopener">📍 Google Maps</a> <a class="tabe-link" href="https://tabelog.com/rstLst/?vs=1&sa=CHOCOLATIER%20PALET%20D%27OR" target="_blank" rel="noopener">T 食べログ</a></article>
+>
