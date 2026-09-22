@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>大阪 食べログ百名店｜難波・心斎橋・梅田</title>
+<style>
+:root {
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --text: #1c1c1e;
+  --muted: #8e8e93;
+  --accent: #007aff;
+  --green: #34c759;
+  --orange: #ff9500;
+  --gray: #8e8e93;
+  --border: #e5e5ea;
+  --radius: 14px;
+  --shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans TC", "PingFang TC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.45;
+  padding-bottom: 60px;
+  -webkit-font-smoothing: antialiased;
+}
+header {
+  background: linear-gradient(145deg, #0f0f1a 0%, #1a2744 60%, #0d3b66 100%);
+  color: #fff;
+  padding: 20px 16px 16px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+}
+header h1 { font-size: 1.25rem; font-weight: 700; }
+header p { font-size: 0.78rem; opacity: 0.8; margin-top: 3px; }
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 12px 12px 0;
+  background: var(--bg);
+  position: sticky;
+  top: 70px;
+  z-index: 90;
+}
+.tab {
+  flex: 1;
+  padding: 11px 8px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.2s;
+}
+.tab.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(0,122,255,0.35);
+}
+.tab .count {
+  display: inline-block;
+  background: rgba(0,0,0,0.07);
+  border-radius: 20px;
+  padding: 1px 6px;
+  font-size: 0.72rem;
+  margin-left: 3px;
+}
+.tab.active .count { background: rgba(255,255,255,0.28); }
+.search-wrap { padding: 10px 12px 4px; }
+.search-wrap input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background: #fff;
+  outline: none;
+}
+.search-wrap input:focus { border-color: var(--accent); }
+.section { display: none; padding: 8px 12px 20px; }
+.section.active { display: block; }
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px 14px 12px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.3;
+  flex: 1;
+}
+.score-badge {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 9px;
+  color: #fff;
+  min-width: 48px;
+  text-align: center;
+}
+.score-badge.high { background: var(--green); }
+.score-badge.mid { background: var(--orange); }
+.score-badge.low { background: var(--gray); }
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.tag {
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+.tag.cat { background: #e8f0fe; color: #1967d2; }
+.tag.hyaku { background: #fff3e0; color: #e65100; }
+.intro {
+  font-size: 0.82rem;
+  color: #555;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.info-grid .full { grid-column: 1 / -1; }
+.note-box {
+  font-size: 0.78rem;
+  color: #666;
+  background: #f8f8fa;
+  padding: 7px 9px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border-left: 3px solid var(--accent);
+}
+.gmap-hint {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+}
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 6px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-maps { background: #e8f5e9; color: #2e7d32; }
+.btn-tabelog { background: #fff3e0; color: #e65100; }
+.footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+@media (min-width: 640px) {
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .card { margin-bottom: 0; }
+}
+@media (min-width: 960px) {
+  .cards-grid { grid-template-columns: repeat(3, 1fr); }
+  .container { max-width: 1080px; margin: 0 auto; }
+  header h1 { font-size: 1.45rem; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>🍜 大阪 食べログ百名店</h1>
+  <p>難波・心斎橋・梅田 ｜ 2024年以降選出 ・ 共 105 家</p>
+</header>
+<div class="container">
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-area="難波" onclick="switchTab('難波')">難波<span class="count">19</span></button>
+    <button class="tab" data-area="心斎橋" onclick="switchTab('心斎橋')">心斎橋<span class="count">33</span></button>
+    <button class="tab" data-area="梅田" onclick="switchTab('梅田')">梅田<span class="count">53</span></button>
+  </div>
+  <div class="search-wrap">
+    <input type="search" id="search" placeholder="搜尋店名、類別..." oninput="filterCards()" enterkeyhint="search">
+  </div>
+  <div class="section active" id="sec-難波">
+    <div class="cards-grid">
+      <div class="card" data-name="麺屋 丈六 なんば店" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">麺屋 丈六 なんば店</div>
+          <div class="score-badge high">3.73</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於難波一帶，最近車站：難波（南海）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 難波（南海）／近鉄日本橋／日本橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BA%BA%E5%B1%8B%20%E4%B8%88%E5%85%AD%20%E3%81%AA%E3%82%93%E3%81%B0%E5%BA%97%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27084754/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="三国亭" data-cat="中華（餃子）">
+        <div class="card-top">
+          <div class="card-title">三国亭</div>
+          <div class="score-badge high">3.73</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">中華（餃子）</span>
+          <span class="tag hyaku">中国料理 百名店 2026</span>
+        </div>
+        <div class="intro">中国料理 百名店 2026選出店，主打中華（餃子），位於難波一帶，最近車站：日本橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 日本橋／近鉄日本橋／長堀橋</span>
+          <span>🌙 晚餐 ¥3,000～3,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%89%E5%9B%BD%E4%BA%AD%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27001443/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="福太郎 本店" data-cat="大阪燒">
+        <div class="card-top">
+          <div class="card-title">福太郎 本店</div>
+          <div class="score-badge high">3.72</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">大阪燒</span>
+          <span class="tag hyaku">お好み焼き 百名店 2025</span>
+        </div>
+        <div class="intro">お好み焼き 百名店 2025選出店，主打大阪燒，位於難波一帶，最近車站：近鉄日本橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 近鉄日本橋／日本橋／難波（南海）</span>
+          <span>🌙 晚餐 ¥2,000～2,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">地址取自食べログ整理頁</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E5%8D%83%E6%97%A5%E5%89%8D2-3-17%20%E7%A6%8F%E5%A4%AA%E9%83%8E%20%E6%9C%AC%E5%BA%97" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27002665/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="クレープリー・アルション" data-cat="甜點（可麗餅）">
+        <div class="card-top">
+          <div class="card-title">クレープリー・アルション</div>
+          <div class="score-badge high">3.72</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">甜點（可麗餅）</span>
+          <span class="tag hyaku">スイーツ 百名店 2026</span>
+        </div>
+        <div class="intro">スイーツ 百名店 2026選出店，主打甜點（可麗餅），位於難波一帶，最近車站：なんば（大阪メトロ）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 なんば（大阪メトロ）／大阪難波／日本橋</span>
+          <span>🌙 晚餐 ¥2,000～2,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AF%E3%83%AC%E3%83%BC%E3%83%97%E3%83%AA%E3%83%BC%E3%83%BB%E3%82%A2%E3%83%AB%E3%82%B7%E3%83%A7%E3%83%B3%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27003897/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="千とせ 本店" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">千とせ 本店</div>
+          <div class="score-badge high">3.72</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於難波一帶，最近車站：難波（南海）。 名物：肉吸い（口コミ）</div>
+        <div class="info-grid">
+          <span class="full">🚉 難波（南海）／近鉄日本橋／日本橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">名物：肉吸い（口コミ）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8D%83%E3%81%A8%E3%81%9B%20%E6%9C%AC%E5%BA%97%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27002763/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="なにわ 麺次郎" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">なにわ 麺次郎</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於難波一帶，最近車站：大阪難波。</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪難波／なんば（大阪メトロ）／JR難波</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%AA%E3%81%AB%E3%82%8F%20%E9%BA%BA%E6%AC%A1%E9%83%8E%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27112089/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="麺のようじ" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">麺のようじ</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於難波一帶，最近車站：日本橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 日本橋／近鉄日本橋／谷町九丁目</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BA%BA%E3%81%AE%E3%82%88%E3%81%86%E3%81%98%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27072765/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="サロン・ド・テ・アルション 法善寺本店" data-cat="甜點（蛋糕）">
+        <div class="card-top">
+          <div class="card-title">サロン・ド・テ・アルション 法善寺本店</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">甜點（蛋糕）</span>
+          <span class="tag hyaku">スイーツ 百名店 2026</span>
+        </div>
+        <div class="intro">スイーツ 百名店 2026選出店，主打甜點（蛋糕），位於難波一帶，最近車站：なんば（大阪メトロ）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 なんば（大阪メトロ）／大阪難波／日本橋</span>
+          <span>🌙 晚餐 ¥2,000～2,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%89%E3%83%BB%E3%83%86%E3%83%BB%E3%82%A2%E3%83%AB%E3%82%B7%E3%83%A7%E3%83%B3%20%E6%B3%95%E5%96%84%E5%AF%BA%E6%9C%AC%E5%BA%97%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27001538/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="友愛亭" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">友愛亭</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於難波一帶，最近車站：恵美須町。 位於恵美須町一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 恵美須町／難波（南海）／今宮戎</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">位於恵美須町一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%8F%8B%E6%84%9B%E4%BA%AD%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27079226/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ソウル" data-cat="燒肉">
+        <div class="card-top">
+          <div class="card-title">ソウル</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">燒肉</span>
+          <span class="tag hyaku">焼肉 百名店 2025</span>
+        </div>
+        <div class="intro">焼肉 百名店 2025選出店，主打燒肉，位於難波一帶，最近車站：JR難波。</div>
+        <div class="info-grid">
+          <span class="full">🚉 JR難波／難波（南海）／大阪難波</span>
+          <span>🌙 晚餐 ¥4,000～4,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%BD%E3%82%A6%E3%83%AB%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27003344/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="酒肴哲" data-cat="居酒屋">
+        <div class="card-top">
+          <div class="card-title">酒肴哲</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">居酒屋</span>
+          <span class="tag hyaku">居酒屋 百名店 2025</span>
+        </div>
+        <div class="intro">居酒屋 百名店 2025選出店，主打居酒屋，位於難波一帶，最近車站：近鉄日本橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 近鉄日本橋／日本橋／難波（南海）</span>
+          <span>🌙 晚餐 ¥6,000～7,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%85%92%E8%82%B4%E5%93%B2%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27050565/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="き田たけうどん" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">き田たけうどん</div>
+          <div class="score-badge mid">3.69</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於難波一帶，最近車站：難波（南海）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 難波（南海）／近鉄日本橋／日本橋</span>
+          <span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%8D%E7%94%B0%E3%81%9F%E3%81%91%E3%81%86%E3%81%A9%E3%82%93%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27103359/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="重亭" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">重亭</div>
+          <div class="score-badge mid">3.67</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於難波一帶，最近車站：なんば（大阪メトロ）。 名物：漢堡排（口コミ）</div>
+        <div class="info-grid">
+          <span class="full">🚉 なんば（大阪メトロ）／大阪難波／難波（南海）</span>
+          <span>🌙 晚餐 ¥2,000～2,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">名物：漢堡排（口コミ）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%87%8D%E4%BA%AD%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27001308/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="天政" data-cat="烏龍麵／蕎麥麵">
+        <div class="card-top">
+          <div class="card-title">天政</div>
+          <div class="score-badge mid">3.67</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵／蕎麥麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵／蕎麥麵，位於難波一帶，最近車站：なんば（大阪メトロ）。 地址取自口コミ；名物：かやくご飯（炊飯）</div>
+        <div class="info-grid">
+          <span class="full">🚉 なんば（大阪メトロ）／大阪難波／難波（南海）</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">地址取自口コミ；名物：かやくご飯（炊飯）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A9%E6%94%BF%20%E3%81%86%E3%81%A9%E3%82%93%20%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%9B%A3%E6%B3%A23-3-3" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27024361/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="アラビヤコーヒー" data-cat="咖啡廳（喫茶店）">
+        <div class="card-top">
+          <div class="card-title">アラビヤコーヒー</div>
+          <div class="score-badge mid">3.67</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（喫茶店）</span>
+          <span class="tag hyaku">喫茶店 百名店 2026</span>
+        </div>
+        <div class="intro">喫茶店 百名店 2026選出店，主打咖啡廳（喫茶店），位於難波一帶，最近車站：なんば（大阪メトロ）。 口コミ：阿拉比亞三明治</div>
+        <div class="info-grid">
+          <span class="full">🚉 なんば（大阪メトロ）／大阪難波／日本橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">口コミ：阿拉比亞三明治</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%A9%E3%83%93%E3%83%A4%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27001511/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ダマン リュミエール 高島屋大阪店" data-cat="咖啡廳（紅茶）">
+        <div class="card-top">
+          <div class="card-title">ダマン リュミエール 高島屋大阪店</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（紅茶）</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳（紅茶），位於難波一帶，最近車站：難波（南海）。 在髙島屋大阪店內</div>
+        <div class="info-grid">
+          <span class="full">🚉 難波（南海）／なんば（大阪メトロ）／大阪難波</span>
+          <span>🌙 晚餐 ¥2,000～2,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="note-box">在髙島屋大阪店內</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%80%E3%83%9E%E3%83%B3%20%E3%83%AA%E3%83%A5%E3%83%9F%E3%82%A8%E3%83%BC%E3%83%AB%20%E9%AB%98%E5%B3%B6%E5%B1%8B%E5%A4%A7%E9%98%AA%E5%BA%97%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27055738/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="純喫茶 アメリカン" data-cat="咖啡廳（喫茶店）">
+        <div class="card-top">
+          <div class="card-title">純喫茶 アメリカン</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（喫茶店）</span>
+          <span class="tag hyaku">喫茶店 百名店 2026</span>
+        </div>
+        <div class="intro">喫茶店 百名店 2026選出店，主打咖啡廳（喫茶店），位於難波一帶，最近車站：なんば（大阪メトロ）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 なんば（大阪メトロ）／日本橋／近鉄日本橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%B4%94%E5%96%AB%E8%8C%B6%20%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%83%B3%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27005758/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="大黒" data-cat="食堂（炊飯定食）">
+        <div class="card-top">
+          <div class="card-title">大黒</div>
+          <div class="score-badge mid">3.58</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">食堂（炊飯定食）</span>
+          <span class="tag hyaku">食堂 百名店 2026</span>
+        </div>
+        <div class="intro">食堂 百名店 2026選出店，主打食堂（炊飯定食），位於難波一帶，最近車站：なんば（大阪メトロ）。 口コミ：名物かやくご飯</div>
+        <div class="info-grid">
+          <span class="full">🚉 なんば（大阪メトロ）／大阪難波／JR難波</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：名物かやくご飯</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%BB%92%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27001293/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="粉もん處 光圀 裏なんば店" data-cat="大阪燒">
+        <div class="card-top">
+          <div class="card-title">粉もん處 光圀 裏なんば店</div>
+          <div class="score-badge low">3.46</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">大阪燒</span>
+          <span class="tag hyaku">お好み焼き 百名店 2025</span>
+        </div>
+        <div class="intro">お好み焼き 百名店 2025選出店，主打大阪燒，位於難波一帶，最近車站：近鉄日本橋。 裏なんば（千日前）</div>
+        <div class="info-grid">
+          <span class="full">🚉 近鉄日本橋／日本橋／難波（南海）</span>
+          <span>🌙 晚餐 ¥5,000～5,999</span><span>☀️ 午餐 ¥3,000～3,999</span>
+        </div>
+        <div class="note-box">裏なんば（千日前）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%B2%89%E3%82%82%E3%82%93%E8%99%95%20%E5%85%89%E5%9C%80%20%E8%A3%8F%E3%81%AA%E3%82%93%E3%81%B0%E5%BA%97%20%E9%9B%A3%E6%B3%A2%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270202/27139866/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="sec-心斎橋">
+    <div class="cards-grid">
+      <div class="card" data-name="橋本屋" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">橋本屋</div>
+          <div class="score-badge high">4.03</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：長堀橋。 僅午餐營業（食べログ晚餐預算未標）</div>
+        <div class="info-grid">
+          <span class="full">🚉 長堀橋／心斎橋／堺筋本町</span>
+          <span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">僅午餐營業（食べログ晚餐預算未標）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%A9%8B%E6%9C%AC%E5%B1%8B%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27107555/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="とんかつ 康四郎" data-cat="豬排">
+        <div class="card-top">
+          <div class="card-title">とんかつ 康四郎</div>
+          <div class="score-badge high">3.73</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">豬排</span>
+          <span class="tag hyaku">とんかつ 百名店 2026</span>
+        </div>
+        <div class="intro">とんかつ 百名店 2026選出店，主打豬排，位於心斎橋一帶，最近車站：心斎橋。 晚餐預算接近上限</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋／長堀橋／堺筋本町</span>
+          <span>🌙 晚餐 ¥8,000～9,999</span><span>☀️ 午餐 ¥4,000～4,999</span>
+        </div>
+        <div class="note-box">晚餐預算接近上限</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%A8%E3%82%93%E3%81%8B%E3%81%A4%20%E5%BA%B7%E5%9B%9B%E9%83%8E%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27134224/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="いかれたヌードル フィッシュトンズ" data-cat="沾麵">
+        <div class="card-top">
+          <div class="card-title">いかれたヌードル フィッシュトンズ</div>
+          <div class="score-badge high">3.72</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">沾麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打沾麵，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／心斎橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%84%E3%81%8B%E3%82%8C%E3%81%9F%E3%83%8C%E3%83%BC%E3%83%89%E3%83%AB%20%E3%83%95%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%83%88%E3%83%B3%E3%82%BA%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27101904/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="le premier cafe 心斎橋本店" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">Le Premier Cafe 心斎橋本店</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">喫茶店 百名店 2026</span>
+        </div>
+        <div class="intro">喫茶店 百名店 2026選出店，主打咖啡廳，位於心斎橋一帶，最近車站：心斎橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋／長堀橋／四ツ橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=Le%20Premier%20Cafe%20%E5%BF%83%E6%96%8E%E6%A9%8B%E6%9C%AC%E5%BA%97%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27004529/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ル・ピノー 北堀江本店" data-cat="甜點（蛋糕）">
+        <div class="card-top">
+          <div class="card-title">ル・ピノー 北堀江本店</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">甜點（蛋糕）</span>
+          <span class="tag hyaku">スイーツ 百名店 2026</span>
+        </div>
+        <div class="intro">スイーツ 百名店 2026選出店，主打甜點（蛋糕），位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／西長堀</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%AB%E3%83%BB%E3%83%94%E3%83%8E%E3%83%BC%20%E5%8C%97%E5%A0%80%E6%B1%9F%E6%9C%AC%E5%BA%97%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27001030/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ダンケ 心斎橋" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">ダンケ 心斎橋</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">喫茶店 百名店 2026</span>
+        </div>
+        <div class="intro">喫茶店 百名店 2026選出店，主打咖啡廳，位於心斎橋一帶，最近車站：心斎橋。 口コミ：戚風蛋糕套餐</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋／長堀橋／四ツ橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：戚風蛋糕套餐</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%80%E3%83%B3%E3%82%B1%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27053278/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="山斗" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">山斗</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／本町</span>
+          <span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%B1%B1%E6%96%97%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27040461/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="パティスリー アクイユ" data-cat="甜點（蛋糕）">
+        <div class="card-top">
+          <div class="card-title">パティスリー アクイユ</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">甜點（蛋糕）</span>
+          <span class="tag hyaku">スイーツ 百名店 2026</span>
+        </div>
+        <div class="intro">スイーツ 百名店 2026選出店，主打甜點（蛋糕），位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／心斎橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%91%E3%83%86%E3%82%A3%E3%82%B9%E3%83%AA%E3%83%BC%20%E3%82%A2%E3%82%AF%E3%82%A4%E3%83%A6%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27079456/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="グリルばらの木" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">グリルばらの木</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：心斎橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋</span>
+          <span>🌙 晚餐 ¥4,000～4,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="note-box">地址取自食べログ整理頁；口コミ：老牌洋食，蛋包飯發祥店之一，需脫鞋座敷</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%9D%B1%E5%BF%83%E6%96%8E%E6%A9%8B1-16-14%20%E3%81%B0%E3%82%89%E3%81%AE%E6%9C%A8%E3%83%93%E3%83%AB1F%20%E3%82%B0%E3%83%AA%E3%83%AB%E3%81%B0%E3%82%89%E3%81%AE%E6%9C%A8" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27000886/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ラヴィリンス" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">ラヴィリンス</div>
+          <div class="score-badge mid">3.69</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：西大橋。 僅午餐在預算內；晚餐超過 ¥10,000</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／心斎橋</span>
+          <span>🌙 晚餐 ¥10,000～14,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">僅午餐在預算內；晚餐超過 ¥10,000</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%A9%E3%83%B4%E3%82%A3%E3%83%AA%E3%83%B3%E3%82%B9%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27051602/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="麺匠至誠" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">麺匠至誠</div>
+          <div class="score-badge mid">3.68</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於心斎橋一帶，最近車站：四ツ橋。 口コミ：蛤蜊高湯鹽味拉麵</div>
+        <div class="info-grid">
+          <span class="full">🚉 四ツ橋／西大橋／心斎橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">口コミ：蛤蜊高湯鹽味拉麵</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BA%BA%E5%8C%A0%E8%87%B3%E8%AA%A0%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27085783/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="辛激屋" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">辛激屋</div>
+          <div class="score-badge mid">3.68</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：長堀橋。 口コミ：黑咖哩</div>
+        <div class="info-grid">
+          <span class="full">🚉 長堀橋／心斎橋／松屋町</span>
+          <span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：黑咖哩</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BE%9B%E6%BF%80%E5%B1%8B%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27011492/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="御堂筋 ロッヂ" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">御堂筋 ロッヂ</div>
+          <div class="score-badge mid">3.67</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：心斎橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋</span>
+          <span>🌙 晚餐 ¥6,000～7,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%BE%A1%E5%A0%82%E7%AD%8B%20%E3%83%AD%E3%83%83%E3%83%82%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27059987/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="スパイスカリーて" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">スパイスカリーて</div>
+          <div class="score-badge mid">3.66</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：心斎橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋／長堀橋／本町</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B9%E3%83%91%E3%82%A4%E3%82%B9%E3%82%AB%E3%83%AA%E3%83%BC%E3%81%A6%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27094910/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ボタ" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">ボタ</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：長堀橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 長堀橋／心斎橋／松屋町</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">地址取自食べログ整理頁</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%9C%E3%82%BF%20%E3%82%AB%E3%83%AC%E3%83%BC%20%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E6%9D%B1%E5%BF%83%E6%96%8E%E6%A9%8B1-8-20" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27000588/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ボナボナ" data-cat="咖哩（印度）">
+        <div class="card-top">
+          <div class="card-title">ボナボナ</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩（印度）</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩（印度），位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／心斎橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%9C%E3%83%8A%E3%83%9C%E3%83%8A%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27005018/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="渡邊カリー 心斎橋店" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">渡邊カリー 心斎橋店</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：心斎橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋／本町／長堀橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B8%A1%E9%82%8A%E3%82%AB%E3%83%AA%E3%83%BC%20%E5%BF%83%E6%96%8E%E6%A9%8B%E5%BA%97%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27104341/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="お好み たまちゃん viva" data-cat="大阪燒">
+        <div class="card-top">
+          <div class="card-title">お好み たまちゃん viva</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">大阪燒</span>
+          <span class="tag hyaku">お好み焼き 百名店 2025</span>
+        </div>
+        <div class="intro">お好み焼き 百名店 2025選出店，主打大阪燒，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／西長堀</span>
+          <span>🌙 晚餐 ¥4,000～4,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%8A%E5%A5%BD%E3%81%BF%20%E3%81%9F%E3%81%BE%E3%81%A1%E3%82%83%E3%82%93%20viva%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27069514/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ヨバレヤ" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">ヨバレヤ</div>
+          <div class="score-badge mid">3.64</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／心斎橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%A8%E3%83%90%E3%83%AC%E3%83%A4%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27067687/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="cafe 婆沙羅 かえる堂" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">Cafe 婆沙羅 かえる堂</div>
+          <div class="score-badge mid">3.64</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／西長堀</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=Cafe%20%E5%A9%86%E6%B2%99%E7%BE%85%20%E3%81%8B%E3%81%88%E3%82%8B%E5%A0%82%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27003907/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="和レー屋 南船場ゴヤクラ" data-cat="咖哩（和風）">
+        <div class="card-top">
+          <div class="card-title">和レー屋 南船場ゴヤクラ</div>
+          <div class="score-badge mid">3.63</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩（和風）</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩（和風），位於心斎橋一帶，最近車站：松屋町。</div>
+        <div class="info-grid">
+          <span class="full">🚉 松屋町／長堀橋／堺筋本町</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%92%8C%E3%83%AC%E3%83%BC%E5%B1%8B%20%E5%8D%97%E8%88%B9%E5%A0%B4%E3%82%B4%E3%83%A4%E3%82%AF%E3%83%A9%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27015562/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="洋食 matsushita" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">洋食 Matsushita</div>
+          <div class="score-badge mid">3.63</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：長堀橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 長堀橋</span>
+          <span>🌙 晚餐 ¥10,000～14,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B4%8B%E9%A3%9F%20Matsushita%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27099803/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="洋食 手嶋" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">洋食 手嶋</div>
+          <div class="score-badge mid">3.63</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋</span>
+          <span>🌙 晚餐 ¥6,000～7,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B4%8B%E9%A3%9F%20%E6%89%8B%E5%B6%8B%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27113674/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="wad omotenashi cafe" data-cat="咖啡廳（煎茶）">
+        <div class="card-top">
+          <div class="card-title">wad omotenashi cafe</div>
+          <div class="score-badge mid">3.63</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（煎茶）</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳（煎茶），位於心斎橋一帶，最近車站：心斎橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋／四ツ橋／本町</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=wad%20omotenashi%20cafe%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27088707/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="カレー コンドル" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">カレー コンドル</div>
+          <div class="score-badge mid">3.62</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／心斎橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AB%E3%83%AC%E3%83%BC%20%E3%82%B3%E3%83%B3%E3%83%89%E3%83%AB%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27059870/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="らくしゅみ" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">らくしゅみ</div>
+          <div class="score-badge mid">3.62</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：西大橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋／四ツ橋／心斎橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%89%E3%81%8F%E3%81%97%E3%82%85%E3%81%BF%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27004574/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="コイチカレー" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">コイチカレー</div>
+          <div class="score-badge mid">3.61</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於心斎橋一帶，最近車站：長堀橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 長堀橋／心斎橋／松屋町</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B3%E3%82%A4%E3%83%81%E3%82%AB%E3%83%AC%E3%83%BC%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27129579/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="モンディアルカフェ328" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">モンディアルカフェ328</div>
+          <div class="score-badge mid">3.61</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳，位於心斎橋一帶，最近車站：四ツ橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 四ツ橋／西大橋／心斎橋</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%A2%E3%83%B3%E3%83%87%E3%82%A3%E3%82%A2%E3%83%AB%E3%82%AB%E3%83%95%E3%82%A7328%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27082472/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ムグニ" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">ムグニ</div>
+          <div class="score-badge mid">3.59</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：大阪難波。 主要以ランチ為主</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪難波</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">主要以ランチ為主</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%A0%E3%82%B0%E3%83%8B%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27014566/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="四ツ橋カフェ" data-cat="洋食（咖啡廳）">
+        <div class="card-top">
+          <div class="card-title">四ツ橋カフェ</div>
+          <div class="score-badge mid">3.59</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食（咖啡廳）</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食（咖啡廳），位於心斎橋一帶，最近車站：西大橋。 幾乎只營業午餐</div>
+        <div class="info-grid">
+          <span class="full">🚉 西大橋</span>
+          <span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">幾乎只營業午餐</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%9B%9B%E3%83%84%E6%A9%8B%E3%82%AB%E3%83%95%E3%82%A7%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27070293/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="れすとらん 源ちゃん" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">れすとらん 源ちゃん</div>
+          <div class="score-badge mid">3.51</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：長堀橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 長堀橋</span>
+          <span>🌙 晚餐 ¥10,000～14,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%8C%E3%81%99%E3%81%A8%E3%82%89%E3%82%93%20%E6%BA%90%E3%81%A1%E3%82%83%E3%82%93%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27003946/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="乃呂" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">乃呂</div>
+          <div class="score-badge mid">3.51</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：長堀橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 長堀橋</span>
+          <span>🌙 晚餐 ¥10,000～14,999</span><span>☀️ 午餐 ¥3,000～3,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B9%83%E5%91%82%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27000884/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="明治軒" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">明治軒</div>
+          <div class="score-badge low">3.49</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於心斎橋一帶，最近車站：心斎橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 心斎橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%8E%E6%B2%BB%E8%BB%92%20%E5%BF%83%E6%96%8E%E6%A9%8B%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270201/27001834/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" id="sec-梅田">
+    <div class="cards-grid">
+      <div class="card" data-name="洋食 泉" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">洋食 泉</div>
+          <div class="score-badge high">3.97</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於梅田一帶，最近車站：大江橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 大江橋</span>
+          <span>🌙 晚餐 ¥8,000～9,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B4%8B%E9%A3%9F%20%E6%B3%89%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27118018/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="麦と麺助" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">麦と麺助</div>
+          <div class="score-badge high">3.84</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於梅田一帶，最近車站：中津（大阪メトロ）。 位於中津一帶（食べログ歸在梅田區）</div>
+        <div class="info-grid">
+          <span class="full">🚉 中津（大阪メトロ）／中津（阪急）／中崎町</span>
+          <span>🌙 晚餐 ¥3,000～3,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="note-box">位於中津一帶（食べログ歸在梅田區）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%BA%A6%E3%81%A8%E9%BA%BA%E5%8A%A9%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27104891/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="botani：curry 梅田店" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">BOTANI：CURRY 梅田店</div>
+          <div class="score-badge high">3.8</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於梅田一帶，最近車站：大阪梅田（阪神）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪神）／東梅田／梅田</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=BOTANI%EF%BC%9ACURRY%20%E6%A2%85%E7%94%B0%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27125687/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="たけうちうどん店" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">たけうちうどん店</div>
+          <div class="score-badge high">3.78</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於梅田一帶，最近車站：中津（大阪メトロ）。 位於中津一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中津（大阪メトロ）／中津（阪急）／中崎町</span>
+          <span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">位於中津一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%9F%E3%81%91%E3%81%86%E3%81%A1%E3%81%86%E3%81%A9%E3%82%93%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27006684/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="うどん棒 大阪本店" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">うどん棒 大阪本店</div>
+          <div class="score-badge high">3.78</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於梅田一帶，最近車站：東梅田。 常有期間限定烏龍麵（口コミ）</div>
+        <div class="info-grid">
+          <span class="full">🚉 東梅田／北新地／大阪梅田（阪神）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">常有期間限定烏龍麵（口コミ）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%86%E3%81%A9%E3%82%93%E6%A3%92%20%E5%A4%A7%E9%98%AA%E6%9C%AC%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27003766/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="うどん屋 きすけ" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">うどん屋 きすけ</div>
+          <div class="score-badge high">3.76</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於梅田一帶，最近車站：中崎町。 位於中崎町一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中崎町／中津（大阪メトロ）／大阪梅田（阪急）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">位於中崎町一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%86%E3%81%A9%E3%82%93%E5%B1%8B%20%E3%81%8D%E3%81%99%E3%81%91%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27015342/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ブーランジェリー ブルディガラ 大阪店" data-cat="麵包">
+        <div class="card-top">
+          <div class="card-title">ブーランジェリー ブルディガラ 大阪店</div>
+          <div class="score-badge high">3.76</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">麵包</span>
+          <span class="tag hyaku">パン 百名店 2026</span>
+        </div>
+        <div class="intro">パン 百名店 2026選出店，主打麵包，位於梅田一帶，最近車站：西梅田。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西梅田</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">ハービスプラザ B2F；口コミ約1560人</div>
+        <div class="gmap-hint">🍽️ 食べログ口コミ約 約1560 人　｜　📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%96%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B8%E3%82%A7%E3%83%AA%E3%83%BC%20%E3%83%96%E3%83%AB%E3%83%87%E3%82%A3%E3%82%AC%E3%83%A9%20%E5%A4%A7%E9%98%AA%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27009000/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="踊るうどん 梅田店" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">踊るうどん 梅田店</div>
+          <div class="score-badge high">3.76</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於梅田一帶，最近車站：北新地。 午餐預算未標，僅有晚餐 ～¥999</div>
+        <div class="info-grid">
+          <span class="full">🚉 北新地／東梅田／西梅田</span>
+          <span>🌙 晚餐 ～¥999</span>
+        </div>
+        <div class="note-box">午餐預算未標，僅有晚餐 ～¥999</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%B8%8A%E3%82%8B%E3%81%86%E3%81%A9%E3%82%93%20%E6%A2%85%E7%94%B0%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27015312/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="梅田 釜たけうどん" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">梅田 釜たけうどん</div>
+          <div class="score-badge high">3.76</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於梅田一帶，最近車站：梅田。 口コミ：竹輪天＋玉子天 醬油烏龍（常排隊）</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田／大阪梅田（阪神）／大阪梅田（阪急）</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">口コミ：竹輪天＋玉子天 醬油烏龍（常排隊）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%A2%85%E7%94%B0%20%E9%87%9C%E3%81%9F%E3%81%91%E3%81%86%E3%81%A9%E3%82%93%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27052204/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="梅田 ミックスジュース 本店" data-cat="果汁吧（綜合果汁）">
+        <div class="card-top">
+          <div class="card-title">梅田 ミックスジュース 本店</div>
+          <div class="score-badge high">3.76</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">果汁吧（綜合果汁）</span>
+          <span class="tag hyaku">スイーツ 百名店 2026</span>
+        </div>
+        <div class="intro">スイーツ 百名店 2026選出店，主打果汁吧（綜合果汁），位於梅田一帶，最近車站：大阪梅田（阪神）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪神）／東梅田／梅田</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%A2%85%E7%94%B0%20%E3%83%9F%E3%83%83%E3%82%AF%E3%82%B9%E3%82%B8%E3%83%A5%E3%83%BC%E3%82%B9%20%E6%9C%AC%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27013772/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="らーめん弥七" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">らーめん弥七</div>
+          <div class="score-badge high">3.74</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於梅田一帶，最近車站：中津（大阪メトロ）。 位於中津一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中津（大阪メトロ）／中津（阪急）／中崎町</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">位於中津一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%89%E3%83%BC%E3%82%81%E3%82%93%E5%BC%A5%E4%B8%83%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27003232/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="うどん 兎麦 阪急三番街店" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">うどん 兎麦 阪急三番街店</div>
+          <div class="score-badge high">3.73</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於梅田一帶，最近車站：大阪梅田（阪急）。 阪急三番街內</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪急）／梅田／大阪</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">阪急三番街內</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%86%E3%81%A9%E3%82%93%20%E5%85%8E%E9%BA%A6%20%E9%98%AA%E6%80%A5%E4%B8%89%E7%95%AA%E8%A1%97%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%B8%82%20%E6%A2%85%E7%94%B0" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27002469/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="讃岐うどん 今雪" data-cat="烏龍麵">
+        <div class="card-top">
+          <div class="card-title">讃岐うどん 今雪</div>
+          <div class="score-badge high">3.72</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">烏龍麵</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打烏龍麵，位於梅田一帶，最近車站：扇町。 位於扇町／中崎町一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 扇町／中崎町／天満</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">位於扇町／中崎町一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%AE%83%E5%B2%90%E3%81%86%E3%81%A9%E3%82%93%20%E4%BB%8A%E9%9B%AA%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27067874/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="カンテグランデカレー サン広場店" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">カンテグランデカレー サン広場店</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於梅田一帶，最近車站：梅田。</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田／大阪梅田（阪急）／大阪梅田（阪神）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AB%E3%83%B3%E3%83%86%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%87%E3%82%AB%E3%83%AC%E3%83%BC%20%E3%82%B5%E3%83%B3%E5%BA%83%E5%A0%B4%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27091267/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="シナジー" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">シナジー</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於梅田一帶，最近車站：北新地。 口コミ：鰻魚蒲燒 keema 咖哩</div>
+        <div class="info-grid">
+          <span class="full">🚉 北新地／渡辺橋／大江橋</span>
+          <span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">口コミ：鰻魚蒲燒 keema 咖哩</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B7%E3%83%8A%E3%82%B8%E3%83%BC%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27074379/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="渡邊カリー 梅田本店" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">渡邊カリー 梅田本店</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於梅田一帶，最近車站：北新地。</div>
+        <div class="info-grid">
+          <span class="full">🚉 北新地／西梅田／渡辺橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%B8%A1%E9%82%8A%E3%82%AB%E3%83%AA%E3%83%BC%20%E6%A2%85%E7%94%B0%E6%9C%AC%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27091294/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="旧ヤム鐵道" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">旧ヤム鐵道</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於梅田一帶，最近車站：大阪。 口コミ：位於 LUCUA 1100 B2「バルチカ」內，常排隊</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪／梅田／大阪梅田（阪神）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：位於 LUCUA 1100 B2「バルチカ」內，常排隊</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%97%A7%E3%83%A4%E3%83%A0%E9%90%B5%E9%81%93%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27084538/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ル・ブーランジェ・ドゥ・モンジュ うめだ阪急店" data-cat="麵包">
+        <div class="card-top">
+          <div class="card-title">ル・ブーランジェ・ドゥ・モンジュ うめだ阪急店</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">麵包</span>
+          <span class="tag hyaku">パン 百名店 2026</span>
+        </div>
+        <div class="intro">パン 百名店 2026選出店，主打麵包，位於梅田一帶，最近車站：梅田。 阪急うめだ本店B2F</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">阪急うめだ本店B2F</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%AB%E3%83%BB%E3%83%96%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B8%E3%82%A7%E3%83%BB%E3%83%89%E3%82%A5%E3%83%BB%E3%83%A2%E3%83%B3%E3%82%B8%E3%83%A5%20%E3%81%86%E3%82%81%E3%81%A0%E9%98%AA%E6%80%A5%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27068669/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="野口次郎" data-cat="居酒屋">
+        <div class="card-top">
+          <div class="card-title">野口次郎</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">居酒屋</span>
+          <span class="tag hyaku">居酒屋 百名店 2025</span>
+        </div>
+        <div class="intro">居酒屋 百名店 2025選出店，主打居酒屋，位於梅田一帶，最近車站：渡辺橋。 完全予約制・會員制</div>
+        <div class="info-grid">
+          <span class="full">🚉 渡辺橋</span>
+          <span>🌙 晚餐 ¥20,000～29,999</span>
+        </div>
+        <div class="note-box">完全予約制・會員制</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%87%8E%E5%8F%A3%E6%AC%A1%E9%83%8E%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27129695/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="大阪麺哲" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">大阪麺哲</div>
+          <div class="score-badge high">3.71</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於梅田一帶，最近車站：東梅田。</div>
+        <div class="info-grid">
+          <span class="full">🚉 東梅田／大阪梅田（阪神）／梅田</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%98%AA%E9%BA%BA%E5%93%B2%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27080479/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="らーめん香澄 中崎町店" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">らーめん香澄 中崎町店</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於梅田一帶，最近車站：中崎町。 位於中崎町一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中崎町／天神橋筋六丁目／天満</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">位於中崎町一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%89%E3%83%BC%E3%82%81%E3%82%93%E9%A6%99%E6%BE%84%20%E4%B8%AD%E5%B4%8E%E7%94%BA%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27088923/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="自家焙煎珈琲工房 カフェ バーンホーフ 三番街店" data-cat="咖啡廳（喫茶店）">
+        <div class="card-top">
+          <div class="card-title">自家焙煎珈琲工房 カフェ バーンホーフ 三番街店</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（喫茶店）</span>
+          <span class="tag hyaku">喫茶店 百名店 2026</span>
+        </div>
+        <div class="intro">喫茶店 百名店 2026選出店，主打咖啡廳（喫茶店），位於梅田一帶，最近車站：大阪梅田（阪急）。 阪急三番街內</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪急）／梅田／大阪梅田（阪神）</span>
+          <span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">阪急三番街內</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%87%AA%E5%AE%B6%E7%84%99%E7%85%8E%E7%8F%88%E7%90%B2%E5%B7%A5%E6%88%BF%20%E3%82%AB%E3%83%95%E3%82%A7%20%E3%83%90%E3%83%BC%E3%83%B3%E3%83%9B%E3%83%BC%E3%83%95%20%E4%B8%89%E7%95%AA%E8%A1%97%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%B8%82%20%E6%A2%85%E7%94%B0" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27011966/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="馬鹿坊" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">馬鹿坊</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於梅田一帶，最近車站：天神橋筋六丁目。 位於天六一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 天神橋筋六丁目／中崎町／天満</span>
+          <span>🌙 晚餐 ¥5,000～5,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">位於天六一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%A6%AC%E9%B9%BF%E5%9D%8A%20%E5%A4%A7%E9%98%AA%E5%B8%82%20%E5%A4%A9%E7%A5%9E%E6%A9%8B%E7%AD%8B%E5%85%AD%E4%B8%81%E7%9B%AE%E9%A7%85" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27084317/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="京都 麺屋たけ井 阪急梅田店" data-cat="沾麵">
+        <div class="card-top">
+          <div class="card-title">京都 麺屋たけ井 阪急梅田店</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">沾麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打沾麵，位於梅田一帶，最近車站：大阪梅田（阪急）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪急）／梅田／大阪</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E9%83%BD%20%E9%BA%BA%E5%B1%8B%E3%81%9F%E3%81%91%E4%BA%95%20%E9%98%AA%E6%80%A5%E6%A2%85%E7%94%B0%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27092383/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="こころにあまい あんぱんや 梅田店" data-cat="麵包（紅豆麵包）">
+        <div class="card-top">
+          <div class="card-title">こころにあまい あんぱんや 梅田店</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">麵包（紅豆麵包）</span>
+          <span class="tag hyaku">パン 百名店 2026</span>
+        </div>
+        <div class="intro">パン 百名店 2026選出店，主打麵包（紅豆麵包），位於梅田一帶，最近車站：梅田。</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">新梅田食道街；口コミ約957人</div>
+        <div class="gmap-hint">🍽️ 食べログ口コミ約 約957 人　｜　📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%93%E3%81%93%E3%82%8D%E3%81%AB%E3%81%82%E3%81%BE%E3%81%84%20%E3%81%82%E3%82%93%E3%81%B1%E3%82%93%E3%82%84%20%E6%A2%85%E7%94%B0%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27010364/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="びんびや" data-cat="居酒屋">
+        <div class="card-top">
+          <div class="card-title">びんびや</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">居酒屋</span>
+          <span class="tag hyaku">居酒屋 百名店 2025</span>
+        </div>
+        <div class="intro">居酒屋 百名店 2025選出店，主打居酒屋，位於梅田一帶，最近車站：大江橋。 無午餐</div>
+        <div class="info-grid">
+          <span class="full">🚉 大江橋</span>
+          <span>🌙 晚餐 ¥6,000～7,999</span>
+        </div>
+        <div class="note-box">無午餐</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%B3%E3%82%93%E3%81%B3%E3%82%84%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27013283/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="大阪浪花家" data-cat="甜點（鯛魚燒）">
+        <div class="card-top">
+          <div class="card-title">大阪浪花家</div>
+          <div class="score-badge high">3.7</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">甜點（鯛魚燒）</span>
+          <span class="tag hyaku">和菓子・甘味処 百名店 2026</span>
+        </div>
+        <div class="intro">和菓子・甘味処 百名店 2026選出店，主打甜點（鯛魚燒），位於梅田一帶，最近車站：中崎町。 位於中崎町一帶；夏季需預約（口コミ）</div>
+        <div class="info-grid">
+          <span class="full">🚉 中崎町／天神橋筋六丁目／天満</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">位於中崎町一帶；夏季需預約（口コミ）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%98%AA%E6%B5%AA%E8%8A%B1%E5%AE%B6%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27069919/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="塩々" data-cat="拉麵（鹽味）">
+        <div class="card-top">
+          <div class="card-title">塩々</div>
+          <div class="score-badge mid">3.69</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵（鹽味）</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵（鹽味），位於梅田一帶，最近車站：中之島。 位於中之島／新福島一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中之島／新福島／玉川</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">位於中之島／新福島一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A1%A9%E3%80%85%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27100567/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ロンドンティールーム 堂島本店" data-cat="咖啡廳（英式茶）">
+        <div class="card-top">
+          <div class="card-title">ロンドンティールーム 堂島本店</div>
+          <div class="score-badge mid">3.69</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（英式茶）</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳（英式茶），位於梅田一帶，最近車站：北新地。</div>
+        <div class="info-grid">
+          <span class="full">🚉 北新地／西梅田／渡辺橋</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%AD%E3%83%B3%E3%83%89%E3%83%B3%E3%83%86%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%BC%E3%83%A0%20%E5%A0%82%E5%B3%B6%E6%9C%AC%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27002171/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="廣東料理 民生 ヒルトンプラザウエスト店" data-cat="中華（廣東菜）">
+        <div class="card-top">
+          <div class="card-title">廣東料理 民生 ヒルトンプラザウエスト店</div>
+          <div class="score-badge mid">3.68</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">中華（廣東菜）</span>
+          <span class="tag hyaku">中国料理 百名店 2026</span>
+        </div>
+        <div class="intro">中国料理 百名店 2026選出店，主打中華（廣東菜），位於梅田一帶，最近車站：西梅田。 口コミ：名物魷魚天婦羅；在 Hilton Plaza West</div>
+        <div class="info-grid">
+          <span class="full">🚉 西梅田／北新地／大阪</span>
+          <span>🌙 晚餐 ¥6,000～7,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：名物魷魚天婦羅；在 Hilton Plaza West</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%BB%A3%E6%9D%B1%E6%96%99%E7%90%86%20%E6%B0%91%E7%94%9F%20%E3%83%92%E3%83%AB%E3%83%88%E3%83%B3%E3%83%97%E3%83%A9%E3%82%B6%E3%82%A6%E3%82%A8%E3%82%B9%E3%83%88%E5%BA%97%20%E5%A4%A7%E9%98%AA%E5%B8%82%20%E8%A5%BF%E6%A2%85%E7%94%B0%E9%A7%85" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27006463/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="銀座 篝 ルクア大阪店" data-cat="拉麵（雞白湯）">
+        <div class="card-top">
+          <div class="card-title">銀座 篝 ルクア大阪店</div>
+          <div class="score-badge mid">3.68</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵（雞白湯）</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵（雞白湯），位於梅田一帶，最近車站：大阪。 在 LUCUA 大阪內</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪／梅田／大阪梅田（阪神）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">在 LUCUA 大阪內</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8A%80%E5%BA%A7%20%E7%AF%9D%20%E3%83%AB%E3%82%AF%E3%82%A2%E5%A4%A7%E9%98%AA%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27102306/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="curry restaurant bruno hep navio店" data-cat="咖哩（歐風）">
+        <div class="card-top">
+          <div class="card-title">curry restaurant BRUNO HEP NAVIO店</div>
+          <div class="score-badge mid">3.67</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩（歐風）</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩（歐風），位於梅田一帶，最近車站：梅田。 在 HEP NAVIO 內（口コミ）</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田／大阪梅田（阪神）／大阪梅田（阪急）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">在 HEP NAVIO 內（口コミ）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=curry%20restaurant%20BRUNO%20HEP%20NAVIO%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27001963/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="老虎菜 阪神梅田店" data-cat="中華">
+        <div class="card-top">
+          <div class="card-title">老虎菜 阪神梅田店</div>
+          <div class="score-badge mid">3.67</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">中華</span>
+          <span class="tag hyaku">中国料理 百名店 2026</span>
+        </div>
+        <div class="intro">中国料理 百名店 2026選出店，主打中華，位於梅田一帶，最近車站：大阪梅田（阪神）。 口コミ：午餐套餐</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪神）／東梅田／梅田</span>
+          <span>🌙 晚餐 ¥5,000～5,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：午餐套餐</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%80%81%E8%99%8E%E8%8F%9C%20%E9%98%AA%E7%A5%9E%E6%A2%85%E7%94%B0%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27124951/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="なにわ麺次郎 然" data-cat="拉麵">
+        <div class="card-top">
+          <div class="card-title">なにわ麺次郎 然</div>
+          <div class="score-badge mid">3.67</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵，位於梅田一帶，最近車站：大阪梅田（阪神）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪神）／東梅田／梅田</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%AA%E3%81%AB%E3%82%8F%E9%BA%BA%E6%AC%A1%E9%83%8E%20%E7%84%B6%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27125673/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="zen laboratory" data-cat="拉麵（白醬油）">
+        <div class="card-top">
+          <div class="card-title">ZEN LABORATORY</div>
+          <div class="score-badge mid">3.66</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">拉麵（白醬油）</span>
+          <span class="tag hyaku">ラーメン 百名店 2025</span>
+        </div>
+        <div class="intro">ラーメン 百名店 2025選出店，主打拉麵（白醬油），位於梅田一帶，最近車站：大阪梅田（阪急）。 深夜也營業（口コミ）</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪梅田（阪急）／中津（大阪メトロ）／梅田</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">深夜也營業（口コミ）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=ZEN%20LABORATORY%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27124204/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="アイリッシュ カレー 中津店" data-cat="咖哩">
+        <div class="card-top">
+          <div class="card-title">アイリッシュ カレー 中津店</div>
+          <div class="score-badge mid">3.66</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩，位於梅田一帶，最近車站：中津（大阪メトロ）。 位於中津一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中津（大阪メトロ）／中津（阪急）／大阪梅田（阪急）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">位於中津一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%82%A4%E3%83%AA%E3%83%83%E3%82%B7%E3%83%A5%20%E3%82%AB%E3%83%AC%E3%83%BC%20%E4%B8%AD%E6%B4%A5%E5%BA%97%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27017872/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="サッチェズカリー" data-cat="咖哩（印度）">
+        <div class="card-top">
+          <div class="card-title">サッチェズカリー</div>
+          <div class="score-badge mid">3.66</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩（印度）</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩（印度），位於梅田一帶，最近車站：中崎町。 位於中崎町一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中崎町／扇町／天満</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">位於中崎町一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%83%83%E3%83%81%E3%82%A7%E3%82%BA%E3%82%AB%E3%83%AA%E3%83%BC%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27085130/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ホワイトバード コーヒー スタンド" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">ホワイトバード コーヒー スタンド</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳，位於梅田一帶，最近車站：東梅田。 口コミ：經典布丁，常排隊</div>
+        <div class="info-grid">
+          <span class="full">🚉 東梅田／大江橋／北新地</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：經典布丁，常排隊</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%9B%E3%83%AF%E3%82%A4%E3%83%88%E3%83%90%E3%83%BC%E3%83%89%20%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%20%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27082635/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="カレーショップmasara" data-cat="咖哩（歐風）">
+        <div class="card-top">
+          <div class="card-title">カレーショップMASARA</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖哩（歐風）</span>
+          <span class="tag hyaku">カレー 百名店 2026</span>
+        </div>
+        <div class="intro">カレー 百名店 2026選出店，主打咖哩（歐風），位於梅田一帶，最近車站：梅田。 新梅田食道街內</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田／大阪梅田（阪神）／大阪梅田（阪急）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">新梅田食道街內</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AB%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97MASARA%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27007871/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="カンテ・グランデ ベーカリー" data-cat="麵包">
+        <div class="card-top">
+          <div class="card-title">カンテ・グランデ ベーカリー</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">麵包</span>
+          <span class="tag hyaku">パン 百名店 2026</span>
+        </div>
+        <div class="intro">パン 百名店 2026選出店，主打麵包，位於梅田一帶，最近車站：中津（阪急）。</div>
+        <div class="info-grid">
+          <span class="full">🚉 中津（阪急）</span>
+          <span>🌙 晚餐 ～¥999</span><span>☀️ 午餐 ～¥999</span>
+        </div>
+        <div class="note-box">中津；口コミ約555人</div>
+        <div class="gmap-hint">🍽️ 食べログ口コミ約 約555 人　｜　📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%AB%E3%83%B3%E3%83%86%E3%83%BB%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%87%20%E3%83%99%E3%83%BC%E3%82%AB%E3%83%AA%E3%83%BC%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27005149/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="きしめん あまの" data-cat="刀削風麵（きしめん）">
+        <div class="card-top">
+          <div class="card-title">きしめん あまの</div>
+          <div class="score-badge mid">3.65</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">刀削風麵（きしめん）</span>
+          <span class="tag hyaku">うどん 百名店 2024</span>
+        </div>
+        <div class="intro">うどん 百名店 2024選出店，主打刀削風麵（きしめん），位於梅田一帶，最近車站：梅田。 口コミ：牛もつきしめん</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田／大阪梅田（阪神）／大阪梅田（阪急）</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：牛もつきしめん</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%81%8D%E3%81%97%E3%82%81%E3%82%93%20%E3%81%82%E3%81%BE%E3%81%AE%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27000285/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="炭達磨" data-cat="居酒屋">
+        <div class="card-top">
+          <div class="card-title">炭達磨</div>
+          <div class="score-badge mid">3.64</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">居酒屋</span>
+          <span class="tag hyaku">居酒屋 百名店 2025</span>
+        </div>
+        <div class="intro">居酒屋 百名店 2025選出店，主打居酒屋，位於梅田一帶，最近車站：中津（大阪メトロ）。 位於中津一帶；吸煙店</div>
+        <div class="info-grid">
+          <span class="full">🚉 中津（大阪メトロ）</span>
+          <span>🌙 晚餐 ¥8,000～9,999</span>
+        </div>
+        <div class="note-box">位於中津一帶；吸煙店</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%82%AD%E9%81%94%E7%A3%A8%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27090826/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="mlesnatea osaka" data-cat="咖啡廳（茶館）">
+        <div class="card-top">
+          <div class="card-title">MLESNATEA OSAKA</div>
+          <div class="score-badge mid">3.63</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（茶館）</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳（茶館），位於梅田一帶，最近車站：西梅田。</div>
+        <div class="info-grid">
+          <span class="full">🚉 西梅田／北新地／大阪</span>
+          <span>🌙 晚餐 ¥2,000～2,999</span><span>☀️ 午餐 ¥2,000～2,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=MLESNATEA%20OSAKA%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27059454/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="炭火焼鳥いこか 西天満" data-cat="居酒屋（焼き鳥）">
+        <div class="card-top">
+          <div class="card-title">炭火焼鳥いこか 西天満</div>
+          <div class="score-badge mid">3.62</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">居酒屋（焼き鳥）</span>
+          <span class="tag hyaku">居酒屋 百名店 2025</span>
+        </div>
+        <div class="intro">居酒屋 百名店 2025選出店，主打居酒屋（焼き鳥），位於梅田一帶，最近車站：大江橋。</div>
+        <div class="info-grid">
+          <span class="full">🚉 大江橋</span>
+          <span>🌙 晚餐 ¥5,000～5,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%82%AD%E7%81%AB%E7%84%BC%E9%B3%A5%E3%81%84%E3%81%93%E3%81%8B%20%E8%A5%BF%E5%A4%A9%E6%BA%80%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27136696/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="hannoc" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">hannoc</div>
+          <div class="score-badge mid">3.62</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳，位於梅田一帶，最近車站：中崎町。 位於中崎町一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中崎町／大阪梅田（阪急）／扇町</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">位於中崎町一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=hannoc%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27121787/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="bvlgari osaka café" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">BVLGARI OSAKA CAFÉ</div>
+          <div class="score-badge mid">3.61</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳，位於梅田一帶，最近車站：梅田。</div>
+        <div class="info-grid">
+          <span class="full">🚉 梅田／大阪梅田（阪神）／大阪梅田（阪急）</span>
+          <span>🌙 晚餐 ¥4,000～4,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=BVLGARI%20OSAKA%20CAF%C3%89%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27068631/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="fiveran osaka coffee base" data-cat="麵包">
+        <div class="card-top">
+          <div class="card-title">fiveran osaka Coffee BASE</div>
+          <div class="score-badge mid">3.61</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">麵包</span>
+          <span class="tag hyaku">パン 百名店 2026</span>
+        </div>
+        <div class="intro">パン 百名店 2026選出店，主打麵包，位於梅田一帶，最近車站：大阪。 グランフロント大阪南館B1F</div>
+        <div class="info-grid">
+          <span class="full">🚉 大阪</span>
+          <span>🌙 晚餐 ¥1,000～1,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">グランフロント大阪南館B1F</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=fiveran%20osaka%20Coffee%20BASE%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27144659/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="ザ ロビーラウンジ" data-cat="咖啡廳（飯店茶廊）">
+        <div class="card-top">
+          <div class="card-title">ザ ロビーラウンジ</div>
+          <div class="score-badge mid">3.61</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳（飯店茶廊）</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳（飯店茶廊），位於梅田一帶，最近車站：西梅田。 僅午餐時段在預算內；晚餐超過 ¥10,000（口コミ：麗思卡爾頓大阪）</div>
+        <div class="info-grid">
+          <span class="full">🚉 西梅田／北新地／福島（阪神）</span>
+          <span>🌙 晚餐 ¥10,000～14,999</span><span>☀️ 午餐 ¥6,000～7,999</span>
+        </div>
+        <div class="note-box">僅午餐時段在預算內；晚餐超過 ¥10,000（口コミ：麗思卡爾頓大阪）</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B6%20%E3%83%AD%E3%83%93%E3%83%BC%E3%83%A9%E3%82%A6%E3%83%B3%E3%82%B8%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27000698/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="食堂 燈" data-cat="居酒屋">
+        <div class="card-top">
+          <div class="card-title">食堂 燈</div>
+          <div class="score-badge mid">3.6</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">居酒屋</span>
+          <span class="tag hyaku">居酒屋 百名店 2025</span>
+        </div>
+        <div class="intro">居酒屋 百名店 2025選出店，主打居酒屋，位於梅田一帶，最近車站：北新地。</div>
+        <div class="info-grid">
+          <span class="full">🚉 北新地</span>
+          <span>🌙 晚餐 ¥6,000～7,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%A3%9F%E5%A0%82%20%E7%87%88%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27112023/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="toromi洋食堂" data-cat="洋食">
+        <div class="card-top">
+          <div class="card-title">TOROMI洋食堂</div>
+          <div class="score-badge mid">3.59</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">洋食</span>
+          <span class="tag hyaku">洋食 百名店 2025</span>
+        </div>
+        <div class="intro">洋食 百名店 2025選出店，主打洋食，位於梅田一帶，最近車站：中崎町。 位於中崎町一帶</div>
+        <div class="info-grid">
+          <span class="full">🚉 中崎町</span>
+          <span>🌙 晚餐 ¥5,000～5,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">位於中崎町一帶</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=TOROMI%E6%B4%8B%E9%A3%9F%E5%A0%82%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27127796/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="グラン カフェ" data-cat="咖啡廳">
+        <div class="card-top">
+          <div class="card-title">グラン カフェ</div>
+          <div class="score-badge mid">3.59</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">咖啡廳</span>
+          <span class="tag hyaku">カフェ 百名店 2025</span>
+        </div>
+        <div class="intro">カフェ 百名店 2025選出店，主打咖啡廳，位於梅田一帶，最近車站：西梅田。 口コミ：位於 Hilton Plaza West 6 樓</div>
+        <div class="info-grid">
+          <span class="full">🚉 西梅田／北新地／大阪</span>
+          <span>🌙 晚餐 ¥3,000～3,999</span><span>☀️ 午餐 ¥1,000～1,999</span>
+        </div>
+        <div class="note-box">口コミ：位於 Hilton Plaza West 6 樓</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B0%E3%83%A9%E3%83%B3%20%E3%82%AB%E3%83%95%E3%82%A7%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27007876/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="酒場 やまと" data-cat="居酒屋（海鮮）">
+        <div class="card-top">
+          <div class="card-title">酒場 やまと</div>
+          <div class="score-badge mid">3.56</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">居酒屋（海鮮）</span>
+          <span class="tag hyaku">居酒屋 百名店 2025</span>
+        </div>
+        <div class="intro">居酒屋 百名店 2025選出店，主打居酒屋（海鮮），位於梅田一帶，最近車站：東梅田。 地址取自食べログ店頁；不可預約、常排隊；名物明石燒</div>
+        <div class="info-grid">
+          <span class="full">🚉 東梅田</span>
+          <span>🌙 晚餐 ¥3,000～3,999</span><span>☀️ 午餐 ¥3,000～3,999</span>
+        </div>
+        <div class="note-box">地址取自食べログ店頁；不可預約、常排隊；名物明石燒</div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A7%E9%98%AA%E5%BA%9C%E5%A4%A7%E9%98%AA%E5%B8%82%E5%8C%97%E5%8C%BA%E5%B0%8F%E6%9D%BE%E5%8E%9F%E7%94%BA2-4%20%E5%A4%A7%E9%98%AA%E5%AF%8C%E5%9B%BD%E7%94%9F%E5%91%BD%E3%83%93%E3%83%AB%20B2F%20%E9%85%92%E5%A0%B4%20%E3%82%84%E3%81%BE%E3%81%A8" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27054292/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+      <div class="card" data-name="尾道 むらかみ" data-cat="大阪燒（廣島風）">
+        <div class="card-top">
+          <div class="card-title">尾道 むらかみ</div>
+          <div class="score-badge low">3.49</div>
+        </div>
+        <div class="meta">
+          <span class="tag cat">大阪燒（廣島風）</span>
+          <span class="tag hyaku">お好み焼き 百名店 2025</span>
+        </div>
+        <div class="intro">お好み焼き 百名店 2025選出店，主打大阪燒（廣島風），位於梅田一帶，最近車站：北新地。</div>
+        <div class="info-grid">
+          <span class="full">🚉 北新地／大江橋／西梅田</span>
+          <span>🌙 晚餐 ¥3,000～3,999</span>
+        </div>
+        <div class="gmap-hint">📍 點擊下方 Google Maps 可查看即時評分與評論數</div>
+        <div class="actions">
+          <a class="btn btn-maps" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%B0%BE%E9%81%93%20%E3%82%80%E3%82%89%E3%81%8B%E3%81%BF%20%E6%A2%85%E7%94%B0%20%E5%A4%A7%E9%98%AA" target="_blank" rel="noopener">🗺️ Google Maps</a>
+          <a class="btn btn-tabelog" href="https://tabelog.com/osaka/A2701/A270101/27004637/" target="_blank" rel="noopener">🍽️ 食べログ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    資料來源：食べログ百名店（2024–2026）<br>
+    Google 評分與評論數請點擊「Google Maps」按鈕查看最新數據<br>
+    食べログ評分為卡片右上角數字
+  </div>
+</div>
+<script>
+function switchTab(area) {
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelector('.tab[data-area="' + area + '"]').classList.add('active');
+  document.getElementById('sec-' + area).classList.add('active');
+  document.getElementById('search').value = '';
+  filterCards();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function filterCards() {
+  var q = document.getElementById('search').value.trim().toLowerCase();
+  var sec = document.querySelector('.section.active');
+  if (!sec) return;
+  sec.querySelectorAll('.card').forEach(function(card) {
+    var name = card.getAttribute('data-name') || '';
+    var cat = card.getAttribute('data-cat') || '';
+    var show = !q || name.indexOf(q) !== -1 || cat.indexOf(q) !== -1;
+    card.style.display = show ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
